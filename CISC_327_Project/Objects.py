@@ -34,6 +34,10 @@ class Item:
         self.name = name
         self.price = price
         self.description = description
+
+class Homepage:
+    def search():
+        search_input = input()
     
 class User:
     def __init__ (self, name, email, phone_number, password, address_list, card_number):
