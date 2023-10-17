@@ -44,11 +44,20 @@ class User:
         self.addresses = address_list
         self.payment_methods = card_list
 
-    def AddAddress(self):
+    def get_name(self):
+        return self.name
+    
+    def get_email(self):
+        return self.email
+    
+    def get_phone_number(self):
+        return self.phone_number
+
+    def add_address(self):
         address = input(str("Please enter the address you want to add:\n"))
         self.addresses.append(address)
     
-    def DeleteAddress(self):
+    def delete_address(self):
         print("\nHere are the list of addresses:\n")
         for i in range(len(self.addresses)):
             print(str(i+1) + ". " + self.addresses[i])
@@ -58,7 +67,7 @@ class User:
             address_index = input(int("Which address would you like to delete? (1 - " + str(len(self.addresses) + 1) + ")\n"))
         self.addresses.pop(address_index)
 
-    def EditAddress(self):
+    def edit_address(self):
         print("\nHere are the list of addresses:\n")
         for i in range(len(self.addresses)):
             print(str(i+1) + ". " + self.addresses[i])
@@ -69,25 +78,25 @@ class User:
         address = input(str("Please enter the new address:\n"))
         self.addresses[address_index] = address
 
-    def EditEmail(self):
+    def edit_email(self):
         email = input(str("Please enter the new email:\n"))
         self.email = email
     
-    def EditName(self):
+    def edit_name(self):
         name = input(str("Please enter the new name:\n"))
         self.name = name     
 
-    def EditPhoneNumber(self):
+    def edit_phone_number_number(self):
         phone_number = input(str("Please enter the new phone number:\n"))
         self.phone_number = phone_number
 
-    def AddPaymentMethod(self):
+    def add_payment_method(self):
         card_number = input(str("Please enter the card number you want to add:\n"))
         self.payment_methods.append(card_number)
 
-    def DeletePaymentMethod(self):
+    def delete_payment_method(self):
         print("\nHere are the list of payment methods:\n")
-        for i in range(len(self.payment_methods):
+        for i in range(len(self.payment_methods)):
             print(str(i+1) + ". " + self.payment_methods[i])
         card_index = input(int("Which card would you like to delete? (1 - " + str(len(self.payment_methods) + 1) + ")\n"))
         while card_index not in range(1, len(self.payment_methods) + 1):
