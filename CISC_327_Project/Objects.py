@@ -1,9 +1,3 @@
-class User:
-<<<<<<< Updated upstream
-    def __init__ (self, name, email, phone_number, password,address):
-    #DFKVHFBVVFKVFWJLVNWEFNFV
-    # DSLKNLKVNLKNVFLEJNVFEQLVNE
-# Objects.py
 class Cart:
     def __init__ (self, item, subtotal):
         self.item = item
@@ -41,8 +35,7 @@ class Item:
         self.price = price
         self.description = description
     
-    
-=======
+class User:
     def __init__ (self, name, email, phone_number, password, address_list, card_number):
         self.name = name
         self.email = email
@@ -101,4 +94,3 @@ class Item:
             print("\nInvalid input. Please enter a card index that is in the list.")
             card_index = input(int("Which card would you like to delete? (1 - " + str(len(self.addresses) + 1) + ")\n"))
         self.payment_methods.pop(card_index)
->>>>>>> Stashed changes
