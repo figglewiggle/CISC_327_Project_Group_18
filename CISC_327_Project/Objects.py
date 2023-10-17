@@ -32,7 +32,7 @@ class Restaurant:
         return self.address
     
     def get_cuisine_list(self):
-        return
+        return self.cuisine_list
 
 class Item:
     def __init__ (self, name, price, description):
