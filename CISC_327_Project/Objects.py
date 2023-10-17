@@ -3,11 +3,18 @@ class Cart:
         self.item_list = item_list
         self.subtotal = subtotal
     
+    def get_item_list(self):
+        return self.item_list
+
+    def get_subtotal(self):
+        return self.subtotal
+
     def add_to_cart(self, item):
         self.item_list.add(item)
     
     def remove_from_cart(self, item):
         self.item_list.remove(item)
+
 
 class Restaurant:
     def __init__(self, name, phone_number, address, cuisine_list, item_list, favourites_list):
