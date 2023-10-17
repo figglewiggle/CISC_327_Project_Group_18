@@ -7,3 +7,13 @@ class Restaurant:
         self.item_list = item_list
         self.favourites_list = favourites_list
     
+    def remove_favourite(self, item):
+        self.favourites_list.remove(item)
+
+class Item:
+    def __init__ (self, name, price, description):
+        self.name = name
+        self.price = price
+        self.description = description
+    
+    
