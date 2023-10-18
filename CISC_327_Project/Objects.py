@@ -1,5 +1,12 @@
 from flask import Flask
 app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return "Congratulations, it's a web app!"
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=8080, debug=True)
 class Cart:
     def __init__ (self, item_list, subtotal):
         self.item_list = item_list
@@ -60,16 +67,20 @@ class User:
         self.password = password
         self.addresses = address_list
         self.payment_methods = [card_number]
-
+        
+    @app.route("/")
     def get_name(self):
         return self.name
     
+    @app.route("/")
     def get_email(self):
         return self.email
     
+    @app.route("/")
     def get_phone_number(self):
         return self.phone_number
-
+    
+    @app.route("/")
     def add_address(self):
         address = input(str("Please enter the address you want to add:\n"))
         self.addresses.append(address)
@@ -83,7 +94,7 @@ class User:
             print("\nInvalid input. Please enter an address index that is in the list.")
             address_index = input(int("Which address would you like to delete? (1 - " + str(len(self.addresses) + 1) + ")\n"))
         self.addresses.pop(address_index)
-
+        
     def edit_address(self):
         print("\nHere are the list of addresses:\n")
         for i in range(len(self.addresses)):
@@ -94,11 +105,11 @@ class User:
             address_index = input(int("Which address would you like to edit? (1 - " + str(len(self.addresses) + 1) + ")\n"))
         address = input(str("Please enter the new address:\n"))
         self.addresses[address_index] = address
-
+        
     def edit_email(self):
         email = input(str("Please enter the new email:\n"))
         self.email = email
-    
+        
     def edit_name(self):
         name = input(str("Please enter the new name:\n"))
         self.name = name     
@@ -107,6 +118,7 @@ class User:
         phone_number = input(str("Please enter the new phone number:\n"))
         self.phone_number = phone_number
 
+    @app.route("/")
     def add_payment_method(self):
         card_number = input(str("Please enter the card number you want to add:\n"))
         self.payment_methods.append(card_number)
