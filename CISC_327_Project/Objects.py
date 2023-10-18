@@ -57,7 +57,7 @@ class User:
         self.phone_number = phone_number
         self.password = password
         self.addresses = address_list
-        self.payment_methods = card_list
+        self.payment_methods = [card_number]
 
     def get_name(self):
         return self.name
