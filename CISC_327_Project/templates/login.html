@@ -6,10 +6,19 @@
     </head>
     <body>
         <div>
-            <form>
+            <h1>Login</h1>
+            <form method="post" action="/login">
                 <div>
-                    <title>Username</title>
-                    <input type="text"></input>
+                    <label>Username</label>
+                    <input type="text" name="username"></input>
+                </div>
+                <br>
+                <div>
+                    <label>Password</label>
+                    <input type="text" name="password"></input>
+                </div>
+                <div>
+                    <button>Submit</button>
                 </div>
             </form>
         </div>
