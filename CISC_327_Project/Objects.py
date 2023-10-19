@@ -56,8 +56,10 @@ class Item:
         self.description = description
 
 class Homepage:
-    def search():
-        search_input = input()
+    def __init__ (self,user_obj, restaurants_near):
+        self.user_obj = user_obj
+        self.restaurants_near = restaurants_near
+    
     
 class User:
     def __init__ (self, name, email, phone_number, password, address_list, card_number):
@@ -68,19 +70,17 @@ class User:
         self.addresses = address_list
         self.payment_methods = [card_number]
         
-    @app.route("/")
     def get_name(self):
         return self.name
     
-    @app.route("/")
+    
     def get_email(self):
         return self.email
     
-    @app.route("/")
+    
     def get_phone_number(self):
         return self.phone_number
     
-    @app.route("/")
     def add_address(self):
         address = input(str("Please enter the address you want to add:\n"))
         self.addresses.append(address)
@@ -118,7 +118,6 @@ class User:
         phone_number = input(str("Please enter the new phone number:\n"))
         self.phone_number = phone_number
 
-    @app.route("/")
     def add_payment_method(self):
         card_number = input(str("Please enter the card number you want to add:\n"))
         self.payment_methods.append(card_number)
