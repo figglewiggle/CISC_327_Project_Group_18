@@ -1,8 +1,5 @@
-from flask import Flask, render_template, request
-app = Flask(__name__)
+from flask import Flask, render_template, request, url_for, redirect
 
-if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8080, debug=True)
 class Cart:
     def __init__ (self, item_list, subtotal):
         self.item_list = item_list
@@ -127,3 +124,20 @@ class User:
             print("\nInvalid input. Please enter a card index that is in the list.")
             card_index = input(int("Which card would you like to delete? (1 - " + str(len(self.addresses) + 1) + ")\n"))
         self.payment_methods.pop(card_index)
+
+app = Flask(__name__)
+
+@app.route("/", methods=['GET'])
+def index():
+    return redirect(url_for('login'))
+@app.route("/login", methods=['GET','POST'])
+def login():
+    if request.method=='POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User(username,"some@gmail.com",14167659069,password,["145 Division Street"],4525385498719082)
+        return render_template('login.html')
+    return render_template('login.html')
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=8080, debug=True)
