@@ -1,17 +1,5 @@
 from flask import Flask, render_template, request
-app = Flask(__name__, template_folder="templates")
-
-@app.route("/")
-def index():
-    return "Index page"
-@app.route("/login", methods=['GET','POST'])
-def login():
-    if request.method=='POST':
-        username = request.form['username']
-        password = request.form['password']
-        user = User(username,"some@gmail.com",14167659069,password,["145 Division Street"],4525385498719082)
-        print("User {user.name} tried to login with password: {user.password}")
-        return render_template('login.html')
+app = Flask(__name__)
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
