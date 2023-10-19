@@ -10,12 +10,12 @@
             <form method="post" action="/login">
                 <div>
                     <label>Username</label>
-                    <input type="text" name="username"></input>
+                    <input type="text" name="username" value="{{request-form['username']}}"></input>
                 </div>
                 <br>
                 <div>
                     <label>Password</label>
-                    <input type="text" name="password"></input>
+                    <input type="text" name="password" value="{{request-form['password']}}"></input>
                 </div>
                 <div>
                     <button type="submit">Submit</button>

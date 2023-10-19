@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 
+@app.route("/")
+def index():
+    return "Index page"
 @app.route("/login", methods=['GET','POST'])
 def login():
     if request.method=='POST':
@@ -8,7 +11,6 @@ def login():
         password = request.form['password']
         user = User(username,"some@gmail.com",14167659069,password,["145 Division Street"],4525385498719082)
         print("User {user.name} tried to login with password: {user.password}")
-        return "Login attempt received!"
         return render_template('login.html')
 
 if __name__ == "__main__":
