@@ -1,9 +1,15 @@
-from flask import Flask
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return "Congratulations, it's a web app!"
+@app.route("/login", methods=['GET','POST'])
+def login():
+    if request.method=='POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User(username,"some@gmail.com",14167659069,password,["145 Division Street"],4525385498719082)
+        print("User {user.name} tried to login with password: {user.password}")
+        return "Login attempt received!"
+        return render_template('login.html')
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
@@ -26,7 +32,7 @@ class Cart:
 
 
 class Restaurant:
-    def __init__(self, name, phone_number, address, cuisine_list, item_list, favourites_list):
+    def __init__(self, name, phone_number, address, cuisine_list, item_list, favourites_list = []):
         self.name = name
         self.phone_number = phone_number
         self.address = address
