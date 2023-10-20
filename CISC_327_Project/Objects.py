@@ -16,8 +16,10 @@ class Cart:
     def remove_from_cart(self, item):
         self.item_list.remove(item)
 
+class Order:
     def __init__(self, user_obj, restaurant_obj):
         self.user_obj = user_obj
+        self.restaurant_obj = restaurant_obj
     
     
 
