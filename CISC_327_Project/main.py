@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def index():
-    return redirect(url_for('login'))
+    return redirect(url_for('login.login'))
 app.register_blueprint(login_blueprint)
 
 if __name__ == "__main__":

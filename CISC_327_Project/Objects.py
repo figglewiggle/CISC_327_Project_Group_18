@@ -122,13 +122,3 @@ class User:
             print("\nInvalid input. Please enter a card index that is in the list.")
             card_index = input(int("Which card would you like to delete? (1 - " + str(len(self.addresses) + 1) + ")\n"))
         self.payment_methods.pop(card_index)
-
-app = Flask(__name__)
-
-@app.route("/", methods=['GET'])
-def index():
-    return redirect(url_for('login'))
-app.register_blueprint(login_blueprint)
-
-if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8080, debug=True)
