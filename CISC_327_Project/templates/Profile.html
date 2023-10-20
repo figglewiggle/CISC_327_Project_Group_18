@@ -10,25 +10,105 @@
         <p>John Doe</p>
 
         <h2>Email</h2>
-        <p><input type="text" name="email" value="user@example.com"> <a href="#">Edit</a></p>
+        <p>
+            <input type="text" name="email" value="user@example.com" disabled>
+            <a href="#" onclick="enableEdit('email')">Edit</a>
+        </p>
 
         <h2>Phone Number</h2>
-        <p><input type="text" name="phone" value="123-456-7890"> <a href="#">Edit</a></p>
+        <p>
+            <input type="text" name="phone" value="123-456-7890" disabled>
+            <a href="#" onclick="enableEdit('phone')">Edit</a>
+        </p>
 
         <h2>Password</h2>
-        <p>********** <a href="#">Change Password</a></p>
+        <p>
+            <input type="password" name="password" value="**********" disabled>
+            <a href="#" onclick="enableEdit('password')">Change Password</a>
+        </p>
 
-        <h2>Address</h2>
-        <p><input type="text" name="address" value="123 Main Street, City, State 12345"> <a href="#">Edit</a></p>
-
-        <h2>Payment Methods</h2>
-        <ul>
-            <li>Visa ending in **** 1234 <a href="#">Edit</a> <a href="#">Delete</a></li>
-            <li>MasterCard ending in **** 5678 <a href="#">Edit</a> <a href="#">Delete</a></li>
-            <li><a href="#">Add New Payment Method</a></li>
+        <h2>Addresses</h2>
+        <ul id="addresses">
+            <li>
+                <input type="text" name="address1" value="123 Main Street, City, State 12345" disabled>
+                <a href="#" onclick="enableEdit('address1')">Edit</a>
+                <a href="#" onclick="deleteAddress('address1')">Delete</a>
+            </li>
+            <li>
+                <input type="text" name="address2" value="456 Elm Street, Town, State 67890" disabled>
+                <a href="#" onclick="enableEdit('address2')">Edit</a>
+                <a href="#" onclick="deleteAddress('address2')">Delete</a>
+            </li>
+            <li>
+                <a href="#" onclick="addAddress()">Add New Address</a>
+            </li>
         </ul>
 
-        <input type="submit" value="Save Changes">
+        <h2>Payment Methods</h2>
+        <ul id="payment-methods">
+            <li>
+                <input type="text" name="payment1" value="1234 5678 9012 3456" disabled>
+                <a href="#" onclick="enableEdit('payment1')">Edit</a>
+                <a href="#" onclick="deletePayment('payment1')">Delete</a>
+            </li>
+            <li>
+                <input type="text" name="payment2" value="5678 1234 9012 3456" disabled>
+                <a href="#" onclick="enableEdit('payment2')">Edit</a>
+                <a href="#" onclick="deletePayment('payment2')">Delete</a>
+            </li>
+            <li>
+                <a href="#" onclick="addPayment()">Add New Payment Method</a>
+            </li>
+        </ul>
+
+        <input type="submit" value="Save Changes" style="display: none;">
     </form>
+
+    <script>
+        function enableEdit(fieldName) {
+            const inputField = document.querySelector(`[name="${fieldName}"]`);
+            inputField.removeAttribute("disabled");
+            const saveButton = document.querySelector('input[type="submit"]');
+            saveButton.style.display = 'block';
+        }
+
+        function deletePayment(fieldName) {
+            const listItem = document.querySelector(`[name="${fieldName}"]`).parentNode;
+            listItem.remove();
+        }
+
+        let paymentCounter = 2;
+
+        function addPayment() {
+            paymentCounter++;
+            const paymentList = document.getElementById('payment-methods');
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <input type="text" name="payment${paymentCounter}" value="">
+                <a href="#" onclick="enableEdit('payment${paymentCounter}')">Edit</a>
+                <a href="#" onclick="deletePayment('payment${paymentCounter}')">Delete</a>
+            `;
+            paymentList.insertBefore(li, paymentList.querySelector('li:last-child'));
+            const saveButton = document.querySelector('input[type="submit"]');
+            saveButton.style.display = 'block';
+        }
+
+        let addressCounter = 2;
+
+        function addAddress() {
+            addressCounter++;
+            const addressList = document.getElementById('addresses');
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <input type="text" name="address${addressCounter}" value="">
+                <a href="#" onclick="enableEdit('address${addressCounter}')">Edit</a>
+                <a href="#" onclick="deleteAddress('address${addressCounter}')">Delete</a>
+            `;
+            addressList.insertBefore(li, addressList.querySelector('li:last-child'));
+            const saveButton = document.querySelector('input[type="submit"]');
+            saveButton.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
+
