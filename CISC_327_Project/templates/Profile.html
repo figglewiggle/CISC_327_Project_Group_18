@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <form method="post" action="/profile">
+        <h2>Name</h2>
+        <p>John Doe</p>
+
+        <h2>Email</h2>
+        <p><input type="text" name="email" value="user@example.com"> <a href="#">Edit</a></p>
+
+        <h2>Phone Number</h2>
+        <p><input type="text" name="phone" value="123-456-7890"> <a href="#">Edit</a></p>
+
+        <h2>Password</h2>
+        <p>********** <a href="#">Change Password</a></p>
+
+        <h2>Address</h2>
+        <p><input type="text" name="address" value="123 Main Street, City, State 12345"> <a href="#">Edit</a></p>
+
+        <h2>Payment Methods</h2>
+        <ul>
+            <li>Visa ending in **** 1234 <a href="#">Edit</a> <a href="#">Delete</a></li>
+            <li>MasterCard ending in **** 5678 <a href="#">Edit</a> <a href="#">Delete</a></li>
+            <li><a href="#">Add New Payment Method</a></li>
+        </ul>
+
+        <input type="submit" value="Save Changes">
+    </form>
+</body>
+</html>
