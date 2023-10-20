@@ -7,7 +7,7 @@
     </head>
     <body>
         <nav class="nav">
-            <a class="nav">PROFILE</a>
+            <a class="nav" href="{{ url_for('profile.profile')}}">PROFILE</a>
             <a class="nav">*SOME ADDRESS*</a>
             <form class="nav" action="./search/">
                 <input type="search" id="restaurant" name="q"/>
@@ -25,6 +25,7 @@
                 </a>
             </div>
             {% endfor %}
+            <a href="{{ url_for('cartpage.cartpage')}}">CART</a>
         </div>
     </body>
 </html>
