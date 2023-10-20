@@ -93,6 +93,11 @@
             saveButton.style.display = 'block';
         }
 
+        function deleteAddress(fieldName) {
+            const listItem = document.querySelector(`[name="${fieldName}"]`).parentNode;
+            listItem.remove();
+        }
+
         let addressCounter = 2;
 
         function addAddress() {
