@@ -3,7 +3,7 @@
     <head>
         <title>Homepage</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="CISC_327_Project\templates\stylesheet.css" />
+        <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}" />
     </head>
     <body>
         <nav class="nav">
@@ -13,11 +13,18 @@
                 <input type="search" id="restaurant" name="q"/>
                 <button type="submit">Search</button>
             </form>
+            <a class="nav">FILTER</a>
         </nav>
-        <div>
-            <div>
-
+        <div class="restaurant-list">
+            {% for restaurant in restaurants %}
+            <div class="restaurant-item">
+                <a href="{{ url_for('restaurant_menu', restaurant_name=restaurant.name) }}">
+                    <h2>{{ restaurant.name }}</h2>
+                    <p>{{ restaurant.address }}</p>
+                    <p> {{ restaurant.phone_number }} </p>
+                </a>
             </div>
+            {% endfor %}
         </div>
     </body>
 </html>
