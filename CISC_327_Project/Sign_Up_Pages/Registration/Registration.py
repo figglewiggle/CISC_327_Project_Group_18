@@ -1,7 +1,7 @@
 #Registration.py
 from flask import Blueprint, render_template, request
 registration_blueprint = Blueprint('registration', __name__)
-@registration_blueprint.rout("/registration", methods = ['GET', 'POST'])
+@registration_blueprint.route("/registration", methods = ['GET', 'POST'])
 def registration():
     if request.method == 'POST':
         name = request.form['name']
@@ -9,7 +9,7 @@ def registration():
         phone_number = request.form['phone number']
         password = request.form['password']
         address = request.form['address']
-        payment_method = request.form['payment method (card number)']
+        payment_method = request.form['payment method']
         with open('CISC_327_Project\Sign_Up_Pages\Registration\Registration.txt', 'w') as file:
             file.write(f"Name: {name}\n")
             file.write(f"Email: {email}\n")

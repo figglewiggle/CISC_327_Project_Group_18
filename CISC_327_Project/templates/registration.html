@@ -25,7 +25,7 @@
                 <br>
                 <div>
                     <label>password</label>
-                    <input type="text" name="password" value="{{ request.form['password'] }}"></input>
+                    <input type="password" name="password" value="{{ request.form['password'] }}"></input>
                 </div>
                 <br>
                 <div>
@@ -39,7 +39,7 @@
                 </div>
                 <br>
                 <div>
-                    <button type="Register">Submit</button>
+                    <a href="{{url_for('homepage.homepage')}}" class="btn">Register</a>
                 </div>
             </form>
         </div>

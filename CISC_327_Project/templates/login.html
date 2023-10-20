@@ -18,7 +18,7 @@
                     <input type="password" name="password" value="{{ request.form['password'] }}"></input>
                 </div>
                 <div>
-                    <button type="submit">Submit</button>
+                    <a href="{{url_for('registration.registration')}}" class='btn btn-primary'>No Account? Signup</a>
                 </div>
             </form>
         </div>
