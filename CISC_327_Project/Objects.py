@@ -1,7 +1,8 @@
 class Cart:
-    def __init__ (self, item_list, subtotal):
+    def __init__ (self, item_list, subtotal, restaurant_name):
         self.item_list = item_list
         self.subtotal = subtotal
+        self.restaurant_name = restaurant_name
     
     def get_item_list(self):
         return self.item_list
@@ -15,6 +16,10 @@ class Cart:
     def remove_from_cart(self, item):
         self.item_list.remove(item)
 
+    def __init__(self, user_obj, restaurant_obj):
+        self.user_obj = user_obj
+    
+    
 
 class Restaurant:
     def __init__(self, name, phone_number, address, cuisine_list, item_list, favourites_list = []):
