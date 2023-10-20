@@ -3,6 +3,7 @@ from Sign_Up_Pages.Login.Login import login_blueprint
 from Sign_Up_Pages.Registration.Registration import registration_blueprint
 from Homepage.Homepage import homepage_blueprint
 from Profile_Page.Profile import profile_blueprint
+from Cart_Page.Cartpage import cartpage_blueprint
 app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
@@ -12,6 +13,7 @@ app.register_blueprint(login_blueprint)
 app.register_blueprint(registration_blueprint)
 app.register_blueprint(homepage_blueprint)
 app.register_blueprint(profile_blueprint)
+app.register_blueprint(cartpage_blueprint)
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
