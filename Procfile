@@ -1,2 +1,2 @@
 web: gunicorn app:app
-web: python ./app.py $PORT
+web: python ./CISC_327_Project/app.py $PORT
