@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registration Page</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div>
+            <h1>Registration</h1>
+            <form method="post" action="/registration">
+                <div>
+                    <label>name</label>
+                    <input type="text" name="name" value="{{ request.form['name'] }}"></input>
+                </div>
+                <br>
+                <div>
+                    <label>email</label>
+                    <input type="text" name="email" value="{{ request.form['email'] }}"></input>
+                </div>
+                <br>
+                <div>
+                    <label>phone_number</label>
+                    <input type="text" name="phone number" value="{{ request.form['phone number'] }}"></input>
+                </div>
+                <br>
+                <div>
+                    <label>password</label>
+                    <input type="text" name="password" value="{{ request.form['password'] }}"></input>
+                </div>
+                <br>
+                <div>
+                    <label>address</label>
+                    <input type="text" name="address" value="{{ request.form['address'] }}"></input>
+                </div>
+                <br>
+                <div>
+                    <label>payment_method</label>
+                    <input type="text" name="payment method" value="{{ request.form['payment method'] }}"></input>
+                </div>
+                <br>
+                <div>
+                    <button type="Register">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+
+</html>
