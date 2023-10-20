@@ -18,7 +18,7 @@
         <div class="restaurant-list">
             {% for restaurant in restaurants %}
             <div class="restaurant-item">
-                <a href="{{ url_for('restaurant_menu', restaurant_name=restaurant.name) }}">
+                <a href="{{ url_for('menu', restaurant_name=restaurant.name) }}">
                     <h2>{{ restaurant.name }}</h2>
                     <p>{{ restaurant.address }}</p>
                     <p> {{ restaurant.phone_number }} </p>
