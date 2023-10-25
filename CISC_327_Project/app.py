@@ -5,9 +5,18 @@ from Homepage.Homepage import homepage_blueprint
 from Profile_Page.Profile import profile_blueprint
 from Cart_Page.Cartpage import cartpage_blueprint
 from Homepage.Menu_Access.Menu_Access import menu_blueprint
+from flask_sqlalchemy import SQLAlchemy
 import os
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
 
+# models
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20, unique=True, nullable=False))
+    
+    
 @app.route("/", methods=['GET'])
 def index():
     return redirect(url_for('login.login'))
