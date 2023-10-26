@@ -26,3 +26,26 @@ class Payment_Method(db.Model):
     card_num = db.Column(db.String(16), nullable=False)
     default = db.Column(db.Boolean, default=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+class Restaurant(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30), unique=False, nullable=False)
+    phone_number = db.Column(db.String(10), unique=True, nullable=False)
+    address = db.Column(db.String(50), unique=True, nullable=False)
+    cuisine = db.Column(db.String(20), unique=True, nullable=False)
+    item_list = db.relationship('Item', backref='restaurant', lazy=True)
+    favourites_list = db.relationship('Favourites',backref='restaurant', lazy=True)
+    
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20), unique=True, nullable=False)
+    description = db.Column(db.text(), unique=True, nullable=False)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
+    favourites_id = db.Column(db.Integer, db.ForeignKey('favourites.id'), nullable=False)
+
+class Favourites(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    item_list = db.relationship('Item', backref='favourites', lazy=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
+    
+    
