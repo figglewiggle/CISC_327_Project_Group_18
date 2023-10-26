@@ -23,7 +23,7 @@ def registration():
         address_col = Address(address=address,default=True)
         payment_method_col = Payment_Method(card_num=payment_method,default=True)
         user.addresses.append(address_col)
-        user.payment_methods.add(payment_method_col)
+        user.payment_methods.append(payment_method_col)
         try:
             db.session.add(user)
             db.session.commit()
