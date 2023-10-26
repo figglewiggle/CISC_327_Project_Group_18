@@ -7,7 +7,18 @@
     <body>
         <div>
             <h1>Login</h1>
-            <form method="post" action="/login">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div id="flashMessages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <form id="loginForm" method="post" action="/login">
                 <div>
                     <label>Email</label>
                     <input type="email" name="email" value="{{ request.form['email'] }}"></input>
@@ -18,10 +29,28 @@
                     <input type="password" name="password" value="{{ request.form['password'] }}"></input>
                 </div>
                 <div>
-                    <a href="{{url_for('registration.registration')}}" class='btn btn-primary'>No Account? Signup</a>
+                    <button type="submit" id="loginButton" disabled>Login</button>
                 </div>
             </form>
+            <div>
+                <a href="{{url_for('registration.registration')}}" class='btn btn-primary'>No Account? Signup</a>
+            </div>
         </div>
+        <script>
+            const form = document.getElementById('loginForm');
+            const registerButton = document.getElementById('loginButton');
+    
+            form.addEventListener('input', function() {
+                let allFilled = true;
+                for (const input of form.querySelectorAll('input')) {
+                    if (!input.value) {
+                        allFilled = false;
+                        break;
+                    }
+                }
+                registerButton.disabled = !allFilled;
+            });
+        </script>
     </body>
 
 </html>

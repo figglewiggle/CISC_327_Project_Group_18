@@ -1,0 +1,28 @@
+# models.py
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20), unique=True, nullable=False)
+    email = db.Column(db.String(20), unique=True, nullable=False)
+    phone_number = db.Column(db.String(10), unique=True, nullable=False)
+    password = db.Column(db.String(20), unique=True, nullable=False)
+    addresses = db.relationship('Address', backref='user', lazy='dynamic')
+    payment_methods = db.relationship('Payment_Method', backref='user',lazy='dynamic')
+    def __repr__(self):
+        return f"Name: {self.name}, Email: {self.email}, Phone Number: {self.phone_number}, Address: {self.addresses.filter_by(default=True).all()}"
+
+class Address(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    address = db.Column(db.String(50), nullable=False)
+    default = db.Column(db.Boolean, default=False, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+class Payment_Method(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    card_num = db.Column(db.String(16), nullable=False)
+    default = db.Column(db.Boolean, default=False, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
