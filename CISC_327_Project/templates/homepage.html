@@ -8,7 +8,7 @@
     <body>
         <nav class="nav">
             <a class="nav" href="{{ url_for('profile.profile')}}">PROFILE</a>
-            <a class="nav">*SOME ADDRESS*</a>
+            <a class="nav">{{ default_address.address if default_address else 'No default address set' }}</a>
             <form class="nav" action="./search/">
                 <input type="search" id="restaurant" name="q"/>
                 <button type="submit">Search</button>

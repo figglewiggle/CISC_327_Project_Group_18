@@ -1,17 +1,19 @@
 # models.py
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_login import UserMixin
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 
-class User(db.Model):
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(20), unique=True, nullable=False)
     phone_number = db.Column(db.String(10), unique=True, nullable=False)
-    password = db.Column(db.String(20), unique=True, nullable=False)
-    addresses = db.relationship('Address', backref='user', lazy='dynamic')
-    payment_methods = db.relationship('Payment_Method', backref='user',lazy='dynamic')
+    password = db.Column(db.String(50), unique=True, nullable=False)
+    addresses = db.relationship('Address', backref='user', cascade='all,delete', lazy='dynamic')
+    payment_methods = db.relationship('Payment_Method', backref='user', cascade='all,delete',lazy='dynamic')
     def __repr__(self):
         return f"Name: {self.name}, Email: {self.email}, Phone Number: {self.phone_number}, Address: {self.addresses.filter_by(default=True).all()}"
 
@@ -47,5 +49,5 @@ class Favourites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     item_list = db.relationship('Item', backref='favourites', lazy=True)
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
-    
+
     
