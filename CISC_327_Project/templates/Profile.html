@@ -7,38 +7,35 @@
     <h1>User Profile</h1>
     <form method="post" action="/profile">
         <h2>Name</h2>
-        <p>John Doe</p>
+        <p>{{name}}</p>
 
         <h2>Email</h2>
         <p>
-            <input type="text" name="email" value="user@example.com" disabled>
+            <input type="text" name="email" value="{{email}}" disabled>
             <a href="#" onclick="enableEdit('email')">Edit</a>
         </p>
 
         <h2>Phone Number</h2>
         <p>
-            <input type="text" name="phone" value="123-456-7890" disabled>
+            <input type="text" name="phone" value="{{phone_number}}" disabled>
             <a href="#" onclick="enableEdit('phone')">Edit</a>
         </p>
 
         <h2>Password</h2>
         <p>
-            <input type="password" name="password" value="**********" disabled>
+            <input type="password" name="password" value="{{password}}" disabled>
             <a href="#" onclick="enableEdit('password')">Change Password</a>
         </p>
 
         <h2>Addresses</h2>
         <ul id="addresses">
+            {% for address in addresses %}
             <li>
-                <input type="text" name="address1" value="123 Main Street, City, State 12345" disabled>
-                <a href="#" onclick="enableEdit('address1')">Edit</a>
-                <a href="#" onclick="deleteAddress('address1')">Delete</a>
+                <input type="text" name="address" value="{{address.address}}" disabled>
+                <a href="#" onclick="enableEdit('address')">Edit</a>
+                <a href="#" onclick="deleteAddress('address')">Delete</a>
             </li>
-            <li>
-                <input type="text" name="address2" value="456 Elm Street, Town, State 67890" disabled>
-                <a href="#" onclick="enableEdit('address2')">Edit</a>
-                <a href="#" onclick="deleteAddress('address2')">Delete</a>
-            </li>
+            {% endfor %}
             <li>
                 <a href="#" onclick="addAddress()">Add New Address</a>
             </li>
@@ -46,16 +43,13 @@
 
         <h2>Payment Methods</h2>
         <ul id="payment-methods">
+            {% for card_num in payment_methods %}
             <li>
-                <input type="text" name="payment1" value="1234 5678 9012 3456" disabled>
-                <a href="#" onclick="enableEdit('payment1')">Edit</a>
-                <a href="#" onclick="deletePayment('payment1')">Delete</a>
+                <input type="text" name="payment" value="{{card_num.card_num}}" disabled>
+                <a href="#" onclick="enableEdit('payment')">Edit</a>
+                <a href="#" onclick="deletePayment('payment')">Delete</a>
             </li>
-            <li>
-                <input type="text" name="payment2" value="5678 1234 9012 3456" disabled>
-                <a href="#" onclick="enableEdit('payment2')">Edit</a>
-                <a href="#" onclick="deletePayment('payment2')">Delete</a>
-            </li>
+            {% endfor %}
             <li>
                 <a href="#" onclick="addPayment()">Add New Payment Method</a>
             </li>
