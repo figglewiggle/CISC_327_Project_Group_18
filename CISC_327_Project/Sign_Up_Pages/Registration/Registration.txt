@@ -5,3 +5,21 @@ Phone Number: 4168419626
 Password: lickmyballs
 Address: 111 Gamble Glen Crescent
 Payment Method: 4525678946879072
+Name: james
+Email: peters
+Phone Number: 123456789
+Password: password
+Address: nkw e 12345
+Payment Method: 123456789
+Name: james peters
+Email: jamespeters@gmail.com
+Phone Number: 123456789
+Password: password
+Address: nkw e 12345
+Payment Method: 123456789
+Name: james charles
+Email: jamescharles@gmail.com
+Phone Number: 987654321
+Password: password
+Address: nkw e 12345
+Payment Method: 987654321

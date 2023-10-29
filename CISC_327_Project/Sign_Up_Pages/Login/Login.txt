@@ -9,5 +9,18 @@ Email: ethfig@gmail.com
 Password: lickmyballs
 Email: ethfig@gmail.com
 Password: lickmyballs
+<<<<<<< Updated upstream
 Email: ethfig@gmail.com
 Password: lickmyballs
+=======
+Email: jamescharles@gmail.com
+Password: password
+Email: jamescharles@gmail.com
+Password: password
+Email: jamescharles@gmail.com
+Password: password
+Email: jamescharles@gmail.com
+Password: password
+Email: jamescharles@gmail.com
+Password: password
+>>>>>>> Stashed changes
