@@ -1,4 +1,3 @@
-<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,78 +103,6 @@
             addressList.insertBefore(li, addressList.querySelector('li:last-child'));
             const saveButton = document.querySelector('input[type="submit"]');
             saveButton.style.display = 'block';
-        }
-    </script>
-</body>
-</html>
--->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Profile</title>
-</head>
-<body>
-    <nav>
-        <a href={{ url_for('homepage.homepage') }}>Back to Homepage</a>
-    </nav>
-    <h1>User Profile</h1>
-    <h2>Name</h2>
-    <p>{{ name }}</p>
-
-    <h2>Email</h2>
-    <p>{{ email }}</p>
-
-    <h2>Phone Number</h2>
-    <p>
-        <span id="phone_number">{{ phone_number }}</span>
-        <button onclick="enableEdit('phone_number')">Edit</button>
-    </p>
-
-    <h2>Password</h2>
-    <p>
-        <span id="password">********</span>
-        <button onclick="enableEdit('new_password')">Change Password</button>
-    </p>
-
-    <h2>Addresses</h2>
-    <ul id="addresses">
-        {% for address in addresses %}
-        <li>
-            <span>{{ address }}</span>
-            <button onclick="enableEdit('address_{{ loop.index }}')">Edit</button>
-        </li>
-        {% endfor %}
-    </ul>
-
-    <!-- Form for editing -->
-    <form method="post" action="/profile" style="display: none;" id="editForm">
-        <input type="hidden" name="field_to_edit" id="field_to_edit">
-        <input type="text" name="phone_number" id="edit_phone_number" style="display: none;">
-        <input type="password" name="new_password" id="edit_new_password" style="display: none;">
-        <!-- Add fields for other information as needed -->
-        <input type="submit" value="Save Changes">
-    </form>
-
-    <script>
-        function enableEdit(field) {
-            const editForm = document.getElementById('editForm');
-            const fieldToEdit = document.getElementById('field_to_edit');
-
-            fieldToEdit.value = field;
-
-            if (field === 'phone_number') {
-                const phoneNumber = document.getElementById('phone_number');
-                const editPhoneNumber = document.getElementById('edit_phone_number');
-                editPhoneNumber.value = phoneNumber.textContent.trim();
-                editPhoneNumber.style.display = 'block';
-            } else if (field === 'new_password') {
-                const editPassword = document.getElementById('edit_new_password');
-                editPassword.style.display = 'block';
-            } else {
-                // Handle editing of other fields here
-            }
-
-            editForm.style.display = 'block';
         }
     </script>
 </body>
