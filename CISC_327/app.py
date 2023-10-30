@@ -6,6 +6,7 @@ from Profile_Page.Profile import profile_blueprint
 from Cart_Page.Cartpage import cartpage_blueprint
 from Homepage.Menu_Access.Menu_Access import menu_blueprint
 from Sign_Up_Pages.Logout import logout_blueprint
+from Homepage.Search.Text_Search.Text_Search import text_search_blueprint
 from models import db, bcrypt, User, Restaurant, Item
 from flask_migrate import Migrate, migrate
 import os
@@ -38,13 +39,13 @@ def delete_user_command(user_id):
         click.echo(f"User with ID {user_id} and related posts deleted.")
         
 @app.cli.command("display-user")
-@click.argument("user_id")
-def display_user_command(user_id):
+@click.argument("user_name")
+def display_user_command(user_name):
     """Displays a user with the given user_id, to help with testing"""
     with app.app_context():
-        user= User.query.get(user_id)
+        user= User.query.get(user_name)
         if not user:
-            click.echo(f"User with ID {user_id} not found.")
+            click.echo(f"User with ID {user_name} not found.")
             return
         print(user.__repr__())
 
@@ -69,8 +70,10 @@ def add_item_command(restaurant_id):
             return
         name = input("Enter Name: ")
         description = input("Enter Description: ")
-        item = Item(name=name, description=description)
+        price = input("Enter Price: ")
+        item = Item(name=name, description=description, price=price)
         restaurant.item_list.append(item)
+        db.session.add(item)
         db.session.commit()
 
 @app.cli.command("display-restaurant")
@@ -79,9 +82,22 @@ def display_restaurant_command(restaurant_id):
     with app.app_context():
         restaurant = Restaurant.query.get(restaurant_id)
         if not restaurant:
-            click.echo(f"Restaurant with name {restaurant_id} not found.")
+            click.echo(f"Restaurant with ID {restaurant_id} not found.")
             return
         print(restaurant.__repr__())
+        
+@app.cli.command("delete-restaurant")
+@click.argument("restaurant_id")
+def delete_user_command(restaurant_id):
+    """Deletes a user with the given user_id and all related rows, to clear test cases."""
+    with app.app_context():
+        restaurant = Restaurant.query.get(restaurant_id)
+        if not restaurant:
+            click.echo(f"Restaurant with ID {restaurant_id} not found.")
+            return
+        db.session.delete(restaurant)
+        db.session.commit()
+        click.echo(f"User with ID {restaurant_id} and related posts deleted.")
         
 @login_manager.user_loader
 def load_user(user_id):
@@ -98,6 +114,7 @@ app.register_blueprint(profile_blueprint)
 app.register_blueprint(cartpage_blueprint)
 app.register_blueprint(menu_blueprint)
 app.register_blueprint(logout_blueprint)
+app.register_blueprint(text_search_blueprint)
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
     app.run(host="0.0.0.0", port=port, debug=True, threaded=True)
