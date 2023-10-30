@@ -5,7 +5,8 @@ from Homepage.Homepage import homepage_blueprint
 from Profile_Page.Profile import profile_blueprint
 from Cart_Page.Cartpage import cartpage_blueprint
 from Homepage.Menu_Access.Menu_Access import menu_blueprint
-from models import db, bcrypt, User
+from Sign_Up_Pages.Logout import logout_blueprint
+from models import db, bcrypt, User, Restaurant
 from flask_migrate import Migrate, migrate
 import os
 import click
@@ -46,6 +47,17 @@ def display_user_command(user_id):
             click.echo(f"User with ID {user_id} not found.")
             return
         print(user.__repr__())
+
+@app.cli.command("add-restaurant")
+def add_restaurant_command():
+    with app.app_context():
+        name = input("Enter Restaurant Name: ")
+        phone_number = input("Enter Restaurant Phone Number:")
+        address = input("Enter Address: ")
+        restaurant= Restaurant(name=name, phone_number=phone_number, address=address)
+        db.session.add(restaurant)
+        db.session.commit()
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -60,6 +72,7 @@ app.register_blueprint(homepage_blueprint)
 app.register_blueprint(profile_blueprint)
 app.register_blueprint(cartpage_blueprint)
 app.register_blueprint(menu_blueprint)
+app.register_blueprint(logout_blueprint)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))

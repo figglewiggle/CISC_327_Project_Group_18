@@ -12,6 +12,7 @@ Password: lickmyballs
 <<<<<<< Updated upstream
 Email: ethfig@gmail.com
 Password: lickmyballs
+<<<<<<< Updated upstream
 =======
 Email: jamescharles@gmail.com
 Password: password
@@ -23,4 +24,10 @@ Email: jamescharles@gmail.com
 Password: password
 Email: jamescharles@gmail.com
 Password: password
+>>>>>>> Stashed changes
+=======
+Email: ethfig@gmail.com
+Password: lickmyballs
+Email: ethfig@gmail.com
+Password: lickmyballs
 >>>>>>> Stashed changes
