@@ -58,6 +58,16 @@ def add_restaurant_command():
         db.session.add(restaurant)
         db.session.commit()
 
+@app.cli.command("display-restaurant")
+@click.argument("restaurant_name")
+def display_restaurant_command(restaurant_name):
+    with app.app_context():
+        restaurant = Restaurant.query.get(restaurant_name)
+        if not restaurant:
+            click.echo(f"Restaurant with name {restaurant_name} not found.")
+            return
+        print(restaurant.__repr__())
+        
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -73,7 +83,6 @@ app.register_blueprint(profile_blueprint)
 app.register_blueprint(cartpage_blueprint)
 app.register_blueprint(menu_blueprint)
 app.register_blueprint(logout_blueprint)
-
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
     app.run(host="0.0.0.0", port=port, debug=True, threaded=True)
