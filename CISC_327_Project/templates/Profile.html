@@ -5,6 +5,8 @@
 </head>
 <body>
     <h1>User Profile</h1>
+    <nav>
+    <a href={{ url_for('homepage.homepage') }}>Back to Homepage</a>
     <form method="post" action="/profile">
         <h2>Name</h2>
         <p>{{name}}</p>
@@ -14,8 +16,8 @@
 
         <h2>Phone Number</h2>
         <p>
-            <input type="text" name="phone" value="{{phone_number}}" disabled>
-            <a href="#" onclick="enableEdit('phone')">Edit</a>
+            <span id="phone_number">{{ phone_number }}</span>
+            <button onclick="enableEdit('phone_number')">Edit</button>
         </p>
 
         <h2>Password</h2>
