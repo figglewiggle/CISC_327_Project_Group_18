@@ -30,13 +30,14 @@ class Payment_Method(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 class Restaurant(db.Model):
+    __tablename__ = 'restaurant'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), unique=False, nullable=False)
     phone_number = db.Column(db.String(10), unique=True, nullable=False)
     address = db.Column(db.String(50), unique=True, nullable=False)
     cuisine = db.Column(db.String(20), unique=True, nullable=False)
-    item_list = db.relationship('Item', backref='restaurant', lazy=True)
-    favourites_list = db.relationship('Favourites',backref='restaurant', lazy=True)
+    item_list = db.relationship('Item', backref='restaurant', cascade='all,delete', lazy=True)
+    favourites_list = db.relationship('Favourites',backref='restaurant', cascade='all,delete', lazy=True)
     def __repr__(self):
         return f"Name: {self.name}, Phone Number: {self.phone_number}, Address: {self.address}"
     
