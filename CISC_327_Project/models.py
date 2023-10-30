@@ -37,6 +37,8 @@ class Restaurant(db.Model):
     cuisine = db.Column(db.String(20), unique=True, nullable=False)
     item_list = db.relationship('Item', backref='restaurant', lazy=True)
     favourites_list = db.relationship('Favourites',backref='restaurant', lazy=True)
+    def __repr__(self):
+        return f"Name: {self.name}, Phone Number: {self.phone_number}, Address: {self.address}"
     
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
