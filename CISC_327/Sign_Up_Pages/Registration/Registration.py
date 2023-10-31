@@ -31,6 +31,7 @@ def registration():
             return redirect(url_for('homepage.homepage'))
         except Exception as e:
             db.session.rollback()
+            print(e)
             flash(f'Error registering user', 'danger')
             return render_template('registration.html')
     return render_template('registration.html')
