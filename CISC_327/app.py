@@ -97,7 +97,18 @@ def delete_restaurant_command(restaurant_id):
         db.session.delete(restaurant)
         db.session.commit()
         click.echo(f"User with ID {restaurant_id} and related posts deleted.")
-        
+
+@app.cli.command("add-to-cart")
+@click.argument("item_id")
+def add_to_cart_command(item_id):
+    with app.app_context():
+        item = Item.query.get(item_id)
+        if not item:
+            click.echo(f"Item with ID {item_id} not found.")
+            return
+        Item.query.filter(Item.id==item_id).update({Item.in_cart: True})
+        db.session.commit()
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
