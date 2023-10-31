@@ -1,6 +1,0 @@
-Name: John Mayer
-Email: johnmayer@gmail.com
-Phone Number: 987654321
-Password: password
-Address: 123 house
-Payment Method: 123 card
