@@ -18,10 +18,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SECRET_KEY'] = 'the random string'
 login_manager = LoginManager()
 login_manager.login_view = "login.login"
+migrate = Migrate(app, db)
 login_manager.init_app(app)
 db.init_app(app)
 bcrypt.init_app(app)
-migrate = Migrate(app, db)
 migrate.init_app(app, db)
 
 @app.cli.command("delete-user")
