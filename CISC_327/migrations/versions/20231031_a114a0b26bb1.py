@@ -1,8 +1,8 @@
-"""Inital Migration
+"""Initial Migration
 
-Revision ID: d5bdc7222d2b
+Revision ID: a114a0b26bb1
 Revises: 
-Create Date: 2023-10-30 17:47:07.078963
+Create Date: 2023-10-31 14:04:33.590511
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd5bdc7222d2b'
+revision = 'a114a0b26bb1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,7 +37,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('name'),
-    sa.UniqueConstraint('password'),
     sa.UniqueConstraint('phone_number')
     )
     op.create_table('address',
@@ -54,6 +53,7 @@ def upgrade():
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('restaurant_id', sa.Integer(), nullable=False),
+    sa.Column('in_cart', sa.Boolean(), nullable=False),
     sa.ForeignKeyConstraint(['restaurant_id'], ['restaurant.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('description'),

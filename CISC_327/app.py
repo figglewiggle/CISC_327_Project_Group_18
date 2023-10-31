@@ -24,6 +24,7 @@ login_manager.init_app(app)
 db.init_app(app)
 bcrypt.init_app(app)
 migrate = Migrate(app, db)
+migrate.init_app(app, db)
 
 @app.cli.command("delete-user")
 @click.argument("user_id")
@@ -71,7 +72,7 @@ def add_item_command(restaurant_id):
         name = input("Enter Name: ")
         description = input("Enter Description: ")
         price = input("Enter Price: ")
-        item = Item(name=name, description=description, price=price)
+        item = Item(name=name, description=description, price=price, in_cart=False)
         restaurant.item_list.append(item)
         db.session.add(item)
         db.session.commit()
@@ -88,7 +89,7 @@ def display_restaurant_command(restaurant_id):
         
 @app.cli.command("delete-restaurant")
 @click.argument("restaurant_id")
-def delete_user_command(restaurant_id):
+def delete_restaurant_command(restaurant_id):
     """Deletes a user with the given user_id and all related rows, to clear test cases."""
     with app.app_context():
         restaurant = Restaurant.query.get(restaurant_id)
