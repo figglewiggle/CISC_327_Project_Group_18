@@ -1,1 +1,1 @@
-web: python ./CISC_327_Project/app.py $PORT
+web: python ./CISC_327/app.py $PORT

@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(20), unique=True, nullable=False)
     phone_number = db.Column(db.String(10), unique=True, nullable=False)
-    password = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(50), nullable=False)
     addresses = db.relationship('Address', backref='user', cascade='all,delete', lazy='dynamic')
     payment_methods = db.relationship('Payment_Method', backref='user', cascade='all,delete',lazy='dynamic')
     def __repr__(self):
@@ -46,15 +46,7 @@ class Item(db.Model):
     description = db.Column(db.Text(), unique=True, nullable=False)
     price = db.Column(db.Integer, unique=False, nullable=False)
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
-    in_cart = db.Column(db.Boolean, in_cart=False, nullable=False)
+    in_cart = db.Column(db.Boolean, nullable=False)
     def __repr__(self):
         return f"Name: {self.name}, Description: {self.description}"
-    favourites_id = db.Column(db.Integer, db.ForeignKey('favourites.id'), nullable=False)
-
-
-
-class Favourites(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    item_list = db.relationship('Item', backref='favourites', lazy=True)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
 
