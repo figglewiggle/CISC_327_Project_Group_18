@@ -7,7 +7,11 @@
     <body>
         <div>
             <h1>Cart</h1>
-            
+            <div class="cart-list"> 
+                {% for cart in cart_items %}
+                <h2>{{ cart.name }}</h2>
+                {% endfor %}
+            </div>
             <a href="{{url_for('homepage.homepage')}}" class="btn">Back To Homepage</a>
             <p>Subtotal = $0.00</p>
         </div>

@@ -4,3 +4,9 @@ Phone Number: 4168419626
 Password: minime65
 Address: 111 Gamble Glen Crescent
 Payment Method: 4525678946879072
+Name: poop
+Email: poop@gmail.com
+Phone Number: 1234567890
+Password: abcd
+Address: 100 poop street
+Payment Method: 1234567890
