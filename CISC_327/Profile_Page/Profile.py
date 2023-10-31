@@ -1,16 +1,17 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect
 from flask_login import current_user,login_required
+from models import db, bcrypt, User
 profile_blueprint = Blueprint('profile', __name__)
-@profile_blueprint.route("/profile", methods = ['GET', 'POST', 'PUT'])
+@profile_blueprint.route("/profile", methods = ['GET', 'POST'])
 @login_required
 def profile():
     if current_user.is_authenticated:
-        if request.method == 'PUT':
+        if request.method == 'POST':
             field_to_edit = request.form.get('field_to_edit')
-            if field_to_edit = request.form.get('phone_number'):
-                updated_phone_number = request.form['phone number']
-                current_user.phone_number = up
-            if field_to_edit = request.form.get('password'):
+            if field_to_edit == request.form.get('phone_number'):
+                updated_phone_number = request.form['phone_number']
+                current_user.phone_number = updated_phone_number
+            if field_to_edit == request.form.get('password'):
                 updated_password = request.form['password']
                 hashed_password = bcrypt.generate_password_hash(updated_password).decode('utf-8')
                 current_user.password = hashed_password
