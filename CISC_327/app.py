@@ -9,14 +9,12 @@ from Sign_Up_Pages.Logout import logout_blueprint
 from Homepage.Search.Text_Search.Text_Search import text_search_blueprint
 from models import db, bcrypt, User, Restaurant, Item
 from flask_migrate import Migrate, migrate
+import psycopg2
 import os
 import click
 from flask_login import LoginManager
 app = Flask(__name__)
-DATABASE_URL = os.environ.get('DATABASE_URL')
-if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL or 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://akbqduweltruwg:cf1e8850f5e1cfdd9db387c163959d45c0026224ff995847046d330a5cb85ce0@ec2-3-221-177-27.compute-1.amazonaws.com:5432/deii7804acm4tj" or 'sqlite:///site.db'
 app.config['SECRET_KEY'] = 'the random string'
 login_manager = LoginManager()
 login_manager.login_view = "login.login"
