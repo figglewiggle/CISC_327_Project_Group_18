@@ -6,6 +6,7 @@ Email: ethfig@gmail.com
 Password: minime65
 Email: ethfig@gmail.com
 Password: minime65
+<<<<<<< HEAD
 Email: johnmayer@gmail.com
 Password: password
 Email: johnmayer@gmail.com
@@ -22,3 +23,23 @@ Email: johnmayer@gmail.com
 Password: password
 Email: johnmayer@gmail.com
 Password: password
+=======
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+>>>>>>> b164f194232d54cfbbda36eb8160a29aa7af26e6
