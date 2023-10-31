@@ -8,6 +8,7 @@ def menu(restaurant_id):
     if not restaurant:
         flash(f'Restaurant not found','danger')
         return render_template("homepage.html")
+    items = restaurant.item_list
     return render_template("menupage.html", restaurant_name = restaurant.name, 
                            restaurant_address=restaurant.address, restaurant_phone_number = restaurant.phone_number,
-                           restaurant_cuisine = restaurant.cuisine)
+                           restaurant_cuisine = restaurant.cuisine, items=items)

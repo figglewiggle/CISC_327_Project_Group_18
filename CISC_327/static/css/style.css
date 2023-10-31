@@ -18,3 +18,18 @@
 .restaurant-item:hover {
     background: #f9f9f9;
 }
+
+.menu-navbar {
+    display: inline-block;
+    vertical-align: center;
+    padding-left: 65px;
+    padding-right: 65px;
+    border: 1px solid #ddd;
+}
+
+.menu-nav {
+    display: inline-block;
+    vertical-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}

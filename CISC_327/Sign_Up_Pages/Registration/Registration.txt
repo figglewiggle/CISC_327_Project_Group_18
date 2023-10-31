@@ -10,3 +10,9 @@ Phone Number: 4168419626
 Password: minime65
 Address: 111 Gamble Glen Crescent
 Payment Method: 4525678946879072
+Name: jesus
+Email: jesus@gmail.com
+Phone Number: 6479998643
+Password: jesusisking
+Address: 1456 Century Avenue
+Payment Method: 4675891234561876

@@ -6,9 +6,23 @@
         <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
     </head>
     <body>
-        <h1>{{ restaurant_name }}</h1>
-        <h2>{{ restaurant_address }}</h2>
-        <h3>{{ restaurant_phone_number }}</h3>
-        <h4>{{ restaurant_cuisine}}</h4>
+        <nav class="menu-navbar">
+            <h1 class="menu-nav">{{ restaurant_name }}</h1>
+            <h4 class="menu-nav">Address: {{ restaurant_address }}</h4>
+            <h4 class="menu-nav"> Phone: {{ restaurant_phone_number }}</h4>
+            <h4 class="menu-nav">{{ restaurant_cuisine }} Cuisine</h4>
+        </nav>
+        {% for item in items %}
+        <div class="restaurant-item">
+            <div>
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description }}</p>
+                <p>${{ item.price }}</p>
+            </div>
+            <div>
+                <button type="submit">Add To Cart</button>
+            </div>
+        </div>
+        {% endfor %}
     </body>
 </html>
