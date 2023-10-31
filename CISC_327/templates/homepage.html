@@ -7,9 +7,9 @@
     </head>
     <body>
         <nav class="nav">
-            <a class="nav" href="{{ url_for('profile.profile')}}">PROFILE</a>
+            <a class="nav" href="{{ url_for('profile.profile') }}">PROFILE</a>
             <a class="nav">{{ default_address.address if default_address else 'No default address set' }}</a>
-            <form class="nav" action="./search/">
+            <form class="nav" action="{{ url_for('text_search.text_search') }}">
                 <input type="search" id="restaurant" name="q"/>
                 <button type="submit"disabled>Search</button>
             </form>

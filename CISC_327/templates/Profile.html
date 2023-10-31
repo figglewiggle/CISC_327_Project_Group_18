@@ -5,6 +5,8 @@
 </head>
 <body>
     <h1>User Profile</h1>
+    <nav>
+    <a href={{ url_for('homepage.homepage') }}>Back to Homepage</a>
     <form method="post" action="/profile">
         <h2>Name</h2>
         <p>{{name}}</p>
@@ -14,8 +16,8 @@
 
         <h2>Phone Number</h2>
         <p>
-            <input type="text" name="phone" value="{{phone_number}}" disabled>
-            <a href="#" onclick="enableEdit('phone')">Edit</a>
+            <span id="phone_number">{{ phone_number }}</span>
+            <button onclick="enableEdit('phone_number')">Edit</button>
         </p>
 
         <h2>Password</h2>
@@ -52,15 +54,34 @@
             </li>
         </ul>
 
-        <input type="submit" value="Save Changes" style="display: none;">
-    </form>
+        <form method="post" action="/profile" style="display: none;" id="editForm">
+            <input type="hidden" name="field_to_edit" id="field_to_edit">
+            <input type="text" name="phone_number" id="edit_phone_number" style="display: none;">
+            <input type="password" name="new_password" id="edit_new_password" style="display: none;">
+            <!-- Add fields for other information as needed -->
+            <input type="submit" value="Save Changes">
+        </form>
 
     <script>
-        function enableEdit(fieldName) {
-            const inputField = document.querySelector(`[name="${fieldName}"]`);
-            inputField.removeAttribute("disabled");
-            const saveButton = document.querySelector('input[type="submit"]');
-            saveButton.style.display = 'block';
+       function enableEdit(field) {
+            const editForm = document.getElementById('editForm');
+            const fieldToEdit = document.getElementById('field_to_edit');
+
+            fieldToEdit.value = field;
+
+            if (field === 'phone_number') {
+                const phoneNumber = document.getElementById('phone_number');
+                const editPhoneNumber = document.getElementById('edit_phone_number');
+                editPhoneNumber.value = phoneNumber.textContent.trim();
+                editPhoneNumber.style.display = 'block';
+            } else if (field === 'new_password') {
+                const editPassword = document.getElementById('edit_new_password');
+                editPassword.style.display = 'block';
+            } else {
+                // Handle editing of other fields here
+            }
+
+            editForm.style.display = 'block';
         }
 
         function deletePayment(fieldName) {
