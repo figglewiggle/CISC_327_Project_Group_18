@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(20), unique=True, nullable=False)
     phone_number = db.Column(db.String(10), unique=True, nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
     addresses = db.relationship('Address', backref='user', cascade='all,delete', lazy='dynamic')
     payment_methods = db.relationship('Payment_Method', backref='user', cascade='all,delete',lazy='dynamic')
     def __repr__(self):
