@@ -13,4 +13,4 @@ def cartpage(restaurant_id):
     restaurant = Restaurant.query.get(restaurant_id)
     if not restaurant:
         flash(f'Restaurant not found','danger')
-    return render_template("cartpage.html", cart_items=cart_items, subtotal=subtotal, restaurant=restaurant)
+    return render_template("cartpage.html", cart_items=cart_items, subtotal=subtotal, restaurant=restaurant, msg=msg)
