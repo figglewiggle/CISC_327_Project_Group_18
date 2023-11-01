@@ -22,14 +22,18 @@
 .menu-navbar {
     display: inline-block;
     vertical-align: center;
-    padding-left: 65px;
-    padding-right: 65px;
+    padding-left: 88px;
+    padding-right: 88px;
     border: 1px solid #ddd;
 }
 
 .menu-nav {
     display: inline-block;
     vertical-align: center;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.footer-right {
+    padding-left: 600px;
 }
