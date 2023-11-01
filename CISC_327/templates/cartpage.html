@@ -8,6 +8,7 @@
         <div>
             <h1>Cart</h1>
             <h3>{{msg}}</h3>
+            <h1>{{ restaurant.name }} Cart</h1>
             <div class="cart-list"> 
                 {% for cart in cart_items %}
                 <h3> {{ cart.name }} </h3><button type="submit" name="action" value="remove">Remove</button>
@@ -20,6 +21,7 @@
                 <a class="footer-right" href="{{url_for('checkout.checkout')}}">CHECKOUT</a>
             </div>
             
+            <a href="{{ url_for('menu.menu', restaurant_id=restaurant.id) }}" class="btn">Back To Menu</a>
             
         </div>
     </body>

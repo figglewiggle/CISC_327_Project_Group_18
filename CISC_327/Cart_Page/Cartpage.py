@@ -1,13 +1,16 @@
-from flask import Blueprint, render_template, request
-from models import db, Item
+from flask import Blueprint, render_template, flash
+from models import Item, Restaurant
 cartpage_blueprint = Blueprint('cartpage',__name__)
-@cartpage_blueprint.route("/cartpage", methods=['GET','POST'])
-def cartpage():
+@cartpage_blueprint.route("/cartpage/<restaurant_id>", methods=['GET','POST'])
+def cartpage(restaurant_id):
     subtotal = 0
-    msg = ""
-    cart_items = Item.query.filter(Item.in_cart==True).all()
+    msg=""
+    cart_items = Item.query.filter_by(in_cart=True).all()
     if not cart_items:
-        msg="You haven't added any items to your cart yet."
+        msg="You have not added any items to your cart."
     for c in cart_items:
         subtotal += c.price
-    return render_template("cartpage.html", cart_items=cart_items, subtotal=subtotal, msg=msg)
+    restaurant = Restaurant.query.get(restaurant_id)
+    if not restaurant:
+        flash(f'Restaurant not found','danger')
+    return render_template("cartpage.html", cart_items=cart_items, subtotal=subtotal, restaurant=restaurant)

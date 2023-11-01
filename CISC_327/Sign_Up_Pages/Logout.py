@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, url_for
-from flask_login import logout_user, login_required
+from flask_login import current_user, logout_user, login_required
 logout_blueprint = Blueprint('logout',__name__)
 @logout_blueprint.route('/logout',methods=['GET', 'POST'])
 @login_required
