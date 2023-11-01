@@ -1,9 +1,12 @@
-from flask import Blueprint, render_template, request
-from models import Item
+from flask import Blueprint, render_template, request, flash
+from models import Item, Restaurant
 from flask_login import current_user
 checkout_blueprint = Blueprint('checkout',__name__)
-@checkout_blueprint.route("/checkout", methods=['GET','POST'])
-def checkout():
+@checkout_blueprint.route("/checkout/<restaurant_id>", methods=['GET','POST'])
+def checkout(restaurant_id):
+    restaurant = Restaurant.query.get(restaurant_id)
+    if not restaurant:
+        flash(f'Restaurant not found','danger')
     subtotal = 0
     cart_items = Item.query.filter(Item.in_cart==True).all()
     if current_user.is_authenticated:
@@ -16,4 +19,4 @@ def checkout():
         subtotal += c.price
     tax = subtotal*0.14
     total = tax + subtotal
-    return render_template("checkout.html", cart_items=cart_items,subtotal=subtotal,total=total,tax=tax,name=name,email=email,phone_number=phone_number,address=address,payment_method=payment_method)
+    return render_template("checkout.html", restaurant=restaurant,cart_items=cart_items,subtotal=subtotal,total=total,tax=tax,name=name,email=email,phone_number=phone_number,address=address,payment_method=payment_method)

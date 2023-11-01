@@ -37,3 +37,17 @@
 .footer-right {
     padding-left: 600px;
 }
+
+.cart-item{
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+.container {
+    display: inline-block;
+}
+
+.box {
+    border: 1px solid #ddd;
+    padding-left: 10px
+}
+

@@ -6,34 +6,43 @@
         <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
     </head>
     <body>
+        <h1>Checkout</h1>
+        <h2>Delivery Details</h2>
+        <div class="box">
         <div>
-            <h1>Checkout</h1>
-
-            <h3>Address</h3>
-            <p>{{address.address}}</p>
-
-            <h3>Name</h3>
-            <p>{{name}}</p>
-
-            <h3>Email</h3>
-            <p>{{email}}</p>
-
-            <h3>Phone Number</h3>
-            <p>{{phone_number}}</p>
-
-            <h3>Payment Method</h3>
-            <p>{{payment_method.payment_method}}</p>
+            <h3 class="container">Address: </h3>
+            <p class="container">{{address.address}}</p>
+        </div>
+        <div>
+            <h3 class="container">Name: </h3>
+            <p class="container">{{name}}</p>
+        </div>   
+        <div>
+            <h3 class="container">Email: </h3>
+            <p class="container">{{email}}</p>
+        </div>
+        <div>
+            <h3 class="container">Phone Number: </h3>
+            <p class="container">{{phone_number}}</p>
+        </div>
+        <div>
+            <h3 class="container">Payment Method: </h3>
+            <p class="container">{{payment_method.payment_method}}</p>
+        </div>
         </div>
         <h2>Order Summary</h2>
-        <div class="cart-list">
+        <div class="cart-item">
             {% for cart in cart_items %}
                 <h3> {{ cart.name }} </h3>
-                <p> {{ cart.price }} </p>
+                <p> ${{ cart.price }} </p>
             {% endfor %}
         </div>
         <p>Subtotal: ${{ subtotal }}</p>
         <p>Tax: ${{tax}}</p>
         <p>Total Amount: ${{total}}</p>
-
+        <div>
+            <a  href="{{url_for('cartpage.cartpage', restaurant_id=restaurant.id)}}">Back To Cart</a>
+            <button>Pay</button>
+        </div>
     </body>
 </html>
