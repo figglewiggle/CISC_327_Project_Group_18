@@ -16,3 +16,9 @@ Phone Number: 6479998643
 Password: jesusisking
 Address: 1456 Century Avenue
 Payment Method: 4675891234561876
+Name: poop
+Email: poop@gmail.com
+Phone Number: 1234567890
+Password: abc
+Address: 100 poop street
+Payment Method: 1234567890

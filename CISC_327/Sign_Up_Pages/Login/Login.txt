@@ -13,3 +13,7 @@ Email: ethfig@gmail.com
 Password: minime65
 Email: jesus@gmail.com
 Password: jesusisking
+Email: poop@gmail.com
+Password: abc
+Email: poop@gmail.com
+Password: abc

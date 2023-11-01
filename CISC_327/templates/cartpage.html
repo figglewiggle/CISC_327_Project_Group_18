@@ -7,13 +7,19 @@
     <body>
         <div>
             <h1>Cart</h1>
+            <h3>{{msg}}</h3>
             <div class="cart-list"> 
                 {% for cart in cart_items %}
-                <h3>{{ cart.name }}</h3>
-                {% endfor %}
+                <h3> {{ cart.name }} </h3><button type="submit" name="action" value="remove">Remove</button>
+                <h4> {{ cart.price }} </h4>
+                {% endfor %}    
             </div>
             <p>Subtotal = ${{ subtotal }}</p>
-            <a href="{{url_for('homepage.homepage')}}" class="btn">Back To Homepage</a>
+            <div> 
+                <a href="{{url_for('homepage.homepage')}}" class="btn">HOMEPAGE</a>
+                <a class="footer-right" href="{{url_for('checkout.checkout')}}">CHECKOUT</a>
+            </div>
+            
             
         </div>
     </body>

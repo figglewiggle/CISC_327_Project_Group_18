@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cart Page</title>
+        <meta charset="UTF-8">
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
+    </head>
+    <body>
+        <div>
+            <h1>Checkout</h1>
+
+            <h3>Address</h3>
+            <p>{{address.address}}</p>
+
+            <h3>Name</h3>
+            <p>{{name}}</p>
+
+            <h3>Email</h3>
+            <p>{{email}}</p>
+
+            <h3>Phone Number</h3>
+            <p>{{phone_number}}</p>
+
+            <h3>Payment Method</h3>
+            <p>{{payment_method.payment_method}}</p>
+        </div>
+        <h2>Order Summary</h2>
+        <div class="cart-list">
+            {% for cart in cart_items %}
+                <h3> {{ cart.name }} </h3>
+                <p> {{ cart.price }} </p>
+            {% endfor %}
+        </div>
+        <p>Subtotal: ${{ subtotal }}</p>
+        <p>Tax: ${{tax}}</p>
+        <p>Total Amount: ${{total}}</p>
+
+    </body>
+</html>
