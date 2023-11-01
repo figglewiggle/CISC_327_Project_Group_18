@@ -20,12 +20,14 @@
                 <p>${{ item.price }}</p>
             </div>
             <div>
-                <button type="submit">Add To Cart</button>
+                <form action="{{ url_for('add_to_cart.add_to_cart', item_id=item.id, restaurant_id=restaurant_id) }}" method="post">
+                    <button type="submit">Add To Cart</button>
+                </form>
             </div>
         </div>
         {% endfor %}
         <div>
-            <a href="{{ url_for('cartpage.cartpage') }}">CART</a>
+            <a href="{{ url_for('cartpage.cartpage', restaurant_id=restaurant_id) }}">CART</a>
             <a class="footer-right" href={{ url_for('homepage.homepage') }}>BACK TO HOMEPAGE</a>
         </div>
     </body>

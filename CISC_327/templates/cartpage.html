@@ -6,14 +6,14 @@
     </head>
     <body>
         <div>
-            <h1>Cart</h1>
+            <h1>{{ restaurant.name }} Cart</h1>
             <div class="cart-list"> 
                 {% for cart in cart_items %}
                 <h3>{{ cart.name }}</h3>
                 {% endfor %}
             </div>
             <p>Subtotal = ${{ subtotal }}</p>
-            <a href="{{url_for('homepage.homepage')}}" class="btn">Back To Homepage</a>
+            <a href="{{ url_for('menu.menu', restaurant_id=restaurant.id) }}" class="btn">Back To Menu</a>
             
         </div>
     </body>
