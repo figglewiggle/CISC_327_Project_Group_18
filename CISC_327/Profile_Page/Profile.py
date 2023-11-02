@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect
 from flask_login import current_user,login_required
-from models import db, bcrypt, User
+from models import db, bcrypt
 profile_blueprint = Blueprint('profile', __name__)
 @profile_blueprint.route("/profile", methods = ['GET', 'POST'])
 @login_required
