@@ -16,6 +16,16 @@
             <a class="nav">FILTER</a>
             <a class="nav" href="{{ url_for('logout.logout')}}">LOGOUT</a>
         </nav>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        
         <div class="restaurant-list">
             {% for restaurant in restaurants %}
             <div class="restaurant-item">

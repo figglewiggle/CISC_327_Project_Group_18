@@ -38,6 +38,7 @@
     padding-left: 600px;
 }
 
+<<<<<<< Updated upstream
 .cart-item{
     border: 1px solid #ddd;
     padding: 10px;
@@ -49,5 +50,13 @@
 .box {
     border: 1px solid #ddd;
     padding-left: 10px
+=======
+.delete-from-cart {
+    padding-left: 450px;
+}
+
+.cart-list {
+    border: 1px solid #ddd;
+>>>>>>> Stashed changes
 }
 
