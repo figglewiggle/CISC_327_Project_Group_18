@@ -21,7 +21,7 @@
         <p>{{name}}</p>
 
         <h2>Email</h2>
-        <p>"{{email}}"</p>
+        <p>{{email}}</p>
 
         <h2>Phone Number</h2>
         <p>
@@ -39,101 +39,86 @@
         <ul id="addresses">
             {% for address in addresses %}
             <li>
-                <input type="text" name="address" value="{{address.address}}" disabled>
-                <a href="#" onclick="enableEdit('address')">Edit</a>
-                <a href="#" onclick="deleteAddress('address')">Delete</a>
+                <span>{{ address.address }}</span>
+                <!-- Form for deleting an address -->
+                <form method="post" action="{{ url_for('delete_address.delete_address') }}">
+                    <input type="hidden" name="address_id" value="{{ address.id }}">
+                    <button type="submit">Delete</button>
+                </form>
             </li>
             {% endfor %}
-            <li>
-                <a href="#" onclick="addAddress()">Add New Address</a>
-            </li>
         </ul>
 
         <h2>Payment Methods</h2>
         <ul id="payment-methods">
-            {% for card_num in payment_methods %}
+            {% for payment_method in payment_methods %}
             <li>
-                <input type="text" name="payment" value="{{card_num.card_num}}" disabled>
-                <a href="#" onclick="enableEdit('payment')">Edit</a>
-                <a href="#" onclick="deletePayment('payment')">Delete</a>
+                <span>{{ payment_method.card_num }}</span>
+                <!-- Form for deleting a payment method -->
+                <form method="post" action="{{ url_for('delete_payment.delete_payment') }}">
+                    <input type="hidden" name="payment_id" value="{{ payment_method.id }}">
+                    <button type="submit">Delete</button>
+                </form>
             </li>
             {% endfor %}
-            <li>
-                <a href="#" onclick="addPayment()">Add New Payment Method</a>
-            </li>
         </ul>
+
+    <form method="post" action="{{ url_for('edit_phone.edit_phone') }}" id="phoneForm" style="display: none;">
+        <input type="text" name="new_phone" id="edit_phone_number">
+        <input type="submit" value="Save Phone Number">
     </form>
 
-        <form method="post" action="/profile" style="display: none;" id="editForm">
-            <input type="hidden" name="field_to_edit" id="field_to_edit">
-            <input type="text" name="phone_number" id="edit_phone_number" style="display: none;">
-            <input type="password" name="new_password" id="edit_new_password" style="display: none;">
-            <!-- Add fields for other information as needed -->
-            <input type="submit" value="Save Changes">
-        </form>
+    <!-- Form for updating the password -->
+    <form method="post" action="{{ url_for('edit_password.edit_password') }}" id="passwordForm" style="display: none;">
+        <input type="password" name="new_password" id="edit_new_password">
+        <input type="submit" value="Change Password">
+    </form>
+
+    <!-- Form for adding a new payment method -->
+    <form method="post" action="{{ url_for('add_payment.add_payment') }}" id="addPaymentForm">
+        <input type="text" name="card_num" placeholder="New Card Number">
+        <input type="submit" value="Add Payment Method">
+    </form>
+
+    <!-- Form for adding a new address-->
+    <form method="post" action="{{ url_for('add_address.add_address') }}" id="addAddressForm">
+        <input type="text" name="address" placeholder="New Address">
+        <input type="submit" value="Add Address">
+    </form>
+
 
     <script>
-       function enableEdit(field) {
-            const editForm = document.getElementById('editForm');
-            const fieldToEdit = document.getElementById('field_to_edit');
-
-            fieldToEdit.value = field;
-
+        function enableEdit(field) {
             if (field === 'phone_number') {
-                const phoneNumber = document.getElementById('phone_number');
-                const editPhoneNumber = document.getElementById('edit_phone_number');
-                editPhoneNumber.value = phoneNumber.textContent.trim();
-                editPhoneNumber.style.display = 'block';
-            } else if (field === 'new_password') {
-                const editPassword = document.getElementById('edit_new_password');
-                editPassword.style.display = 'block';
-            } else {
-                // Handle editing of other fields here
+                document.getElementById('phoneForm').style.display = 'block';
+            } else if (field === 'password') {
+                document.getElementById('passwordForm').style.display = 'block';
             }
-
-            editForm.style.display = 'block';
+            // Hide the main edit form to prevent multiple submissions
+            document.getElementById('editForm').style.display = 'none';
         }
-
-        function deletePayment(fieldName) {
-            const listItem = document.querySelector(`[name="${fieldName}"]`).parentNode;
-            listItem.remove();
-        }
-
-        let paymentCounter = 2;
-
-        function addPayment() {
-            paymentCounter++;
-            const paymentList = document.getElementById('payment-methods');
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <input type="text" name="payment${paymentCounter}" value="">
-                <a href="#" onclick="enableEdit('payment${paymentCounter}')">Edit</a>
-                <a href="#" onclick="deletePayment('payment${paymentCounter}')">Delete</a>
-            `;
-            paymentList.insertBefore(li, paymentList.querySelector('li:last-child'));
-            const saveButton = document.querySelector('input[type="submit"]');
-            saveButton.style.display = 'block';
-        }
-
-        function deleteAddress(fieldName) {
-            const listItem = document.querySelector(`[name="${fieldName}"]`).parentNode;
-            listItem.remove();
-        }
-
-        let addressCounter = 2;
 
         function addAddress() {
-            addressCounter++;
-            const addressList = document.getElementById('addresses');
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <input type="text" name="address${addressCounter}" value="">
-                <a href="#" onclick="enableEdit('address${addressCounter}')">Edit</a>
-                <a href="#" onclick="deleteAddress('address${addressCounter}')">Delete</a>
-            `;
-            addressList.insertBefore(li, addressList.querySelector('li:last-child'));
-            const saveButton = document.querySelector('input[type="submit"]');
-            saveButton.style.display = 'block';
+            document.getElementById('addAddressForm').style.display = 'block';
+        }
+    
+        // Function to delete an address
+        function deleteAddress(addressId) {
+            // Confirm with the user before deletion
+            if (confirm('Are you sure you want to delete this address?')) {
+                // Create a form and submit it to delete the address
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = '{{ url_for('delete_address.delete_address') }}';
+                
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'address_id';
+                input.value = addressId;
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
         }
     </script>
 </body>

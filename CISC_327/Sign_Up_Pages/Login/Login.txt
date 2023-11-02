@@ -40,20 +40,9 @@ Password: minime65
 >>>>>>> Stashed changes
 Email: ethfig@gmail.com
 Password: minime65
-<<<<<<< Updated upstream
 Email: ethfig@gmail.com
 Password: minime65
 Email: ethfig@gmail.com
 Password: minime65
-=======
-Email: poop@gmail.com
-Password: abc
->>>>>>> Stashed changes
-Email: poop@gmail.com
-Password: abc
-Email: poop@gmail.com
-Password: abc
-Email: poop@gmail.com
-Password: abc
-Email: poop@gmail.com
-Password: abc
+Email: ethfig@gmail.com
+Password: minime65
