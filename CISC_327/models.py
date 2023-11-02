@@ -38,7 +38,7 @@ class Restaurant(db.Model):
     cuisine = db.Column(db.String(20), nullable=False)
     item_list = db.relationship('Item', backref='restaurant', cascade='all,delete', lazy='dynamic')
     def __repr__(self):
-        return f"Name: {self.name}, Phone Number: {self.phone_number}, Address: {self.address}, Item List: {self.item_list.filter_by().all()}"
+        return f"Name: {self.name}, Phone Number: {self.phone_number}, Address: {self.address}, Item List: {self.item_list.filter_by().all()}, Cuisine: {self.cuisine}"
     
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)

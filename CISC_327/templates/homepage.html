@@ -13,7 +13,7 @@
                 <input type="search" id="restaurant" name="q"/>
                 <button type="submit"disabled>Search</button>
             </form>
-            <a class="nav">FILTER</a>
+            <a class="nav" href="{{ url_for('filter_search.get_cuisines')}}">FILTER</a>
             <a class="nav" href="{{ url_for('logout.logout')}}">LOGOUT</a>
         </nav>
         {% with messages = get_flashed_messages(with_categories=true) %}
