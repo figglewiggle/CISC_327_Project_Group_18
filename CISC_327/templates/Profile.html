@@ -4,8 +4,17 @@
     <title>Profile</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
     <h1>User Profile</h1>
-    <nav>
     <a href={{ url_for('homepage.homepage') }}>Back to Homepage</a>
     <form method="post" action="/profile">
         <h2>Name</h2>
@@ -53,6 +62,7 @@
                 <a href="#" onclick="addPayment()">Add New Payment Method</a>
             </li>
         </ul>
+    </form>
 
         <form method="post" action="/profile" style="display: none;" id="editForm">
             <input type="hidden" name="field_to_edit" id="field_to_edit">

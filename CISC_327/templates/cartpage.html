@@ -3,9 +3,18 @@
     <head>
         <title>Cart Page</title>
         <meta charset="UTF-8">
-        <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
+        <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}" />
     </head>
     <body>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         <div>
             <h1>Cart</h1>
             
@@ -34,11 +43,10 @@
             <div class="container"><p>${{ subtotal }}</p></div>
             
             <div> 
-                <a href="{{url_for('homepage.homepage')}}" class="btn">HOMEPAGE</a>
                 <a  href="{{url_for('checkout.checkout', restaurant_id=restaurant.id)}}">CHECKOUT</a>
             </div>
             
-            <a href="{{ url_for('menu.menu', restaurant_id=restaurant.id) }}" class="btn">Back To Menu</a>
+            <a href="{{ url_for('menu.menu', restaurant_id=restaurant.id) }}" class="btn">MENU</a>
             
         </div>
     </body>
