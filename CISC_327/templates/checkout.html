@@ -12,6 +12,14 @@
         <div>
             <h3 class="container">Address: </h3>
             <p class="container">{{address.address}}</p>
+            <div class="dropdown">
+                <button class="container">Change</button>
+                <div class="dropdown-content">
+                    {% for a in all_addresses %}
+                    <a href="#">{{ a.address }}</a>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
         <div>
             <h3 class="container">Name: </h3>

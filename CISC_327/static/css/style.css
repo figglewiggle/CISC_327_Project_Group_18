@@ -38,7 +38,6 @@
     padding-left: 600px;
 }
 
-<<<<<<< Updated upstream
 .cart-item{
     border: 1px solid #ddd;
     padding: 10px;
@@ -50,14 +49,13 @@
 .box {
     border: 1px solid #ddd;
     padding-left: 10px
-=======
+}
 .delete-from-cart {
     padding-left: 450px;
 }
 
 .cart-list {
     border: 1px solid #ddd;
->>>>>>> Stashed changes
 }
   
   .dropdown {
@@ -69,7 +67,7 @@
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 60px;
+    min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
   }
