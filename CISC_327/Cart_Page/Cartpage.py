@@ -9,15 +9,6 @@ def cartpage(restaurant_id):
     msg=""
     cart_items = Item.query.filter_by(in_cart=True).all()
     if not cart_items:
-<<<<<<< Updated upstream
-        msg="You have not added any items to your cart."
-    for c in cart_items:
-        subtotal += c.price
-    restaurant = Restaurant.query.get(restaurant_id)
-    if not restaurant:
-        flash(f'Restaurant not found','danger')
-    return render_template("cartpage.html", cart_items=cart_items, subtotal=subtotal, restaurant=restaurant, msg=msg)
-=======
         return redirect(url_for('homepage.homepage'))
     else:
         for c in cart_items:
@@ -26,4 +17,3 @@ def cartpage(restaurant_id):
         if not restaurant:
             flash(f'Restaurant not found','danger')
         return render_template("cartpage.html", cart_items=cart_items, subtotal=subtotal, restaurant=restaurant)
->>>>>>> Stashed changes

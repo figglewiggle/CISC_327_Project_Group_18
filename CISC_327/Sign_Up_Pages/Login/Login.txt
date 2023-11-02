@@ -38,3 +38,5 @@ Password: minime65
 Email: ethfig@gmail.com
 Password: minime65
 >>>>>>> Stashed changes
+Email: ethfig@gmail.com
+Password: minime65

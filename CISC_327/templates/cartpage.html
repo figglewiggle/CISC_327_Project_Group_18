@@ -35,11 +35,10 @@
             <div class="container"><p>${{ subtotal }}</p></div>
             
             <div> 
-                <a href="{{url_for('homepage.homepage')}}" class="btn">HOMEPAGE</a>
                 <a  href="{{url_for('checkout.checkout', restaurant_id=restaurant.id)}}">CHECKOUT</a>
             </div>
             
-            <a href="{{ url_for('menu.menu', restaurant_id=restaurant.id) }}" class="btn">Back To Menu</a>
+            <a href="{{ url_for('menu.menu', restaurant_id=restaurant.id) }}" class="btn">MENU</a>
             
         </div>
     </body>
