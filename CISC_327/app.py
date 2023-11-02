@@ -7,7 +7,9 @@ from Cart_Page.Cartpage import cartpage_blueprint
 from Homepage.Menu_Access.Menu_Access import menu_blueprint
 from Sign_Up_Pages.Logout import logout_blueprint
 from Homepage.Search.Text_Search.Text_Search import text_search_blueprint
+from Checkout_Page.Checkout import checkout_blueprint
 from Cart_Page.Add.Add_To_Cart import add_to_cart_blueprint
+from Cart_Page.Delete.Delete_From_Cart import delete_from_cart_blueprint
 from models import db, bcrypt, User, Restaurant, Item
 from flask_migrate import Migrate, migrate
 import os
@@ -126,7 +128,10 @@ app.register_blueprint(cartpage_blueprint)
 app.register_blueprint(menu_blueprint)
 app.register_blueprint(logout_blueprint)
 app.register_blueprint(text_search_blueprint)
+app.register_blueprint(checkout_blueprint)
 app.register_blueprint(add_to_cart_blueprint)
+app.register_blueprint(delete_from_cart_blueprint)
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
     app.run(host="0.0.0.0", port=port, debug=True, threaded=True)

@@ -3,16 +3,33 @@
     <head>
         <title>Cart Page</title>
         <meta charset="UTF-8">
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
     </head>
     <body>
         <div>
+            <h1>Cart</h1>
+            
             <h1>{{ restaurant.name }} Cart</h1>
-            <div class="cart-list"> 
+            <div class="restaurant-item"> 
+                <h3>{{msg}}</h3>
                 {% for cart in cart_items %}
-                <h3>{{ cart.name }}</h3>
-                {% endfor %}
+                <h3> {{ cart.name }} </h3>
+                <p> ${{ cart.price }} </p>
+                <div class="button-container">
+                    <form action="{{ url_for('delete_from_cart.delete_from_cart', item_id=cart.id, restaurant_id=restaurant.id) }}" method="post">
+                        <button type="submit">Remove</button>
+                    </form>
+                </div>
+                {% endfor %}    
             </div>
-            <p>Subtotal = ${{ subtotal }}</p>
+            <div class="container"><h3>Subtotal: </h3></div>
+            <div class="container"><p>${{ subtotal }}</p></div>
+            
+            <div> 
+                <a href="{{url_for('homepage.homepage')}}" class="btn">HOMEPAGE</a>
+                <a  href="{{url_for('checkout.checkout', restaurant_id=restaurant.id)}}">CHECKOUT</a>
+            </div>
+            
             <a href="{{ url_for('menu.menu', restaurant_id=restaurant.id) }}" class="btn">Back To Menu</a>
             
         </div>
