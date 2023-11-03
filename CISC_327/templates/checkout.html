@@ -66,9 +66,16 @@
         <p>Subtotal: ${{ subtotal }}</p>
         <p>Tax: ${{tax}}</p>
         <p>Total Amount: ${{total}}</p>
+
+        <div class="comments-box">
+            <h3>Comments</h3>
+            <input type="text" class="comment-input" placeholder="Write a comment...">
+            <button class="comment-button">Add Comment</button>
+        </div>
+
         <div>
             <a  href="{{url_for('cartpage.cartpage', restaurant_id=restaurant.id)}}">Back To Cart</a>
-            <button>Pay</button>
+            <a href="{{url_for('tracking.tracking', restaurant_id=restaurant.id)}}">Pay</a>
         </div>
     </body>
 </html>

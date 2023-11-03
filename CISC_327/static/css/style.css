@@ -78,8 +78,6 @@
     text-decoration: none;
     display: block;
   }
-
-
   
   .dropdown:hover .dropdown-content {
     display: block;
@@ -88,4 +86,26 @@
   .dropdown:hover .dropbtn {
     background-color: #f9f9f9;
   }
+
+  .comments-box {
+    width: 400px;
+    padding: 10px;
+    
+}
+
+.comment-input {
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.comment-button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 
