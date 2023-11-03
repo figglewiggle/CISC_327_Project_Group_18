@@ -14,13 +14,34 @@
             <p class="container">{{address.address}}</p>
             <div class="dropdown">
                 <button class="container">Change</button>
-                <div class="dropdown-content">
-                    {% for a in all_addresses %}
-                    <a href="#">{{ a.address }}</a>
-                    {% endfor %}
+                <div class="dropdown-content">                   
+                    <form method="post" action="{{ url_for('checkout.checkout', restaurant_id=restaurant.id) }}">
+                        {% for a in all_addresses %}
+                        <input type="radio" id="change_address" name="change_address" value="{{ a.address }}">
+                        <label for="change_address">{{a.address}}</label>                        
+                        {% endfor %}
+                        <input type="submit" value="Submit">
+                    </form>                                    
                 </div>
             </div>
         </div>
+        <div>
+            <h3 class="container">Payment Method: </h3>
+            <p class="container">{{payment_method.card_num}}</p>
+            <div class="dropdown">
+                <button class="container">Change</button>
+                <div class="dropdown-content">                   
+                    <form method="post" action="{{ url_for('checkout.checkout', restaurant_id=restaurant.id) }}">
+                        {% for pm in all_pm %}
+                        <input type="radio" id="change_pm" name="change_pm" value="{{ pm.card_num }}">
+                        <label for="change_pm">{{ pm.card_num }}</label>                        
+                        {% endfor %}
+                        <input type="submit" value="Submit">
+                    </form>                                    
+                </div>
+            </div>
+        </div>
+
         <div>
             <h3 class="container">Name: </h3>
             <p class="container">{{name}}</p>
@@ -33,11 +54,8 @@
             <h3 class="container">Phone Number: </h3>
             <p class="container">{{phone_number}}</p>
         </div>
-        <div>
-            <h3 class="container">Payment Method: </h3>
-            <p class="container">{{payment_method.card_num}}</p>
-        </div>
-        </div>
+        
+        
         <h2>Order Summary</h2>
         <div class="cart-item">
             {% for cart in cart_items %}

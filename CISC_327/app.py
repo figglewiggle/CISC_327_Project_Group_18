@@ -8,6 +8,7 @@ from Homepage.Menu_Access.Menu_Access import menu_blueprint
 from Sign_Up_Pages.Logout import logout_blueprint
 from Homepage.Search.Text_Search.Text_Search import text_search_blueprint
 from Checkout_Page.Checkout import checkout_blueprint
+from Checkout_Page.Preferred_Address.Preferred_Address import preferred_address_blueprint
 from Cart_Page.Add.Add_To_Cart import add_to_cart_blueprint
 from Cart_Page.Delete.Delete_From_Cart import delete_from_cart_blueprint
 from Homepage.Search.Filter_Search.Filter_Search import filter_search_blueprint
@@ -145,6 +146,7 @@ app.register_blueprint(edit_password_blueprint)
 app.register_blueprint(edit_phone_blueprint)
 app.register_blueprint(add_payment_blueprint)
 app.register_blueprint(delete_payment_blueprint)
+app.register_blueprint(preferred_address_blueprint)
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
     app.run(host="0.0.0.0", port=port, debug=True, threaded=True)
