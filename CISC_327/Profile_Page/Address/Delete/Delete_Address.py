@@ -6,7 +6,7 @@ delete_address_blueprint = Blueprint('delete_address',__name__)
 def delete_address():
     address_id = request.form.get('address_id')
     address = Address.query.get(address_id)
-    if address.user_id == current_user.id:
+    if address.user_id == current_user.id and len(current_user.addresses.all())>1:
         db.session.delete(address)
         db.session.commit()
         flash('Address deleted successfully!', 'success')

@@ -16,74 +16,68 @@
 
     <h1>User Profile</h1>
     <a href={{ url_for('homepage.homepage') }}>Back to Homepage</a>
-    <form method="post" action="/profile">
-        <h2>Name</h2>
-        <p>{{name}}</p>
+    <h2>Name</h2>
+    <p>{{name}}</p>
 
-        <h2>Email</h2>
-        <p>{{email}}</p>
+    <h2>Email</h2>
+    <p>{{email}}</p>
 
-        <h2>Phone Number</h2>
-        <p>
-            <span id="phone_number">{{ phone_number }}</span>
-            <button onclick="enableEdit('phone_number')">Edit</button>
-        </p>
+    <h2>Phone Number</h2>
+    <p>
+        <span id="phone_number">{{ phone_number }}</span>
+        <button onclick="enableEdit('phone_number')">Edit</button>
+        <form method="post" action="{{ url_for('edit_phone.edit_phone') }}" id="phoneForm" style="display: none;">
+            <input type="text" name="new_phone" id="edit_phone_number">
+            <input type="submit" value="Save Phone Number">
+        </form>
+    </p>
+    <h2>Password</h2>
+    <p>
+        <input type="password" name="password" value="{{password}}" disabled>
+        <a href="#" onclick="enableEdit('password')">Change Password</a>
+        <!-- Form for updating the password -->
+        <form method="post" action="{{ url_for('edit_password.edit_password') }}" id="passwordForm" style="display: none;">
+            <input type="password" name="new_password" id="edit_new_password">
+            <input type="submit" value="Change Password">
+        </form>
+    </p>
 
-        <h2>Password</h2>
-        <p>
-            <input type="password" name="password" value="{{password}}" disabled>
-            <a href="#" onclick="enableEdit('password')">Change Password</a>
-        </p>
-
-        <h2>Addresses</h2>
-        <ul id="addresses">
-            {% for address in addresses %}
-            <li>
-                <span>{{ address.address }}</span>
-                <!-- Form for deleting an address -->
-                <form method="post" action="{{ url_for('delete_address.delete_address') }}">
-                    <input type="hidden" name="address_id" value="{{ address.id }}">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
-
-        <h2>Payment Methods</h2>
-        <ul id="payment-methods">
-            {% for payment_method in payment_methods %}
-            <li>
-                <span>{{ payment_method.card_num }}</span>
-                <!-- Form for deleting a payment method -->
-                <form method="post" action="{{ url_for('delete_payment.delete_payment') }}">
-                    <input type="hidden" name="payment_id" value="{{ payment_method.id }}">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
-
-    <form method="post" action="{{ url_for('edit_phone.edit_phone') }}" id="phoneForm" style="display: none;">
-        <input type="text" name="new_phone" id="edit_phone_number">
-        <input type="submit" value="Save Phone Number">
+    <h2>Addresses</h2>
+    <ul id="addresses">
+        {% for address in addresses %}
+        <li>
+            <span>{{ address.address }}</span>
+            <!-- Form for deleting an address -->
+            <form method="post" action="{{ url_for('delete_address.delete_address') }}">
+                <input type="hidden" name="address_id" value="{{ address.id }}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <!-- Form for adding a new address-->
+    <form method="post" action="{{ url_for('add_address.add_address') }}" id="addAddressForm">
+        <input type="text" name="address" placeholder="New Address">
+        <input type="submit" value="Add Address">
     </form>
-
-    <!-- Form for updating the password -->
-    <form method="post" action="{{ url_for('edit_password.edit_password') }}" id="passwordForm" style="display: none;">
-        <input type="password" name="new_password" id="edit_new_password">
-        <input type="submit" value="Change Password">
-    </form>
+    <h2>Payment Methods</h2>
+    <ul id="payment-methods">
+        {% for payment_method in payment_methods %}
+        <li>
+            <span>{{ payment_method.card_num }}</span>
+            <!-- Form for deleting a payment method -->
+            <form method="post" action="{{ url_for('delete_payment.delete_payment') }}">
+                <input type="hidden" name="payment_id" value="{{ payment_method.id }}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
 
     <!-- Form for adding a new payment method -->
     <form method="post" action="{{ url_for('add_payment.add_payment') }}" id="addPaymentForm">
         <input type="text" name="card_num" placeholder="New Card Number">
         <input type="submit" value="Add Payment Method">
-    </form>
-
-    <!-- Form for adding a new address-->
-    <form method="post" action="{{ url_for('add_address.add_address') }}" id="addAddressForm">
-        <input type="text" name="address" placeholder="New Address">
-        <input type="submit" value="Add Address">
     </form>
 
 
