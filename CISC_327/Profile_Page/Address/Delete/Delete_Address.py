@@ -4,9 +4,9 @@ from models import db, Address
 delete_address_blueprint = Blueprint('delete_address',__name__)
 @delete_address_blueprint.route('/delete_address', methods=['POST'])
 def delete_address():
-    address_id = request.form.get('address_id')
+    address_id = request.form.get('address_id') # get address based on id
     address = Address.query.get(address_id)
-    if address.user_id == current_user.id and len(current_user.addresses.all())>1:
+    if address.user_id == current_user.id and len(current_user.addresses.all())>1: # only delete address if not the last one
         db.session.delete(address)
         db.session.commit()
         flash('Address deleted successfully!', 'success')
