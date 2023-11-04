@@ -9,6 +9,7 @@ from Sign_Up_Pages.Logout import logout_blueprint
 from Homepage.Search.Text_Search.Text_Search import text_search_blueprint
 from Checkout_Page.Checkout import checkout_blueprint
 from Checkout_Page.Preferred_Address.Preferred_Address import preferred_address_blueprint
+from Checkout_Page.Tips.Tips import tips_blueprint
 from Cart_Page.Add.Add_To_Cart import add_to_cart_blueprint
 from Cart_Page.Delete.Delete_From_Cart import delete_from_cart_blueprint
 from Homepage.Search.Filter_Search.Filter_Search import filter_search_blueprint
@@ -138,6 +139,7 @@ app.register_blueprint(menu_blueprint)
 app.register_blueprint(logout_blueprint)
 app.register_blueprint(text_search_blueprint)
 app.register_blueprint(checkout_blueprint)
+app.register_blueprint(tips_blueprint)
 app.register_blueprint(add_to_cart_blueprint)
 app.register_blueprint(delete_from_cart_blueprint)
 app.register_blueprint(filter_search_blueprint)
