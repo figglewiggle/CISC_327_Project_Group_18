@@ -68,9 +68,18 @@
         <p>Total Amount: ${{total}}</p>
 
         <div class="comments-box">
+            <h3>Tips</h3>
+            <form method="post" action="{{url_for('tips.tips', restaurant_id=restaurant.id)}}">
+                <input id="tip" name="tip" type="text" class="comment-input" placeholder="Add a tip...">
+                <button type="submit" class="comment-button">Add Tip</button>
+            </form>
+        </div>
+
+        <div class="comments-box">
             <h3>Comments</h3>
             <input type="text" class="comment-input" placeholder="Write a comment...">
             <button class="comment-button">Add Comment</button>
+            
         </div>
 
         <div>
