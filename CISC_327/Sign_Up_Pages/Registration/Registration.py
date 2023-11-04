@@ -1,9 +1,14 @@
 # Registration.py
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from models import db, bcrypt, User,Address,Payment_Method
+from models import db, bcrypt, User, Address, Payment_Method, Item
 registration_blueprint = Blueprint('registration', __name__)
 @registration_blueprint.route("/registration", methods = ['GET', 'POST'])
 def registration():
+    items = Item.query.all()
+    if items:
+        for item in items:
+            item.in_cart = False
+        db.session.commit()
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']

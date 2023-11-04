@@ -1,10 +1,15 @@
 # Login.py
 from flask import Blueprint, render_template, request, url_for, redirect, flash
-from models import User, bcrypt
+from models import User, bcrypt, db, Item
 from flask_login import login_user
 login_blueprint = Blueprint('login',__name__)
 @login_blueprint.route("/login", methods=['GET', 'POST'])
 def login():
+    items = Item.query.all()
+    if items:
+        for item in items:
+            item.in_cart = False
+        db.session.commit()
     if request.method=='POST':
         email = request.form['email']
         password = request.form['password']

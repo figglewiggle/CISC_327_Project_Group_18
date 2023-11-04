@@ -6,9 +6,10 @@ logout_blueprint = Blueprint('logout',__name__)
 @login_required
 def logout():
     items = Item.query.all()
-    for item in items:
-        item.in_cart = False
-    db.session.commit()
+    if items:
+        for item in items:
+            item.in_cart = False
+        db.session.commit()
     session.clear()
     logout_user()
     return redirect(url_for('login.login'))
