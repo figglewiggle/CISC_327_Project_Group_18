@@ -43,8 +43,8 @@ def checkout(restaurant_id):
     # Calculates total price
     tax = subtotal*0.14
     total = tax + subtotal
-    tip = session.get('tip') 
-    if tip: # Checks to see if tip was added
+    tip = session.get('tip') # If tip was added, this will return the amount that was stored in session
+    if tip: 
         tip_dec = int(tip)/100
         t = total * tip_dec
         tot = total + t

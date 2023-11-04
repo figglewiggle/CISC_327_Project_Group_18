@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Cart Page</title>
+        <title>Checkout Page</title>
         <meta charset="UTF-8">
         <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
     </head>
@@ -9,7 +9,6 @@
         <h1>Checkout</h1>
         <h2>Delivery Details</h2>
         <div class="box">
-        <div>
             <h3 class="container">Address: </h3>
             <p class="container">{{address.address}}</p>
             <div class="dropdown">
@@ -24,7 +23,7 @@
                     </form>                                    
                 </div>
             </div>
-        </div>
+        
         <div>
             <h3 class="container">Payment Method: </h3>
             <p class="container">{{payment_method.card_num}}</p>
@@ -53,6 +52,7 @@
         <div>
             <h3 class="container">Phone Number: </h3>
             <p class="container">{{phone_number}}</p>
+        </div>
         </div>
         
         
