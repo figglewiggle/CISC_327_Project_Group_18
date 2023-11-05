@@ -8,12 +8,12 @@ delete_from_cart_blueprint = Blueprint('delete_from_cart',__name__)
 @login_required
 # Function for when remove from cart button is pressed 
 def delete_from_cart(item_id, restaurant_id):
-    if request.method=='POST': # Checks if form was submitted
-        item = Item.query.get(item_id) 
-        if not item:
+    if request.method=='POST': 
+        item = Item.query.get(item_id) # Gets specified item
+        if not item: # Error checking to make sure item is in database
             flash("Item Not Found",'danger')
         else:
-            item.in_cart = False # Sets the item's in_cart attribute to false
+            item.in_cart = False # Changes attribute in the database
             db.session.commit()
             flash(f"{item.name} deleted from cart!",'success')
         return redirect(url_for('cartpage.cartpage', restaurant_id=restaurant_id)) # Reloads the cartpage

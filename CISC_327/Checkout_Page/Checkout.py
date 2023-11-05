@@ -19,11 +19,11 @@ def checkout(restaurant_id):
             form_data = request.form.items()
             for key,value in form_data: # Goes through the data fields that were submitted to check which button was pressed
                 if key == "change_address": # The change address button was clicked
-                    session['change_address'] = request.form['change_address'] #Stores the address they want their food delivered to 
+                    session['change_address'] = request.form['change_address'] #Stores the changed address in session
                     new_a = request.form['change_address']
-                    checkout_address = current_user.addresses.filter_by(address=new_a).first()
+                    checkout_address = current_user.addresses.filter_by(address=new_a).first() # Sets displayed address to the changed one
                     pm_data = session.get('change_pm') 
-                    if pm_data: # Checks to see if the user has also changed their payment method before so that it displays that one isntead of the default
+                    if pm_data: # Checks to see if user has changed their payment method before so that it displays that one isntead of the default
                         checkout_pm = current_user.payment_methods.filter_by(card_num=pm_data).first()                
                 else: #The change payment method button was clicked
                     session['change_pm'] = request.form['change_pm']
@@ -36,7 +36,7 @@ def checkout(restaurant_id):
         email = current_user.email
         phone_number = current_user.phone_number
         
-        # Gets all the addresses and payment methods to display in the dropdown menu if they want to switch
+        # Gets all the addresses and payment methods so they can be displayed for when the user wants to switch
         all_addresses = current_user.addresses.all()
         all_pm = current_user.payment_methods.all()
 

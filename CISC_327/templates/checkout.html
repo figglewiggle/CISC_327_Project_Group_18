@@ -66,6 +66,8 @@
                 <p> ${{ cart.price }} </p>
             {% endfor %}
         </div>
+
+        <!-- Displays the prices -->
         <p>Subtotal: ${{ subtotal }}</p>
         <p>Tax: ${{tax}}</p>
         <p>Total Amount: ${{total}}</p>
@@ -74,7 +76,7 @@
         <div class="comments-box">
             <h3>Tips</h3>
             <form method="post" action="{{url_for('tips.tips', restaurant_id=restaurant.id)}}">
-                <input id="tip" name="tip" type="text" class="comment-input" placeholder="Add a tip...">
+                <input id="tip" name="tip" type="text" class="comment-input" placeholder="Add a tip in percentage (e.g. 10%)...">
                 <button type="submit" class="comment-button">Add Tip</button>
             </form>
         </div>

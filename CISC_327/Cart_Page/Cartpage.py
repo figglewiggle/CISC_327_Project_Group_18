@@ -15,7 +15,7 @@ def cartpage(restaurant_id):
         return redirect(url_for('homepage.homepage')) # Redirects back to homepage if there are no cart items
     else:
         restaurant = Restaurant.query.get(restaurant_id)
-        if not restaurant:
+        if not restaurant: #Error checking to see if restaurant can be found
             flash(f'Restaurant not found','danger')
         return render_template("cartpage.html", cart_items=cart_items, subtotal=subtotal, restaurant=restaurant, msg=msg)
 
