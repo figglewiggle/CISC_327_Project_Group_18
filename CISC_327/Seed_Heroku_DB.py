@@ -1,6 +1,4 @@
-from app import create_app
 from models import db, Restaurant, Item
-app = create_app()
 
 def seed_heroku_db():
     data = [
@@ -40,8 +38,4 @@ def seed_heroku_db():
             item = Item(**item_data, restaurant_id=restaurant.id) # use restaurant id here
             db.session.add(item)
     db.session.commit()
-
-if __name__ == "__main__":
-    with app.app_context():
-        seed_heroku_db()
     

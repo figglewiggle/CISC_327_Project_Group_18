@@ -1,4 +1,5 @@
 from flask import Flask, url_for, redirect
+from Seed_Heroku_DB import seed_heroku_db
 from Sign_Up_Pages.Login.Login import login_blueprint
 from Sign_Up_Pages.Registration.Registration import registration_blueprint
 from Homepage.Homepage import homepage_blueprint
@@ -109,6 +110,12 @@ def delete_restaurant_command(restaurant_id):
         db.session.delete(restaurant)
         db.session.commit()
         click.echo(f"User with ID {restaurant_id} and related posts deleted.")
+
+app.cli.command("seed_heroku")
+def seed_heroku_command():
+    with app.app_context():
+        seed_heroku_db()
+    
 
 # @app.cli.command("add-to-cart") 
 # @click.argument("item_id")
