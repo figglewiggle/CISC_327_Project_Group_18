@@ -1,3 +1,7 @@
+# Restaurant_App
+# This is a food delivery app that lets a user login and order from their favourite restaurants
+# and get their food straight at their door
+# this is run on a website: https://restaurant-group-18-ab6d36ffaa44.herokuapp.com/
 from flask import Flask, url_for, redirect
 from Seed_Heroku_DB import seed_heroku_db
 from Sign_Up_Pages.Login.Login import login_blueprint
