@@ -111,7 +111,7 @@ def delete_restaurant_command(restaurant_id):
         db.session.commit()
         click.echo(f"User with ID {restaurant_id} and related posts deleted.")
 
-app.cli.command("seed_heroku")
+@app.cli.command("seed_heroku")
 def seed_heroku_command():
     with app.app_context():
         seed_heroku_db()
