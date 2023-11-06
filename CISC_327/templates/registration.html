@@ -7,6 +7,7 @@
     <body>
         <div>
             <h1>Registration</h1>
+            <!-- display error messages associated with this page -->
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     <div id="flashMessages">
@@ -17,7 +18,8 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-            {% endwith %}
+            {% endwith %} 
+            <!-- form that takes all registration info -->
             <form id="registrationForm" method="post" action="/registration">
                 <div>
                     <label>name</label>
@@ -55,18 +57,18 @@
             </form>
         </div>
         <script>
-            const form = document.getElementById('registrationForm');
-            const registerButton = document.getElementById('registerButton');
+            const form = document.getElementById('registrationForm'); // identifies registration form
+            const registerButton = document.getElementById('registerButton'); // identifies button for submitting above form
     
             form.addEventListener('input', function() {
                 let allFilled = true;
-                for (const input of form.querySelectorAll('input')) {
-                    if (!input.value) {
-                        allFilled = false;
+                for (const input of form.querySelectorAll('input')) { // checks all inputs
+                    if (!input.value) { // if one is not filled
+                        allFilled = false; 
                         break;
                     }
                 }
-                registerButton.disabled = !allFilled;
+                registerButton.disabled = !allFilled; // don't enable submit button if at least one input not filled
             });
         </script>
     </body>

@@ -6,6 +6,7 @@
         <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}" />
     </head>
     <body>
+        <!-- Displays all error messages that are attributed to this page-->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <ul class="flashes">
