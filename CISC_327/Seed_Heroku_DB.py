@@ -5,7 +5,7 @@ def seed_heroku_db():
         {
             "restaurant": {
                 "name": "Jack Astor's",
-                "phone number": "4165738923",
+                "phone_number": "4165738923",
                 "address": "125 King Street",
                 "cuisine": "American"
             },
@@ -18,7 +18,7 @@ def seed_heroku_db():
         {
             "restaurant": {
                 "name": "Pho Kingston",
-                "phone number": "6478923478",
+                "phone_number": "6478923478",
                 "address": "1298 Bath Road",
                 "cuisine": "Vietnamese"
             },
