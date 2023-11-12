@@ -28,3 +28,39 @@ Phone Number: 1234567890
 Password: abc
 Address: 100 poop street
 Payment Method: 1234567890
+Name: gajjar
+Email: gajjar@gmail.com
+Phone Number: 4374374374
+Password: password
+Address: 123 house
+Payment Method: 12334567891234567
+Name: karey
+Email: karey@gmail.com
+Phone Number: 4364374374
+Password: password
+Address: 123 house
+Payment Method: 12334567891234567
+Name: jones
+Email: chanakya@gmail.com
+Phone Number: 0099887766
+Password: password
+Address: 123 house
+Payment Method: 12334567891234567
+Name: bud
+Email: bud@gmail.com
+Phone Number: 0099887766
+Password: password
+Address: 123 house
+Payment Method: 12334567891234567
+Name: dub
+Email: dub@gmail.com
+Phone Number: 0099887766
+Password: password
+Address: 123 house
+Payment Method: 12334567891234567
+Name: dub
+Email: dub@gmail.com
+Phone Number: 0099887766
+Password: password
+Address: 123 house
+Payment Method: 12334567891234567
