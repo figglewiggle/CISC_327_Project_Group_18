@@ -31,7 +31,11 @@ import click
 from flask_login import LoginManager
 app = Flask(__name__)
 DATABASE_URL = os.environ.get('DATABASE_URL','sqlite:///site.db').replace("postgres://", "postgresql://")
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+if os.environ.get('FLASK_ENV') == 'testing':
+    # Testing configuration
+    app.config.from_object('tests.config_test.TestConfig')
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SECRET_KEY'] = 'the random string'
 login_manager = LoginManager()
 login_manager.login_view = "login.login"
