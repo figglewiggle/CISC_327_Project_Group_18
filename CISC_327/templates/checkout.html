@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Cart Page</title>
+        <title>Checkout Page</title>
         <meta charset="UTF-8">
         <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
     </head>
     <body>
         <h1>Checkout</h1>
         <h2>Delivery Details</h2>
+        <!-- Displays the User's information -->
         <div class="box">
-        <div>
             <h3 class="container">Address: </h3>
-            <p class="container">{{address.address}}</p>
+            <p class="container">{{address.address}}</p> <!-- Default address is displayed automatically -->
+            <!-- Creates dropdown menu of all saved user addresses so they can change to a different one if they want -->
             <div class="dropdown">
                 <button class="container">Change</button>
                 <div class="dropdown-content">                   
@@ -24,10 +25,11 @@
                     </form>                                    
                 </div>
             </div>
-        </div>
+        
         <div>
             <h3 class="container">Payment Method: </h3>
-            <p class="container">{{payment_method.card_num}}</p>
+            <p class="container">{{payment_method.card_num}}</p> <!-- Default payment method is displayed automatically -->
+            <!-- Creates dropdown menu of user's saved payment methods so if they want to change it they can -->
             <div class="dropdown">
                 <button class="container">Change</button>
                 <div class="dropdown-content">                   
@@ -54,8 +56,9 @@
             <h3 class="container">Phone Number: </h3>
             <p class="container">{{phone_number}}</p>
         </div>
+        </div>
         
-        
+        <!-- Displays the items they've chosen-->
         <h2>Order Summary</h2>
         <div class="cart-item">
             {% for cart in cart_items %}
@@ -63,18 +66,22 @@
                 <p> ${{ cart.price }} </p>
             {% endfor %}
         </div>
+
+        <!-- Displays the prices -->
         <p>Subtotal: ${{ subtotal }}</p>
         <p>Tax: ${{tax}}</p>
         <p>Total Amount: ${{total}}</p>
 
+        <!-- Creates text box to input a tip -->
         <div class="comments-box">
             <h3>Tips</h3>
             <form method="post" action="{{url_for('tips.tips', restaurant_id=restaurant.id)}}">
-                <input id="tip" name="tip" type="text" class="comment-input" placeholder="Add a tip...">
+                <input id="tip" name="tip" type="text" class="comment-input" placeholder="Add a tip in percentage (e.g. 10%)...">
                 <button type="submit" class="comment-button">Add Tip</button>
             </form>
         </div>
 
+        <!-- Creates text box to write any extra comments -->
         <div class="comments-box">
             <h3>Comments</h3>
             <input type="text" class="comment-input" placeholder="Write a comment...">

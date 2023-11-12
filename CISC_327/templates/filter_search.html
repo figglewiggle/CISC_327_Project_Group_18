@@ -7,11 +7,14 @@
     </head>
     <body>
         <h1>CUISINE TYPES</h1>
+        <!-- form that performs the filter search function -->
         <form action="{{ url_for('filter_search.filter_search') }}" method="post">
+            <!-- for each cuisine type, make a radio button-->
             {% for cuisine in cuisine_list %}
             <input type="radio" id="cuisine-{{ loop.index }}" name="cuisine" value="{{ cuisine }}">
             <label for="cuisine-{{ loop.index }}">{{ cuisine.title() }}</label><br>
             {% endfor %}
+            <!-- submit what is selected, even if nothing is selected -->
             <input type="submit" value="Submit">
         </form>
     </body>

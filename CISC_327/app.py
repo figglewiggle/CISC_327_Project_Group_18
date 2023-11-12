@@ -1,4 +1,9 @@
+# Restaurant_App
+# This is a food delivery app that lets a user login and order from their favourite restaurants
+# and get their food straight at their door
+# this is run on a website: https://restaurant-group-18-ab6d36ffaa44.herokuapp.com/
 from flask import Flask, url_for, redirect
+from Seed_Heroku_DB import seed_heroku_db
 from Sign_Up_Pages.Login.Login import login_blueprint
 from Sign_Up_Pages.Registration.Registration import registration_blueprint
 from Homepage.Homepage import homepage_blueprint
@@ -8,7 +13,6 @@ from Homepage.Menu_Access.Menu_Access import menu_blueprint
 from Sign_Up_Pages.Logout import logout_blueprint
 from Homepage.Search.Text_Search.Text_Search import text_search_blueprint
 from Checkout_Page.Checkout import checkout_blueprint
-from Checkout_Page.Preferred_Address.Preferred_Address import preferred_address_blueprint
 from Checkout_Page.Tips.Tips import tips_blueprint
 from Cart_Page.Add.Add_To_Cart import add_to_cart_blueprint
 from Cart_Page.Delete.Delete_From_Cart import delete_from_cart_blueprint
@@ -27,7 +31,11 @@ import click
 from flask_login import LoginManager
 app = Flask(__name__)
 DATABASE_URL = os.environ.get('DATABASE_URL','sqlite:///site.db').replace("postgres://", "postgresql://")
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+if os.environ.get('FLASK_ENV') == 'testing':
+    # Testing configuration
+    app.config.from_object('tests.config_test.TestConfig')
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SECRET_KEY'] = 'the random string'
 login_manager = LoginManager()
 login_manager.login_view = "login.login"
@@ -37,7 +45,7 @@ db.init_app(app)
 bcrypt.init_app(app)
 migrate.init_app(app, db)
 
-@app.cli.command("delete-user")
+@app.cli.command("delete-user") # deletes user rows to prevent over saturation of the database
 @click.argument("user_id")
 def delete_user_command(user_id):
     """Deletes a user with the given user_id and all related rows, to clear test cases."""
@@ -50,7 +58,7 @@ def delete_user_command(user_id):
         db.session.commit()
         click.echo(f"User with ID {user_id} and related posts deleted.")
         
-@app.cli.command("display-user")
+@app.cli.command("display-user") # displays user rows for testing purposes (guides deletion)
 @click.argument("user_name")
 def display_user_command(user_name):
     """Displays a user with the given user_id, to help with testing"""
@@ -61,7 +69,7 @@ def display_user_command(user_name):
             return
         print(user.__repr__())
 
-@app.cli.command("add-restaurant")
+@app.cli.command("add-restaurant") # adds restaurant rows for testing purposes
 def add_restaurant_command():
     with app.app_context():
         name = input("Enter Restaurant Name: ")
@@ -72,7 +80,7 @@ def add_restaurant_command():
         db.session.add(restaurant)
         db.session.commit()
 
-@app.cli.command("add-item")
+@app.cli.command("add-item") # adds item rows for testing purposes (item functionalities)
 @click.argument("restaurant_id")
 def add_item_command(restaurant_id):
     with app.app_context():
@@ -88,7 +96,7 @@ def add_item_command(restaurant_id):
         db.session.add(item)
         db.session.commit()
 
-@app.cli.command("display-restaurant")
+@app.cli.command("display-restaurant") # display restaurant info for testing purposes (guides deleting and adding)
 @click.argument("restaurant_id")
 def display_restaurant_command(restaurant_id):
     with app.app_context():
@@ -98,7 +106,7 @@ def display_restaurant_command(restaurant_id):
             return
         print(restaurant.__repr__())
         
-@app.cli.command("delete-restaurant")
+@app.cli.command("delete-restaurant") # deletes restaurant row in the restaurant table, for testing purposes
 @click.argument("restaurant_id")
 def delete_restaurant_command(restaurant_id):
     """Deletes a user with the given user_id and all related rows, to clear test cases."""
@@ -111,25 +119,34 @@ def delete_restaurant_command(restaurant_id):
         db.session.commit()
         click.echo(f"User with ID {restaurant_id} and related posts deleted.")
 
-@app.cli.command("add-to-cart")
-@click.argument("item_id")
-def add_to_cart_command(item_id):
+@app.cli.command("seed_heroku")
+def seed_heroku_command():
     with app.app_context():
-        item = Item.query.get(item_id)
-        if not item:
-            click.echo(f"Item with ID {item_id} not found.")
-            return
-        Item.query.filter(Item.id==item_id).update({Item.in_cart: True})
-        db.session.commit()
+        seed_heroku_db()
+    
 
+# @app.cli.command("add-to-cart") 
+# @click.argument("item_id")
+# def add_to_cart_command(item_id):
+#     with app.app_context():
+#         item = Item.query.get(item_id)
+#         if not item:
+#             click.echo(f"Item with ID {item_id} not found.")
+#             return
+#         Item.query.filter(Item.id==item_id).update({Item.in_cart: True})
+#         db.session.commit()
+
+# helper function for flask-login to get current user for a given session
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+# redirect root route to login route, so that the first thing the user sees is a login page
 @app.route("/", methods=['GET'])
 def index():
     return redirect(url_for('login.login'))
 
+# register blueprints to the app so they render properly
 app.register_blueprint(login_blueprint)
 app.register_blueprint(registration_blueprint)
 app.register_blueprint(homepage_blueprint)
@@ -149,8 +166,9 @@ app.register_blueprint(edit_password_blueprint)
 app.register_blueprint(edit_phone_blueprint)
 app.register_blueprint(add_payment_blueprint)
 app.register_blueprint(delete_payment_blueprint)
-app.register_blueprint(preferred_address_blueprint)
 app.register_blueprint(tracking_blueprint)
+
+# run the app
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
     app.run(host="0.0.0.0", port=port, debug=True, threaded=True)

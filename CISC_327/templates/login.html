@@ -7,6 +7,7 @@
     <body>
         <div>
             <h1>Login</h1>
+            <!-- display all error messages for this page -->
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
             <ul class="flashes">
@@ -16,6 +17,7 @@
             </ul>
         {% endif %}
         {% endwith %}
+            <!-- form for login inputs -->
             <form id="loginForm" method="post" action="/login">
                 <div>
                     <label>Email</label>
@@ -31,22 +33,23 @@
                 </div>
             </form>
             <div>
+                <!-- redirect to sign up page -->
                 <a href="{{url_for('registration.registration')}}" class='btn btn-primary'>No Account? Signup</a>
             </div>
         </div>
         <script>
-            const form = document.getElementById('loginForm');
-            const registerButton = document.getElementById('loginButton');
+            const form = document.getElementById('loginForm'); // identify login form
+            const loginButton = document.getElementById('loginButton'); // identify button for submission
     
             form.addEventListener('input', function() {
                 let allFilled = true;
-                for (const input of form.querySelectorAll('input')) {
-                    if (!input.value) {
-                        allFilled = false;
+                for (const input of form.querySelectorAll('input')) { // check all inputs
+                    if (!input.value) { <!-- if one input is not entered -->
+                        allFilled = false; <!-- not logged in -->
                         break;
                     }
                 }
-                registerButton.disabled = !allFilled;
+                loginButton.disabled = !allFilled; // if all filed, loginButton is enabled
             });
         </script>
     </body>

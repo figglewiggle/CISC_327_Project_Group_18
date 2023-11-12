@@ -25,7 +25,7 @@
     <h2>Phone Number</h2>
     <p>
         <span id="phone_number">{{ phone_number }}</span>
-        <button onclick="enableEdit('phone_number')">Edit</button>
+        <button onclick="enableEdit('phone_number')">Edit</button> <!-- edit form opens up on click -->
         <form method="post" action="{{ url_for('edit_phone.edit_phone') }}" id="phoneForm" style="display: none;">
             <input type="text" name="new_phone" id="edit_phone_number">
             <input type="submit" value="Save Phone Number">
@@ -34,7 +34,7 @@
     <h2>Password</h2>
     <p>
         <input type="password" name="password" value="{{password}}" disabled>
-        <a href="#" onclick="enableEdit('password')">Change Password</a>
+        <a href="#" onclick="enableEdit('password')">Change Password</a> <!-- edit form opens up on click -->
         <!-- Form for updating the password -->
         <form method="post" action="{{ url_for('edit_password.edit_password') }}" id="passwordForm" style="display: none;">
             <input type="password" name="new_password" id="edit_new_password">
@@ -47,7 +47,7 @@
         {% for address in addresses %}
         <li>
             <span>{{ address.address }}</span>
-            <!-- Form for deleting an address -->
+            <!-- Form for deleting an address, uses delete_address flask function -->
             <form method="post" action="{{ url_for('delete_address.delete_address') }}">
                 <input type="hidden" name="address_id" value="{{ address.id }}">
                 <button type="submit">Delete</button>
@@ -55,11 +55,12 @@
         </li>
         {% endfor %}
     </ul>
-    <!-- Form for adding a new address-->
+    <!-- Form for adding a new address -->
     <form method="post" action="{{ url_for('add_address.add_address') }}" id="addAddressForm">
         <input type="text" name="address" placeholder="New Address">
         <input type="submit" value="Add Address">
     </form>
+
     <h2>Payment Methods</h2>
     <ul id="payment-methods">
         {% for payment_method in payment_methods %}
@@ -67,7 +68,7 @@
             <span>{{ payment_method.card_num }}</span>
             <!-- Form for deleting a payment method -->
             <form method="post" action="{{ url_for('delete_payment.delete_payment') }}">
-                <input type="hidden" name="payment_id" value="{{ payment_method.id }}">
+                <input type="hidden" name="payment_id" value="{{ payment_method.id }}"> <!-- hidden until delete button clicked -->
                 <button type="submit">Delete</button>
             </form>
         </li>
@@ -82,7 +83,8 @@
 
 
     <script>
-        function enableEdit(field) {
+        // when edit button is clicked, the fields for entering a new phone number/password pop up because of this
+        function enableEdit(field) { 
             if (field === 'phone_number') {
                 document.getElementById('phoneForm').style.display = 'block';
             } else if (field === 'password') {
@@ -92,6 +94,7 @@
             document.getElementById('editForm').style.display = 'none';
         }
 
+        // Function to add an address displayed from the opening of the page
         function addAddress() {
             document.getElementById('addAddressForm').style.display = 'block';
         }

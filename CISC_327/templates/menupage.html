@@ -6,12 +6,14 @@
         <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
     </head>
     <body>
+        <!-- displays restaurant info -->
         <nav class="menu-navbar">
             <h1 class="menu-nav">{{ restaurant_name }}</h1>
             <h4 class="menu-nav"> Address: {{ restaurant_address }}</h4>
             <h4 class="menu-nav"> Phone: {{ restaurant_phone_number }}</h4>
             <h4 class="menu-nav">{{ restaurant_cuisine }} Cuisine</h4>
         </nav>
+        <!-- displays all error messages connected to this page's functionality -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <ul class="flashes">
@@ -22,6 +24,7 @@
         {% endif %}
         {% endwith %}
         
+        <!-- display all items for this restaurant, and each can be added to cart one by one -->
         {% for item in items %}
         <div class="restaurant-item">
             <div>
@@ -29,7 +32,8 @@
                 <p>{{ item.description }}</p>
                 <p>${{ item.price }}</p>
             </div>
-            <div>
+            <div> 
+                <!-- performs the add to cart function when button is clicked on -->
                 <form action="{{ url_for('add_to_cart.add_to_cart', item_id=item.id, restaurant_id=restaurant_id) }}" method="post">
                     <button type="submit">Add To Cart</button>
                 </form>
@@ -37,7 +41,9 @@
         </div>
         {% endfor %}
         <div>
+            <!-- redirects to cart page for that specific restaurant -->
             <a href="{{ url_for('cartpage.cartpage', restaurant_id=restaurant_id) }}">CART</a>
+            <!-- goes back to homepage -->
             <a class="footer-right" href={{ url_for('homepage.homepage') }}>BACK TO HOMEPAGE</a>
         </div>
     </body>

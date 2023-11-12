@@ -6,18 +6,18 @@ profile_blueprint = Blueprint('profile', __name__)
 @login_required
 def profile():
     if current_user.is_authenticated:
-        if request.method == 'POST':
-            field_to_edit = request.form.get('field_to_edit')
-            if field_to_edit == request.form.get('phone_number'):
+        if request.method == 'POST': # if a form as been submitted
+            field_to_edit = request.form.get('field_to_edit') # get the edited item
+            if field_to_edit == request.form.get('phone_number'): # if it is the phone number that has been edited
                 updated_phone_number = request.form['phone_number']
-                current_user.phone_number = updated_phone_number
-            if field_to_edit == request.form.get('password'):
+                current_user.phone_number = updated_phone_number # update
+            if field_to_edit == request.form.get('password'): # edited password
                 updated_password = request.form['password']
                 hashed_password = bcrypt.generate_password_hash(updated_password).decode('utf-8')
-                current_user.password = hashed_password
+                current_user.password = hashed_password # update
             db.session.commit()
             return redirect('/profile')
-        name = current_user.name
+        name = current_user.name # otherwise just get the current attributes and display them
         email = current_user.email
         phone_number = current_user.phone_number
         password = current_user.password

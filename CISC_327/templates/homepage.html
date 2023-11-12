@@ -7,15 +7,21 @@
     </head>
     <body>
         <nav class="nav">
-            <a class="nav" href="{{ url_for('profile.profile') }}">PROFILE</a>
+            <!-- reroutes to profile page if clicked on -->
+            <a class="nav" href="{{ url_for('profile.profile') }}">PROFILE</a> 
+            <!-- displays default address if it exists, otherwise no -->
             <a class="nav">{{ default_address.address if default_address else 'No default address set' }}</a>
+            <!-- does the text search function when form is accessed --> 
             <form class="nav" action="{{ url_for('text_search.text_search') }}">
                 <input type="search" id="restaurant" name="q"/>
                 <button type="submit"disabled>Search</button>
             </form>
+            <!-- redirects to filter search page -->
             <a class="nav" href="{{ url_for('filter_search.get_cuisines')}}">FILTER</a>
+            <!-- logs out when clicked on -->
             <a class="nav" href="{{ url_for('logout.logout')}}">LOGOUT</a>
         </nav>
+        <!-- Displays error messages associated with this page-->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <ul class="flashes">
@@ -26,9 +32,11 @@
         {% endif %}
         {% endwith %}
         
+        <!-- displays list of restaurants from database or what is filtered in-->
         <div class="restaurant-list">
             {% for restaurant in restaurants %}
             <div class="restaurant-item">
+                <!-- each restaurant display links to that restaurant's menu -->
                 <a href="{{ url_for('menu.menu', restaurant_id=restaurant.id) }}">
                     <h2>{{ restaurant.name }}</h2>
                     <p>{{ restaurant.address }}</p>
@@ -39,11 +47,11 @@
         </div>
     </body>
     <script>
-        const searchForm = document.querySelector('form.nav');
-        const searchInput = searchForm.querySelector('input[type="search"]');
-        const searchButton = searchForm.querySelector('button[type="submit"]');
+        const searchForm = document.querySelector('form.nav'); // identifies the search form
+        const searchInput = searchForm.querySelector('input[type="search"]'); // identifies where to get input
+        const searchButton = searchForm.querySelector('button[type="submit"]'); // what to listen for to initiate collect input
         searchForm.addEventListener('input', function() {
-            searchButton.disabled = !searchInput.value.trim();
+            searchButton.disabled = !searchInput.value.trim(); <!-- if search button is clicked, get search input-->
         });
     </script>
 </html>
