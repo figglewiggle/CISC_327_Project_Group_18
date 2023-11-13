@@ -72,3 +72,9 @@ Password: abc
 Email: ethfig@gmail.com
 Password: minime65
 >>>>>>> 712388c78688e6fb5aefc51427ea51a54611d5b7
+Email: poop@gmail.com
+Password: abc
+Email: poop@gmail.com
+Password: abc
+Email: test@example.com
+Password: testpassword

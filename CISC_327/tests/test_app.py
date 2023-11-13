@@ -3,6 +3,7 @@
 # to record the output: pytest > test_results.txt on the command line or pip install pytest-html, and then pytest --html=report.html
 import pytest
 from app import app as flask_app
+from models import Item
 @pytest.fixture
 def app():
     flask_app.config.from_object('tests.config_test.TestConfig')
@@ -55,4 +56,26 @@ def test_user_login():
 
     # You can add additional assertions based on your application's behavior after successful login
 
+def test_add_to_cart(client):
+    response = client.post('/add_to_cart/1/1', follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Chicken Alfredo Pasta added to cart!' in response.data
+
+def test_delete_from_cart(client):
+    item = Item.query.get(1)
+    item.in_cart = True
+    response = client.post('/delete_from_cart/1/1', follow_redirects=True)
+    assert response.status_code == 200
+    assert item.in_cart is False
+
+
+
+def test_subtotal(client):
+    response = client.get('/cartpage/1', follow_redirects=True)
+    
+    assert response.status_code == 200
+
+
+
+    
     

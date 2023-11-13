@@ -5,7 +5,7 @@ from models import db, Item
 from flask_login import login_required
 add_to_cart_blueprint = Blueprint('add_to_cart',__name__)
 @add_to_cart_blueprint.route("/add_to_cart/<item_id>/<restaurant_id>",methods=['POST'])
-@login_required
+
 # Function for when add to cart button is pressed
 def add_to_cart(item_id, restaurant_id):
     if request.method=='POST': # Checks if form was submitted
