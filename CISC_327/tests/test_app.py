@@ -4,12 +4,13 @@
 import pytest
 from app import app as flask_app
 from flask import url_for
-from models import Item
+from models import Item, User
 @pytest.fixture
 def app():
     flask_app.config.from_object('tests.config_test.TestConfig')
     print("Database URI (Test):", flask_app.config['SQLALCHEMY_DATABASE_URI'])  # Debugging line
-    yield flask_app
+    with flask_app.app_context():
+        yield flask_app
 
 @pytest.fixture
 def client(app):
@@ -18,12 +19,6 @@ def client(app):
 def test_homepage(client):
     response = client.get('/')
     assert response.status_code == 302
-
-# test_user_authentication.py
-from flask import Flask
-from flask.testing import FlaskClient
-from app import app as flask_app
-from models import db, User
 
 def test_user_registration():
     client = flask_app.test_client()
@@ -73,11 +68,15 @@ def test_add_to_cart(client):
     response = client.post('/add_to_cart/1/1', follow_redirects=True)
     assert response.status_code == 200
     assert b'Chicken Alfredo Pasta added to cart!' in response.data
+    print('Status Code: ', response.status_code)
+    print('Response: ', response.data.decode('utf-8'))
 
 def test_delete_from_cart(client):
     item = Item.query.get(1)
     item.in_cart = True
     response = client.post('/delete_from_cart/1/1', follow_redirects=True)
+    print('Status Code: ', response.status_code)
+    print('Response: ', response.data.decode('utf-8'))
     assert response.status_code == 200
     assert item.in_cart is False
 
