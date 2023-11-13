@@ -3,10 +3,12 @@
 # to record the output: pytest > test_results.txt on the command line or pip install pytest-html, and then un the test on the command line, first type: FLASK_ENV=testing in the terminal on vscode (navigate to CISC_32pytest --html=report.html
 import pytest
 from app import app as flask_app
+from flask import url_for
 from models import Item
 @pytest.fixture
 def app():
     flask_app.config.from_object('tests.config_test.TestConfig')
+    print("Database URI (Test):", flask_app.config['SQLALCHEMY_DATABASE_URI'])  # Debugging line
     yield flask_app
 
 @pytest.fixture
@@ -41,9 +43,13 @@ def test_user_registration():
 
     # Assert the registration result
     assert response.status_code == 200  # Check if the registration is successful
+    assert response.request.path == url_for('homepage.homepage'), "Did not redirect to the homepage"
 
     registered_user = User.query.filter_by(email='test@example.com').first()
     assert registered_user is not None  # Check if the user is registered in the database
+    
+    assert registered_user.addresses.first() is not None, "Address was not registered"
+    assert registered_user.payment_methods.first() is not None, "Payment method was not registered"
 
 def test_user_login():
     client = flask_app.test_client()
