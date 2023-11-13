@@ -4,12 +4,13 @@
 import pytest
 from app import app as flask_app
 from flask import url_for
-from models import Item
+from models import Item, User
 @pytest.fixture
 def app():
     flask_app.config.from_object('tests.config_test.TestConfig')
     print("Database URI (Test):", flask_app.config['SQLALCHEMY_DATABASE_URI'])  # Debugging line
-    yield flask_app
+    with flask_app.app_context():
+        yield flask_app
 
 @pytest.fixture
 def client(app):
@@ -18,12 +19,6 @@ def client(app):
 def test_homepage(client):
     response = client.get('/')
     assert response.status_code == 302
-
-# test_user_authentication.py
-from flask import Flask
-from flask.testing import FlaskClient
-from app import app as flask_app
-from models import db, User
 
 def test_user_registration():
     client = flask_app.test_client()

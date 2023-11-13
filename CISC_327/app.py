@@ -36,7 +36,7 @@ if os.environ.get('FLASK_ENV') == 'testing':
     app.config.from_object('tests.config_test.TestConfig')
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-app.config['SECRET_KEY'] = 'the random string'
+    app.config['SECRET_KEY'] = 'the random string'
 login_manager = LoginManager()
 login_manager.login_view = "login.login"
 migrate = Migrate(app, db)
