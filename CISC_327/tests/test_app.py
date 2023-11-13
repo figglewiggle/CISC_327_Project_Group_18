@@ -15,4 +15,44 @@ def client(app):
 def test_homepage(client):
     response = client.get('/')
     assert response.status_code == 200
+
+# test_user_authentication.py
+from flask import Flask
+from flask.testing import FlaskClient
+from app import app as flask_app
+from models import db, User
+
+def test_user_registration():
+    client = flask_app.test_client()
+
+    # User Registration Test
+    response = client.post('/registration', data=dict(
+        name='Test User',
+        email='test@example.com',
+        phone_number='1234567890',
+        password='testpassword',
+        address='Test Address',
+        payment_method='1234567890123456'
+    ), follow_redirects=True)
+
+    # Assert the registration result
+    assert response.status_code == 200  # Check if the registration is successful
+
+    registered_user = User.query.filter_by(email='test@example.com').first()
+    assert registered_user is not None  # Check if the user is registered in the database
+
+def test_user_login():
+    client = flask_app.test_client()
+
+    # User Login Test
+    response = client.post('/login', data=dict(
+        email='test@example.com',
+        password='testpassword'
+    ), follow_redirects=True)
+
+    # Assert the login result
+    assert response.status_code == 200  # Check if the login is successful
+
+    # You can add additional assertions based on your application's behavior after successful login
+
     
