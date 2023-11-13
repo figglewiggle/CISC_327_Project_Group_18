@@ -1,6 +1,6 @@
 # test_app.py
-# to run the test on the command line, first type: FLASK_ENV=testing in the terminal on vscode (navigate to CISC_327 first).
-# to record the output: pytest > test_results.txt on the command line or pip install pytest-html, and then pytest --html=report.html
+# to r7 first).
+# to record the output: pytest > test_results.txt on the command line or pip install pytest-html, and then un the test on the command line, first type: FLASK_ENV=testing in the terminal on vscode (navigate to CISC_32pytest --html=report.html
 import pytest
 from app import app as flask_app
 from models import Item
@@ -58,6 +58,10 @@ def test_user_login():
     assert response.status_code == 200  # Check if the login is successful
 
     # You can add additional assertions based on your application's behavior after successful login
+
+def test_menu_access(client):
+    response = client.post('/menu/1', follow_redirects = True)
+    assert response.status_code == 200  
 
 def test_add_to_cart(client):
     response = client.post('/add_to_cart/1/1', follow_redirects=True)
