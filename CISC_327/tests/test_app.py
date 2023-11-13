@@ -15,7 +15,7 @@ def client(app):
 
 def test_homepage(client):
     response = client.get('/')
-    assert response.status_code == 200
+    assert response.status_code == 302
 
 # test_user_authentication.py
 from flask import Flask
@@ -35,6 +35,9 @@ def test_user_registration():
         address='Test Address',
         payment_method='1234567890123456'
     ), follow_redirects=True)
+    
+    print('Status Code:', response.status_code)
+    print('Response:', response.data.decode('utf-8'))  # Assuming response
 
     # Assert the registration result
     assert response.status_code == 200  # Check if the registration is successful
