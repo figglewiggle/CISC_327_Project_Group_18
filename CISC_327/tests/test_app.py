@@ -73,11 +73,15 @@ def test_add_to_cart(client):
     response = client.post('/add_to_cart/1/1', follow_redirects=True)
     assert response.status_code == 200
     assert b'Chicken Alfredo Pasta added to cart!' in response.data
+    print('Status Code: ', response.status_code)
+    print('Response: ', response.data.decode('utf-8'))
 
 def test_delete_from_cart(client):
     item = Item.query.get(1)
     item.in_cart = True
     response = client.post('/delete_from_cart/1/1', follow_redirects=True)
+    print('Status Code: ', response.status_code)
+    print('Response: ', response.data.decode('utf-8'))
     assert response.status_code == 200
     assert item.in_cart is False
 
