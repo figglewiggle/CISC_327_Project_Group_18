@@ -83,8 +83,15 @@ def test_delete_from_cart(client):
 
 def test_subtotal(client):
     response = client.get('/cartpage/1', follow_redirects=True)
-    
     assert response.status_code == 200
+
+def test_search():
+    client = flask_app.test_client()
+    response = client.get(f'/search/?q=Jack Astor\'s', follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Jack Astor' in response.data
+    print('Status Code:', response.status_code)
+    print('Response: ', response.data.decode())
 
 
 
