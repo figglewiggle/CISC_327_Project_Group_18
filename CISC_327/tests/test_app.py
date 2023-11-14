@@ -66,6 +66,8 @@ def test_menu_access(client):
 
 def test_add_to_cart(client):
     response = client.post('/add_to_cart/1/1', follow_redirects=True)
+    item = Item.query.get(1)
+    assert item.in_cart is True
     assert response.status_code == 200
     assert b'Chicken Alfredo Pasta added to cart!' in response.data
     print('Status Code: ', response.status_code)
@@ -81,8 +83,13 @@ def test_delete_from_cart(client):
     assert item.in_cart is False
 
 def test_subtotal(client):
+    item = Item.query.get(1)
+    item.in_cart = True
     response = client.get('/cartpage/1', follow_redirects=True)
     assert response.status_code == 200
+    assert b'$15'
+    print('Status Code:', response.status_code)
+    print('Response: ', response.data.decode())
 
 def test_search():
     client = flask_app.test_client()
@@ -91,6 +98,7 @@ def test_search():
     assert b'Jack Astor' in response.data
     print('Status Code:', response.status_code)
     print('Response: ', response.data.decode())
+
 
 
 
