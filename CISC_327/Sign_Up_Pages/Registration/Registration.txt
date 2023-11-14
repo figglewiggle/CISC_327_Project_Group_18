@@ -64,6 +64,7 @@ Phone Number: 0099887766
 Password: password
 Address: 123 house
 Payment Method: 12334567891234567
+<<<<<<< Updated upstream
 Name: Test User
 Email: test@gmail.com
 Phone Number: 1234567890
@@ -118,3 +119,41 @@ Phone Number: 7895643728
 Password: tryme
 Address: 345 Brock Street
 Payment Method: 2536879109638765
+=======
+Name: Ed Sheeran
+Email: edsheeran@gmail.com
+Phone Number: 1
+Password: password
+Address: 123 house
+Payment Method: 1
+Name: Ed Sheeran
+Email: edsheeran@gmail.com
+Phone Number: 123123123
+Password: password
+Address: 123 house
+Payment Method: 123123123123123123
+Name: Ed Sheeran
+Email: edsheeran@gmail.com
+Phone Number: 1231231231
+Password: password
+Address: 123 house
+Payment Method: 123123123123123123
+Name: Ed Sheeran
+Email: edsheeran@gmail.com
+Phone Number: 1231231231
+Password: password
+Address: 123 house
+Payment Method: 1231231231231231
+Name: Ed Sheeran
+Email: edsheeran@gmail.com
+Phone Number: 3213213213
+Password: password
+Address: 123 house
+Payment Method: 1231231231231231
+Name: Ed Sheeran
+Email: edsheeran@gmail.com
+Phone Number: 3213213213
+Password: pass
+Address: 123 house
+Payment Method: 1231231231231231
+>>>>>>> Stashed changes
