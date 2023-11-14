@@ -119,6 +119,7 @@ Phone Number: 7895643728
 Password: tryme
 Address: 345 Brock Street
 Payment Method: 2536879109638765
+<<<<<<< Updated upstream
 =======
 Name: Ed Sheeran
 Email: edsheeran@gmail.com
@@ -156,4 +157,18 @@ Phone Number: 3213213213
 Password: pass
 Address: 123 house
 Payment Method: 1231231231231231
+>>>>>>> Stashed changes
+=======
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 4167894537
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 4167894537
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
 >>>>>>> Stashed changes

@@ -23,7 +23,7 @@ def test_homepage(client):
     response = client.get('/')
     assert response.status_code == 302
 
-def test_user_registration():
+def test_user_registration(client):
     client = flask_app.test_client()
 
     # User Registration Test
@@ -54,7 +54,7 @@ def test_user_registration():
     assert payment_method is not None, "Payment method was not registered"
     assert payment_method.card_num == '1234567890123456', "Payment method details were not correctly saved"
 
-def test_user_login():
+def test_user_login(client):
     client = flask_app.test_client()
 
     # User Login Test

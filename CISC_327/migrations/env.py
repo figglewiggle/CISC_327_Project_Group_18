@@ -27,10 +27,7 @@ def get_engine():
 def get_engine_url():
     # Check if running in a test environment
     if os.environ.get('FLASK_ENV') == 'testing':
-        # Return the test database URL
-        test_database_url = os.environ.get('sqlite:///:memory:')
-        print(test_database_url)
-        return test_database_url.replace('%', '%%')
+        return 'sqlite:///:memory:'
     else:
         # Use the regular database URL
         try:
