@@ -157,3 +157,9 @@ Password: pass
 Address: 123 house
 Payment Method: 1231231231231231
 >>>>>>> Stashed changes
+Name: Ed Sheeran
+Email: edsheeran@gmail.com
+Phone Number: 3213213213
+Password: password
+Address: 123 house
+Payment Method: 3213213213213213
