@@ -85,6 +85,15 @@ Password: testpassword
 Email: test@example.com
 Password: testpassword
 >>>>>>> 9f16488b09128bc44e597c8ac9363af1dc840dfa
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 2f34af08ac3963bd36e048f29488bcaf7da468cb
+Email: test@example.com
+Password: testpassword
+Email: test@example.com
+Password: testpassword
+<<<<<<< HEAD
 =======
 Email: test@example.com
 Password: testpassword
@@ -98,11 +107,8 @@ Email: test@example.com
 Password: testpassword
 Email: test@example.com
 Password: testpassword
-Email: test@example.com
-Password: testpassword
-Email: test@example.com
-Password: testpassword
 >>>>>>> Stashed changes
+>>>>>>> 2f34af08ac3963bd36e048f29488bcaf7da468cb
 Email: test@example.com
 Password: testpassword
 Email: test@example.com

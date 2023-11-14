@@ -64,3 +64,57 @@ Phone Number: 0099887766
 Password: password
 Address: 123 house
 Payment Method: 12334567891234567
+Name: Test User
+Email: test@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: test@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 4167894537
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 4167894537
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 4167894537
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 4167894537
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 4167894537
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 4167894537
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: ggsmith
+Email: ggsmith@gmail.com
+Phone Number: 7895643728
+Password: tryme
+Address: 345 Brock Street
+Payment Method: 2536879109638765
