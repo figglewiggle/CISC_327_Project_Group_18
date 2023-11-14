@@ -33,6 +33,7 @@ app = Flask(__name__)
 if os.environ.get('FLASK_ENV') == 'testing':
     # Testing configuration
     app.config.from_object('tests.config_test.TestConfig')
+    print("Testing config loaded:", app.config['SQLALCHEMY_DATABASE_URI'])
     migrate = Migrate(app, db)
 else:
     DATABASE_URL = os.environ.get('DATABASE_URL','sqlite:///site.db').replace("postgres://", "postgresql://")

@@ -137,7 +137,14 @@ Password: papajones123
 <<<<<<< Updated upstream
 Email: edsheeran@gmail.com
 Password: password
+<<<<<<< Updated upstream
 =======
+Email: test@example.com
+Password: testpassword
+>>>>>>> Stashed changes
+=======
+Email: test@example.com
+Password: testpassword
 Email: test@example.com
 Password: testpassword
 >>>>>>> Stashed changes
