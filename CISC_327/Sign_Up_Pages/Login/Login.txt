@@ -111,6 +111,7 @@ Password: testpassword
 >>>>>>> 2f34af08ac3963bd36e048f29488bcaf7da468cb
 Email: test@example.com
 Password: testpassword
+<<<<<<< Updated upstream
 Email: test@example.com
 Password: testpassword
 Email: test@example.com
@@ -127,3 +128,9 @@ Email: test@example.com
 Password: testpassword
 Email: test@example.com
 Password: testpassword
+=======
+Email: johnmayer@gmail.com
+Password: papajones123
+Email: john@gmail.com
+Password: papajones123
+>>>>>>> Stashed changes
