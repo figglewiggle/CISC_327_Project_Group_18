@@ -128,9 +128,16 @@ Email: test@example.com
 Password: testpassword
 Email: test@example.com
 Password: testpassword
+<<<<<<< Updated upstream
 =======
 Email: johnmayer@gmail.com
 Password: papajones123
 Email: john@gmail.com
 Password: papajones123
+>>>>>>> Stashed changes
+=======
+Email: test@example.com
+Password: testpassword
+Email: test@example.com
+Password: testpassword
 >>>>>>> Stashed changes
