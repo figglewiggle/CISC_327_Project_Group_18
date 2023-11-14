@@ -24,10 +24,6 @@ def test_homepage(client):
     assert response.status_code == 302
 
 def test_user_registration(client):
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     # User Registration Test
     response = client.post('/registration', data=dict(
         name='Test User',
@@ -57,10 +53,6 @@ def test_user_registration(client):
     assert payment_method.card_num == '1234567890123456', "Payment method details were not correctly saved"
 
 def test_user_login(client):
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     # User Login Test
     response = client.post('/login', data=dict(
         email='test@example.com',
