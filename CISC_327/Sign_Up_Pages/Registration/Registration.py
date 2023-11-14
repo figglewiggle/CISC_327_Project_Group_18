@@ -7,11 +7,11 @@ def registration():
     if request.method == 'POST': # if registration form was submitted
         name = request.form['name']
         email = request.form['email']
-        phone_number = request.form['phone number']
+        phone_number = request.form['phone_number']
         password = request.form['password']
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # generate password hash for security
         address = request.form['address']
-        payment_method = request.form['payment method']
+        payment_method = request.form['payment_method']
         with open('Sign_Up_Pages\Registration\Registration.txt', 'a') as file: # write registration info for testing purposes
             file.write(f"Name: {name}\n")
             file.write(f"Email: {email}\n")
