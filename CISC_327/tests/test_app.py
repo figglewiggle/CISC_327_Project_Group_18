@@ -1,5 +1,5 @@
 from flask import url_for
-from models import Item, User
+from ..models import Item, User
 
 def test_homepage(client):
     response = client.get('/')
@@ -9,7 +9,7 @@ def test_user_registration(client):
     # User Registration Test
     response = client.post('/registration', data=dict(
         name='Test User',
-        email='test@example.com',
+        email='tipi@gmail.com',
         phone_number='1234567890',
         password='testpassword',
         address='Test Address',
@@ -28,9 +28,6 @@ def test_user_registration(client):
     
     assert registered_user.addresses.first() is not None, "Address was not registered"
     assert registered_user.payment_methods.first() is not None, "Payment method was not registered"
-
-def test_user_login():
-    client = flask_app.test_client()
 
 def test_user_login(client):
     # User Login Test
