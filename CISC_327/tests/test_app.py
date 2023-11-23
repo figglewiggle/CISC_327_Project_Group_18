@@ -1,21 +1,5 @@
-import pytest
 from flask import url_for
-<<<<<<< HEAD
-from models import Item
-@pytest.fixture
-=======
-from flask_migrate import upgrade
 from models import Item, User
-@pytest.fixture(scope='module')
->>>>>>> afb03e711eeba6c9d4b59ac1811d71c0d823b10b
-def app():
-    flask_app.config.from_object('tests.config_test.TestConfig')
-    print("Database URI (Test):", flask_app.config['SQLALCHEMY_DATABASE_URI'])  # Debugging line
-    yield flask_app
-
-@pytest.fixture
-def client(app):
-    return app.test_client()
 
 def test_homepage(client):
     response = client.get('/')
