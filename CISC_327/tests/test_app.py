@@ -61,13 +61,10 @@ def test_user_registration(client):
     assert registered_user.addresses.first() is not None, "Address was not registered"
     assert registered_user.payment_methods.first() is not None, "Payment method was not registered"
 
-<<<<<<< HEAD
 def test_user_login():
     client = flask_app.test_client()
 
-=======
 def test_user_login(client):
->>>>>>> afb03e711eeba6c9d4b59ac1811d71c0d823b10b
     # User Login Test
     response = client.post('/login', data=dict(
         email='test@example.com',
@@ -83,12 +80,10 @@ def test_menu_access(client):
     response = client.post('/menu/1', follow_redirects = True)
     assert response.status_code == 200, f"Did not get the expected status code"  
 
-<<<<<<< HEAD
 def test_add_to_cart(client):
     response = client.post('/add_to_cart/1/1', follow_redirects=True)
     assert response.status_code == 200
     assert b'Chicken Alfredo Pasta added to cart!' in response.data
-=======
 def test_add_to_cart_valid(client):
     response = client.post('/add_to_cart/1/1', follow_redirects=True) 
     item = Item.query.get(1)
@@ -97,7 +92,6 @@ def test_add_to_cart_valid(client):
     assert b'Chicken Alfredo Pasta added to cart!' in response.data, f"Item was not added to cart so the flash message was not displayed" # Checks for the flash message in the html 
     print('Add To Cart Test - Status Code: ', response.status_code)
     print('Add To Cart Test - Response: ', response.data.decode('utf-8'))
->>>>>>> afb03e711eeba6c9d4b59ac1811d71c0d823b10b
 
 def test_add_to_cart_invalid(client):
     response = client.post('/add_to_cart/0/0', follow_redirects=True) 
@@ -112,14 +106,12 @@ def test_delete_from_cart_valid(client):
     item = Item.query.get(1)
     item.in_cart = True # Put the item in the cart first
     response = client.post('/delete_from_cart/1/1', follow_redirects=True)
-<<<<<<< HEAD
     assert response.status_code == 200
     assert item.in_cart is False
 
 def test_subtotal(client):
     response = client.get('/cartpage/1', follow_redirects=True)
     assert response.status_code == 200
-=======
     print('Delete From Cart Test - Status Code: ', response.status_code)
     print('Delete From Cart Test - Response: ', response.data.decode('utf-8'))
     assert response.status_code == 200, f"Did not get the expected status code"
@@ -143,7 +135,6 @@ def test_subtotal_valid(client):
     assert b'$15' in response.data, f"Did not get the expected subtotal " # Check that the price of the item is listed
     print('Subtotal Test - Status Code:', response.status_code)
     print('Subtotal Test - Response: ', response.data.decode())
->>>>>>> afb03e711eeba6c9d4b59ac1811d71c0d823b10b
 
 def test_subtotal_invalid(client):
     item = Item.query.get(1)
