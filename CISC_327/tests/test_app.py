@@ -114,7 +114,7 @@ def test_search_valid(client):
     # Makes request to search function with the specified query
     response = client.get(f'/search/?q=Jack Astor\'s', follow_redirects=True)
     assert response.status_code == 200, f"Did not get the expected status code"
-    assert b'Jack Astor' in response.data, f"The expected search result was not displayed"
+    assert b'Jack Astor\'s' in response.data, f"The expected search result was not displayed"
     print('Search Bar Test - Status Code:', response.status_code)
     print('Search Bar Test - Response: ', response.data.decode())
 
@@ -122,7 +122,7 @@ def test_search_invalid(client):
     # Makes request to search function with the specified query
     response = client.get(f'/search/?q=Jack Ator\'s', follow_redirects=True)
     assert response.status_code == 200, f"Did not get the expected status code"
-    assert b'Jack Astor' in response.data, f"The expected search result was not displayed"
+    assert b'Jack Astor\'s' in response.data, f"The expected search result was not displayed"
     print('Search Bar Test - Status Code:', response.status_code)
     print('Search Bar Test - Response: ', response.data.decode())
 
