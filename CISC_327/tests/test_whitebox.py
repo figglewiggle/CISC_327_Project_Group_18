@@ -2,7 +2,6 @@
 
 from flask import url_for
 from ..models import Item, User
-from CISC_327.Profile_Page.Edit_Phone_Number import edit_phone
 
 def test_filter_search_1(client):
     response = client.post('/registration', data=dict(
@@ -38,7 +37,5 @@ def test_filter_search_3(client):
 
 
 def test_edit_phone_number(client):
-    #from Edit_Phone_Number import edit_phone
-    result = edit_phone()
-    assert result == url_for('profile.profile')
-
+    response = client.post('/edit_phone', data = {"new_phone": "0987654321"}, follow_redirects = True)
+    assert response.status_code == 200
