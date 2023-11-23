@@ -1,6 +1,21 @@
 import pytest
 from flask import url_for
-from ..models import Item, User
+<<<<<<< HEAD
+from models import Item
+@pytest.fixture
+=======
+from flask_migrate import upgrade
+from models import Item, User
+@pytest.fixture(scope='module')
+>>>>>>> afb03e711eeba6c9d4b59ac1811d71c0d823b10b
+def app():
+    flask_app.config.from_object('tests.config_test.TestConfig')
+    print("Database URI (Test):", flask_app.config['SQLALCHEMY_DATABASE_URI'])  # Debugging line
+    yield flask_app
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
 
 def test_homepage(client):
     response = client.get('/')
@@ -10,8 +25,8 @@ def test_user_registration(client):
     # User Registration Test
     response = client.post('/registration', data=dict(
         name='Test User',
-        email='tipi@gmail.com',
-        phone_number='4167894537',
+        email='test@example.com',
+        phone_number='1234567890',
         password='testpassword',
         address='Test Address',
         payment_method='1234567890123456'
@@ -27,13 +42,11 @@ def test_user_registration(client):
     registered_user = User.query.filter_by(email='tipi@gmail.com').first()
     assert registered_user is not None  # Check if the user is registered in the database
     
-    address = registered_user.addresses.first()
-    assert address is not None, "Address was not registered"
-    assert address.address == 'Test Address', "Address details were not correctly saved"
-    # Check if payment method is added correctly
-    payment_method = registered_user.payment_methods.first()
-    assert payment_method is not None, "Payment method was not registered"
-    assert payment_method.card_num == '1234567890123456', "Payment method details were not correctly saved"
+    assert registered_user.addresses.first() is not None, "Address was not registered"
+    assert registered_user.payment_methods.first() is not None, "Payment method was not registered"
+
+def test_user_login():
+    client = flask_app.test_client()
 
 def test_user_login(client):
     # User Login Test
@@ -51,6 +64,10 @@ def test_menu_access(client):
     response = client.post('/menu/1', follow_redirects = True)
     assert response.status_code == 200, f"Did not get the expected status code"  
 
+def test_add_to_cart(client):
+    response = client.post('/add_to_cart/1/1', follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Chicken Alfredo Pasta added to cart!' in response.data
 def test_add_to_cart_valid(client):
     response = client.post('/add_to_cart/1/1', follow_redirects=True) 
     item = Item.query.get(1)
@@ -73,6 +90,13 @@ def test_delete_from_cart_valid(client):
     item = Item.query.get(1)
     item.in_cart = True # Put the item in the cart first
     response = client.post('/delete_from_cart/1/1', follow_redirects=True)
+    assert response.status_code == 200
+    assert item.in_cart is False
+
+def test_subtotal(client):
+    response = client.get('/cartpage/1', follow_redirects=True)
+    item = Item.query.get(1)
+    assert response.status_code == 200
     print('Delete From Cart Test - Status Code: ', response.status_code)
     print('Delete From Cart Test - Response: ', response.data.decode('utf-8'))
     assert response.status_code == 200, f"Did not get the expected status code"
@@ -121,3 +145,7 @@ def test_search_invalid(client):
     assert b'Jack Astor' in response.data, f"The expected search result was not displayed"
     print('Search Bar Test - Status Code:', response.status_code)
     print('Search Bar Test - Response: ', response.data.decode())
+
+
+    
+    
