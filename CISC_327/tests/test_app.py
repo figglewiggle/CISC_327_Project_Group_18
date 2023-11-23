@@ -71,17 +71,16 @@ def test_delete_from_cart_valid(client):
     item = Item.query.get(1)
     item.in_cart = True # Put the item in the cart first
     response = client.post('/delete_from_cart/1/1', follow_redirects=True)
-    assert response.status_code == 200
-    assert item.in_cart is False
+    print('Delete From Cart Test - Status Code: ', response.status_code)
+    print('Delete From Cart Test - Response: ', response.data.decode('utf-8'))
+    assert response.status_code == 200, f"Did not get the expected status code"
+    assert item.in_cart is False, f"The item was not removed from the cart" # Check that is has been removed from cart
 
 def test_subtotal(client):
     response = client.get('/cartpage/1', follow_redirects=True)
     item = Item.query.get(1)
     assert response.status_code == 200
-    print('Delete From Cart Test - Status Code: ', response.status_code)
-    print('Delete From Cart Test - Response: ', response.data.decode('utf-8'))
-    assert response.status_code == 200, f"Did not get the expected status code"
-    assert item.in_cart is False, f"The item was not removed from the cart" # Check that is has been removed from cart
+    
 
 def test_delete_from_cart_invalid(client):
     item = Item.query.get(1)
