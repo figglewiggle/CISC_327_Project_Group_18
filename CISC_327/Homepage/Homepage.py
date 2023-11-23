@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session
-from models import db, Restaurant, Address
+from ..models import db, Restaurant, Address
 from flask_login import current_user, login_required
 homepage_blueprint = Blueprint('homepage',__name__)
 @homepage_blueprint.route("/homepage", methods=['GET','POST'])

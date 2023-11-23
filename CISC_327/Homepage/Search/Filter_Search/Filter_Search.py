@@ -1,6 +1,6 @@
 # Filter_Search.py
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from models import Restaurant
+from ....models import Restaurant
 from flask_login import current_user
 filter_search_blueprint = Blueprint('filter_search',__name__)
 

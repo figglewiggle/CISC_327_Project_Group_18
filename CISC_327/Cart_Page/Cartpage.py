@@ -1,10 +1,10 @@
 from flask import Blueprint, redirect, url_for, render_template, flash
-from models import Item, Restaurant
-import Cart_Page.Subtotal.Subtotal as Subtotal
+from ..models import Item, Restaurant
+from .Subtotal import Subtotal
 from flask_login import current_user, login_required
 cartpage_blueprint = Blueprint('cartpage',__name__)
 @cartpage_blueprint.route("/cartpage/<restaurant_id>", methods=['GET','POST'])
-
+@login_required
 def cartpage(restaurant_id):
     subtotal = Subtotal.subtotal()
     msg=""

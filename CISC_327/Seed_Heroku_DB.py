@@ -1,4 +1,4 @@
-from models import db, Restaurant, Item
+from .models import db, Restaurant, Item
 
 def seed_heroku_db():
     data = [

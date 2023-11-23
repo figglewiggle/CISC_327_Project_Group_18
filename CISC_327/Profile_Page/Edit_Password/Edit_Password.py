@@ -1,7 +1,7 @@
 # Edit_Password.py
 from flask import Blueprint, request, redirect, url_for, flash
 from flask_login import current_user, login_required
-from models import db, bcrypt
+from ...models import db, bcrypt
 
 edit_password_blueprint = Blueprint('edit_password', __name__)
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, url_for, render_template, flash, request, session
-from models import Item, Restaurant
-import Cart_Page.Subtotal.Subtotal as Subtotal
+from ...models import Item, Restaurant
+from ...Cart_Page.Subtotal import Subtotal
 from flask_login import current_user, login_required
 tips_blueprint = Blueprint('tips',__name__)
 @tips_blueprint.route("/tips/<restaurant_id>", methods=['GET','POST'])

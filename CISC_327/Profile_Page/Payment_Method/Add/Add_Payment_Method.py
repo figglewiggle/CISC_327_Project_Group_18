@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect, url_for
 from flask_login import current_user
-from models import db, Payment_Method
+from ....models import db, Payment_Method
 add_payment_blueprint = Blueprint('add_payment',__name__)
 @add_payment_blueprint.route('/add_payment',methods=['GET', 'POST'])
 def add_payment():

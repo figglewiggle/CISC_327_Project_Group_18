@@ -1,23 +1,6 @@
-# test_app.py
-# to r7 first).
-# to record the output: pytest > test_results.txt on the command line or pip install pytest-html, and then un the test on the command line, first type: FLASK_ENV=testing in the terminal on vscode (navigate to CISC_32pytest --html=report.html
 import pytest
-from app import app as flask_app
 from flask import url_for
-from flask_migrate import upgrade
-from models import Item, User
-@pytest.fixture(scope='module')
-def app():
-    flask_app.config.from_object('tests.config_test.TestConfig')
-    print("Database URI (Test):", flask_app.config['SQLALCHEMY_DATABASE_URI'])  # Debugging line
-    with flask_app.app_context():
-        upgrade()
-        yield flask_app
-        
-
-@pytest.fixture
-def client(app):
-    return app.test_client()
+from ..models import Item, User
 
 def test_homepage(client):
     response = client.get('/')
@@ -39,9 +22,9 @@ def test_user_registration(client):
 
     # Assert the registration result
     assert response.status_code == 200  # Check if the registration is successful
-    assert response.request.path == url_for('homepage.homepage'), "Did not redirect to the homepage"
+    assert response.request.path == url_for('login.login'), "Did not redirect to the homepage"
 
-    registered_user = User.query.filter_by(email='test@example.com').first()
+    registered_user = User.query.filter_by(email='tipi@gmail.com').first()
     assert registered_user is not None  # Check if the user is registered in the database
     
     address = registered_user.addresses.first()
@@ -55,7 +38,7 @@ def test_user_registration(client):
 def test_user_login(client):
     # User Login Test
     response = client.post('/login', data=dict(
-        email='test@example.com',
+        email='tipi@gmail.com',
         password='testpassword'
     ), follow_redirects=True)
 
@@ -138,8 +121,3 @@ def test_search_invalid(client):
     assert b'Jack Astor' in response.data, f"The expected search result was not displayed"
     print('Search Bar Test - Status Code:', response.status_code)
     print('Search Bar Test - Response: ', response.data.decode())
-
-
-
-    
-    

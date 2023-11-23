@@ -1,7 +1,7 @@
 # Add_To_Cart.py
 # Author: Unbearable Solutions
 from flask import Blueprint, request, redirect, url_for, flash
-from models import db, Item
+from ...models import db, Item
 from flask_login import login_required
 add_to_cart_blueprint = Blueprint('add_to_cart',__name__)
 @add_to_cart_blueprint.route("/add_to_cart/<item_id>/<restaurant_id>",methods=['POST'])

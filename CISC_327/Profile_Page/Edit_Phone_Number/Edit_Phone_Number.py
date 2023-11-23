@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect, url_for, flash
 from flask_login import current_user, login_required
-from models import db, bcrypt
+from ...models import db, bcrypt
 
 edit_phone_blueprint = Blueprint('edit_phone', __name__)
 @edit_phone_blueprint.route("/edit_phone", methods=['GET', 'POST'])

@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect, url_for, flash
 from flask_login import current_user
-from models import db, Payment_Method
+from ....models import db, Payment_Method
 delete_payment_blueprint = Blueprint('delete_payment',__name__)
 @delete_payment_blueprint.route('/delete_payment', methods=['POST'])
 def delete_payment():

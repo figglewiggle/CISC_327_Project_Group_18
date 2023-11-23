@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect, url_for, flash
 from flask_login import current_user
-from models import db, Address
+from ....models import db, Address
 add_address_blueprint = Blueprint('add_address',__name__)
 @add_address_blueprint.route('/add_address',methods=['GET', 'POST'])
 def add_address():

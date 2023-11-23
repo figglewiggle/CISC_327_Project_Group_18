@@ -3,49 +3,84 @@
 # and get their food straight at their door
 # this is run on a website: https://restaurant-group-18-ab6d36ffaa44.herokuapp.com/
 from flask import Flask, url_for, redirect
-from Seed_Heroku_DB import seed_heroku_db
-from Sign_Up_Pages.Login.Login import login_blueprint
-from Sign_Up_Pages.Registration.Registration import registration_blueprint
-from Homepage.Homepage import homepage_blueprint
-from Profile_Page.Profile import profile_blueprint
-from Cart_Page.Cartpage import cartpage_blueprint
-from Homepage.Menu_Access.Menu_Access import menu_blueprint
-from Sign_Up_Pages.Logout import logout_blueprint
-from Homepage.Search.Text_Search.Text_Search import text_search_blueprint
-from Checkout_Page.Checkout import checkout_blueprint
-from Checkout_Page.Tips.Tips import tips_blueprint
-from Cart_Page.Add.Add_To_Cart import add_to_cart_blueprint
-from Cart_Page.Delete.Delete_From_Cart import delete_from_cart_blueprint
-from Homepage.Search.Filter_Search.Filter_Search import filter_search_blueprint
-from Profile_Page.Address.Add.Add_Address import add_address_blueprint
-from Profile_Page.Address.Delete.Delete_Address import delete_address_blueprint
-from Profile_Page.Edit_Password.Edit_Password import edit_password_blueprint
-from Profile_Page.Edit_Phone_Number.Edit_Phone_Number import edit_phone_blueprint
-from Profile_Page.Payment_Method.Add.Add_Payment_Method import add_payment_blueprint
-from Profile_Page.Payment_Method.Delete.Delete_Payment_Method import delete_payment_blueprint
-from Tracking_Page.Tracking import tracking_blueprint
-from models import db, bcrypt, User, Restaurant, Item
+from .Sign_Up_Pages.Login.Login import login_blueprint
+from .Sign_Up_Pages.Registration.Registration import registration_blueprint
+from .Homepage.Homepage import homepage_blueprint
+from .Profile_Page.Profile import profile_blueprint
+from .Cart_Page.Cartpage import cartpage_blueprint
+from .Homepage.Menu_Access.Menu_Access import menu_blueprint
+from .Sign_Up_Pages.Logout import logout_blueprint
+from .Homepage.Search.Text_Search.Text_Search import text_search_blueprint
+from .Checkout_Page.Checkout import checkout_blueprint
+from .Checkout_Page.Tips.Tips import tips_blueprint
+from .Cart_Page.Add.Add_To_Cart import add_to_cart_blueprint
+from .Cart_Page.Delete.Delete_From_Cart import delete_from_cart_blueprint
+from .Homepage.Search.Filter_Search.Filter_Search import filter_search_blueprint
+from .Profile_Page.Address.Add.Add_Address import add_address_blueprint
+from .Profile_Page.Address.Delete.Delete_Address import delete_address_blueprint
+from .Profile_Page.Edit_Password.Edit_Password import edit_password_blueprint
+from .Profile_Page.Edit_Phone_Number.Edit_Phone_Number import edit_phone_blueprint
+from .Profile_Page.Payment_Method.Add.Add_Payment_Method import add_payment_blueprint
+from .Profile_Page.Payment_Method.Delete.Delete_Payment_Method import delete_payment_blueprint
+from .Tracking_Page.Tracking import tracking_blueprint
+from .models import db, bcrypt, User, Restaurant, Item
 from flask_migrate import Migrate, migrate
+from flask_login import LoginManager
+from .config import DevelopmentConfig
+from .Seed_Heroku_DB import seed_heroku_db
 import os
 import click
-from flask_login import LoginManager
-app = Flask(__name__)
-if os.environ.get('FLASK_ENV') == 'testing':
-    # Testing configuration
-    app.config.from_object('tests.config_test.TestConfig')
-    print("Testing config loaded:", app.config['SQLALCHEMY_DATABASE_URI'])
-    migrate = Migrate(app, db)
-else:
-    DATABASE_URL = os.environ.get('DATABASE_URL','sqlite:///site.db').replace("postgres://", "postgresql://")
-    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-    app.config['SECRET_KEY'] = 'the random string'
-    migrate = Migrate(app, db)
-login_manager = LoginManager()
-login_manager.login_view = "login.login"
-login_manager.init_app(app)
-db.init_app(app)
-bcrypt.init_app(app)
-migrate.init_app(app, db)
+def create_app(test_config=None):
+    app = Flask(__name__)
+    if test_config is not None:
+        # Testing configuration
+        app.config.from_object(test_config)
+        print("Testing config loaded:", app.config['SQLALCHEMY_DATABASE_URI'])
+    else:
+        app.config.from_object(DevelopmentConfig)
+    migrate = Migrate(app, db, directory=app.config.get('MIGRATIONS_DIR', 'migrations'))
+    login_manager = LoginManager()
+    login_manager.login_view = "login.login"
+    login_manager.init_app(app)
+    db.init_app(app)
+    bcrypt.init_app(app)
+    migrate.init_app(app, db)   
+    # helper function for flask-login to get current user for a given session
+    @app.login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
+    # redirect root route to login route, so that the first thing the user sees is a login page
+    @app.route("/", methods=['GET'])
+    def index():
+        return redirect(url_for('login.login'))
+
+    # register blueprints to the app so they render properly
+    app.register_blueprint(login_blueprint)
+    app.register_blueprint(registration_blueprint)
+    app.register_blueprint(homepage_blueprint)
+    app.register_blueprint(profile_blueprint)
+    app.register_blueprint(cartpage_blueprint)
+    app.register_blueprint(menu_blueprint)
+    app.register_blueprint(logout_blueprint)
+    app.register_blueprint(text_search_blueprint)
+    app.register_blueprint(checkout_blueprint)
+    app.register_blueprint(tips_blueprint)
+    app.register_blueprint(add_to_cart_blueprint)
+    app.register_blueprint(delete_from_cart_blueprint)
+    app.register_blueprint(filter_search_blueprint)
+    app.register_blueprint(add_address_blueprint)
+    app.register_blueprint(delete_address_blueprint)
+    app.register_blueprint(edit_password_blueprint)
+    app.register_blueprint(edit_phone_blueprint)
+    app.register_blueprint(add_payment_blueprint)
+    app.register_blueprint(delete_payment_blueprint)
+    app.register_blueprint(tracking_blueprint)
+    
+    return app
+
+# development app
+app = create_app()
 
 @app.cli.command("delete-user") # deletes user rows to prevent over saturation of the database
 @click.argument("user_id")
@@ -137,40 +172,3 @@ def seed_heroku_command():
 #             return
 #         Item.query.filter(Item.id==item_id).update({Item.in_cart: True})
 #         db.session.commit()
-
-# helper function for flask-login to get current user for a given session
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-# redirect root route to login route, so that the first thing the user sees is a login page
-@app.route("/", methods=['GET'])
-def index():
-    return redirect(url_for('login.login'))
-
-# register blueprints to the app so they render properly
-app.register_blueprint(login_blueprint)
-app.register_blueprint(registration_blueprint)
-app.register_blueprint(homepage_blueprint)
-app.register_blueprint(profile_blueprint)
-app.register_blueprint(cartpage_blueprint)
-app.register_blueprint(menu_blueprint)
-app.register_blueprint(logout_blueprint)
-app.register_blueprint(text_search_blueprint)
-app.register_blueprint(checkout_blueprint)
-app.register_blueprint(tips_blueprint)
-app.register_blueprint(add_to_cart_blueprint)
-app.register_blueprint(delete_from_cart_blueprint)
-app.register_blueprint(filter_search_blueprint)
-app.register_blueprint(add_address_blueprint)
-app.register_blueprint(delete_address_blueprint)
-app.register_blueprint(edit_password_blueprint)
-app.register_blueprint(edit_phone_blueprint)
-app.register_blueprint(add_payment_blueprint)
-app.register_blueprint(delete_payment_blueprint)
-app.register_blueprint(tracking_blueprint)
-
-# run the app
-if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host="0.0.0.0", port=port, debug=True, threaded=True)

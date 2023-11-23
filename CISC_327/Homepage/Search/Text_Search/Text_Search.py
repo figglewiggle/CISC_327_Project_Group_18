@@ -1,6 +1,6 @@
 # Text_Search.py
 from flask import Blueprint, render_template, request
-from models import Restaurant
+from ....models import Restaurant
 text_search_blueprint = Blueprint('text_search',__name__)
 @text_search_blueprint.route('/search/', methods=['GET','POST'])
 def text_search():

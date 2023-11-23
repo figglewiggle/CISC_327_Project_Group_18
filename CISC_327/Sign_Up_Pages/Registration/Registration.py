@@ -1,6 +1,7 @@
 # Registration.py
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from models import db, bcrypt, User, Address, Payment_Method, Item
+from ...models import db, bcrypt, User, Address, Payment_Method, Item
+import os
 registration_blueprint = Blueprint('registration', __name__)
 @registration_blueprint.route("/registration", methods = ['GET', 'POST'])
 def registration():
@@ -12,7 +13,8 @@ def registration():
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # generate password hash for security
         address = request.form['address']
         payment_method = request.form['payment_method']
-        with open('Sign_Up_Pages\Registration\Registration.txt', 'a') as file: # write registration info for testing purposes
+        file_path = os.path.join(os.path.dirname(__file__),'Registration.txt')
+        with open(file_path, 'a') as file: # write registration info for testing purposes
             file.write(f"Name: {name}\n")
             file.write(f"Email: {email}\n")
             file.write(f"Phone Number: {phone_number}\n")

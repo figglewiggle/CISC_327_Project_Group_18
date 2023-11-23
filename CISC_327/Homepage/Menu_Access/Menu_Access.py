@@ -1,6 +1,6 @@
 # Menu_Access.py
 from flask import Blueprint, render_template, flash
-from models import Restaurant
+from ...models import Restaurant
 menu_blueprint = Blueprint('menu',__name__)
 @menu_blueprint.route("/menu/<restaurant_id>", methods=['GET','POST'])
 def menu(restaurant_id): # access menu of a given restaurant clicked on

@@ -1,7 +1,8 @@
 # Login.py
 from flask import Blueprint, render_template, request, url_for, redirect, flash
-from models import User, bcrypt, db, Item
+from ...models import User, bcrypt, db, Item
 from flask_login import login_user
+import os
 login_blueprint = Blueprint('login',__name__)
 @login_blueprint.route("/login", methods=['GET', 'POST'])
 def login():
@@ -13,7 +14,8 @@ def login():
     if request.method=='POST': # if form has been submitted
         email = request.form['email']
         password = request.form['password']
-        with open('Sign_Up_Pages\Login\Login.txt','a') as file: # write the email and password for testing purposes
+        file_path = os.path.join(os.path.dirname(__file__),'Login.txt')
+        with open(file_path,'a') as file: # write the email and password for testing purposes
             file.write(f"Email: {email}\n")
             file.write(f"Password: {password}\n")
         try: 
