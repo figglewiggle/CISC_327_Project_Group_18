@@ -238,3 +238,11 @@ Email: tipi@gmail.com
 Password: testpassword
 Email: tipi@gmail.com
 Password: testpassword
+Email: tipi@gmail.com
+Password: testpassword
+Email: tipi@gmail.com
+Password: testpassword
+Email: ethfig@gmail.com
+Password: minime65
+Email: tipi@gmail.com
+Password: testpassword
