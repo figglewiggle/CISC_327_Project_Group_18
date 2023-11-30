@@ -64,6 +64,7 @@
             {% for cart in cart_items %}
                 <h3> {{ cart.name }} </h3>
                 <p> ${{ cart.price }} </p>
+                <p> Quantity: {{ cart.quantity }} </p>
             {% endfor %}
         </div>
 
