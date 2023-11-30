@@ -50,6 +50,8 @@ def checkout(restaurant_id):
         t = total * tip_dec
         tot = total + t
         total = round(tot,2)
+    else:
+        tip = 0
     t = round(t,3)
   
     return render_template("checkout.html", restaurant=restaurant,cart_items=cart_items,subtotal=subtotal,
