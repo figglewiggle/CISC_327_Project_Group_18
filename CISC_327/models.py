@@ -50,7 +50,7 @@ class Item(db.Model): # item table, associated with a restaurant
     description = db.Column(db.Text(), unique=True, nullable=False)
     price = db.Column(db.Integer, unique=False, nullable=False)
     in_cart = db.Column(db.Boolean, nullable=False)
-    quantity = db.Column(db.Integer, default=1, nullable=False)
+    quantity = db.Column(db.Integer, default=0, nullable=False)
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
     def __repr__(self):
         return f"Name: {self.name}, Description: {self.description}, Quantity: {self.quantity}."

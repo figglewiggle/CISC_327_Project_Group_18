@@ -17,6 +17,7 @@ def delete_from_cart(item_id, restaurant_id):
                 item.quantity-=1
             else:
                 item.in_cart = False # Changes attribute in the database
+                item.quantity = 0
             db.session.commit()
             flash(f"{item.name} deleted from cart!",'success')
         return redirect(url_for('cartpage.cartpage', restaurant_id=restaurant_id)) # Reloads the cartpage

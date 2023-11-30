@@ -9,6 +9,7 @@ def logout():
     if items:
         for item in items:
             item.in_cart = False # Get rid of the cart items once you logout
+            item.quantity = 0
         db.session.commit()
     session.clear()
     logout_user()
