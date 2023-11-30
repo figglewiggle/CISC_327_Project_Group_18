@@ -269,3 +269,7 @@ Password: testpassword
 >>>>>>> Stashed changes
 Email: tipi@gmail.com
 Password: testpassword
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65

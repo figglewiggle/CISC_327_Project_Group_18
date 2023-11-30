@@ -13,7 +13,10 @@ def add_to_cart(item_id, restaurant_id):
         if not item: # Error checking to see if specified item can be found in the database
             flash("Item Not Found.",'danger')
         else:
+            if item.in_cart = True:
+                item.quantity+=1
             item.in_cart = True # Changes the attribute in the database
+            item.quantity = 1
             db.session.commit()
             flash(f"{item.name} added to cart!", 'success')
         return redirect(url_for('menu.menu',restaurant_id=restaurant_id)) # Reloads the restaurant's menu page
