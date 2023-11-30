@@ -461,6 +461,7 @@ Password: testpassword
 Address: Test Address
 Payment Method: 1234567890123456
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 Name: Test User
 Email: tipi@gmail.com
@@ -522,4 +523,12 @@ Phone Number: 1234567890
 Password: testpassword
 Address: Test Address
 Payment Method: 1234567890123456
+>>>>>>> Stashed changes
+=======
+Name: jesus
+Email: jesusgmail
+Phone Number: 3478916537
+Password: tryme123!!
+Address: 675 Trayborn Drive
+Payment Method: 2536879109638765
 >>>>>>> Stashed changes

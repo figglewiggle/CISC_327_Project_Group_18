@@ -248,6 +248,7 @@ Password: minime65
 =======
 Email: tipi@gmail.com
 Password: testpassword
+<<<<<<< Updated upstream
 Email: tipi@gmail.com
 Password: testpassword
 Email: tipi@gmail.com
@@ -269,6 +270,22 @@ Password: testpassword
 >>>>>>> Stashed changes
 Email: tipi@gmail.com
 Password: testpassword
+=======
+Email: ethfig@gmail.com
+Password: minime65
+Email: jesus@gmail.com
+Password: jesusisking
+Email: jesus@gmail.com
+Password: jesusisking
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+>>>>>>> Stashed changes
 Email: ethfig@gmail.com
 Password: minime65
 Email: ethfig@gmail.com
