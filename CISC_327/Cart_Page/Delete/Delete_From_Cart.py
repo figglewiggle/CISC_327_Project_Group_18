@@ -13,7 +13,11 @@ def delete_from_cart(item_id, restaurant_id):
         if not item: # Error checking to make sure item is in database
             flash("Item Not Found",'danger')
         else:
-            item.in_cart = False # Changes attribute in the database
+            if item.quantity > 1:
+                item.quantity-=1
+            else:
+                item.in_cart = False # Changes attribute in the database
+                item.quantity = 0
             db.session.commit()
             flash(f"{item.name} deleted from cart!",'success')
         return redirect(url_for('cartpage.cartpage', restaurant_id=restaurant_id)) # Reloads the cartpage

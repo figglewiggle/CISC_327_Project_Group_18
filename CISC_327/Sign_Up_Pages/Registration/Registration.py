@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from ...models import db, bcrypt, User, Address, Payment_Method, Item
 import os
+import re
 registration_blueprint = Blueprint('registration', __name__)
 @registration_blueprint.route("/registration", methods = ['GET', 'POST'])
 def registration():
@@ -13,6 +14,13 @@ def registration():
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # generate password hash for security
         address = request.form['address']
         payment_method = request.form['payment_method']
+
+        # Validate email format
+        email_pattern = re.compile(r'^[a-zA-Z0-9]+@(gmail\.com|yahoo\.com|hotmail\.com)$')
+        if not email_pattern.match(email):
+            flash('Invalid email format. Please use a valid email address.', 'danger')
+            return render_template('registration.html')
+
         file_path = os.path.join(os.path.dirname(__file__),'Registration.txt')
         with open(file_path, 'a') as file: # write registration info for testing purposes
             file.write(f"Name: {name}\n")
@@ -30,7 +38,7 @@ def registration():
             db.session.add(user)
             db.session.commit()
             flash('User registered.','success')
-            return redirect(url_for('homepage.homepage'))
+            return redirect(url_for('login.login'))
         except Exception as e: # if errors occur whilst registering user
             db.session.rollback() # rollback changes to the database above
             print(e)
