@@ -269,3 +269,9 @@ Password: testpassword
 >>>>>>> Stashed changes
 Email: tipi@gmail.com
 Password: testpassword
+Email: jesus@gmail
+Password: password
+Email: mahatma@gmail.com
+Password: password
+Email: nelson@gmail.com
+Password: password
