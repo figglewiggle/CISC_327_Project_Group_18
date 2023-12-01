@@ -17,8 +17,23 @@ def registration():
 
         # Validate email format
         email_pattern = re.compile(r'^[a-zA-Z0-9]+@(gmail\.com|yahoo\.com|hotmail\.com)$')
-        if not email_pattern.match(email):
+        if not email_pattern.match(email) or len(email)>20:
             flash('Invalid email format. Please use a valid email address.', 'danger')
+            return render_template('registration.html')
+        
+        phone_pattern = re.compile(r'^[0-9]+$')
+        if not phone_pattern.match(phone_number) or len(phone_number)!=10:
+            flash('Invalid phone format. Please use a valid phone number.', 'danger')
+            return render_template('registration.html')
+         
+        address_pattern = re.compile(r'^[a-zA-Z0-9 ]+$')
+        if not address_pattern.match(address) or len(address)>50:
+            flash('Invalid address format. Please use a valid address.', 'danger')
+            return render_template('registration.html')
+        
+        payment_pattern = re.compile(r'^[0-9]+$')
+        if not payment_pattern.match(payment_method) or len(payment_method)!=16:
+            flash('Invalid payment method format. Please use a valid payment method.', 'danger')
             return render_template('registration.html')
 
         file_path = os.path.join(os.path.dirname(__file__),'Registration.txt')

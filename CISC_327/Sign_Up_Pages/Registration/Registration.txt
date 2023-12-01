@@ -532,3 +532,9 @@ Password: tryme123!!
 Address: 675 Trayborn Drive
 Payment Method: 2536879109638765
 >>>>>>> Stashed changes
+Name: Kanye
+Email: kanye@gmail.com
+Phone Number: 3458919076
+Password: trymeagain
+Address: 123 Beverly Hills Boulevard
+Payment Method: 4589675432568901
