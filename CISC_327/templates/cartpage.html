@@ -27,22 +27,13 @@
                 {% for cart in cart_items %}
                 <h3> {{ cart.name }} </h3>
                 <p> ${{ cart.price }} </p>
+                <p> Quantity: {{ cart.quantity }} </p>
 
                 <!-- Button that removes item from the cart -->
                 <div class="button-container">
                     <form action="{{ url_for('delete_from_cart.delete_from_cart', item_id=cart.id, restaurant_id=restaurant.id) }}" method="post">
                         <button type="submit">Remove</button>
                     </form>
-                </div>
-
-                <!-- Dropdown list to choose the quantity of the cart item -->
-                <div class="dropdown">
-                    <button class="container">Quantity</button>
-                    <div class="dropdown-content">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                    </div>
                 </div>
                 {% endfor %}    
 

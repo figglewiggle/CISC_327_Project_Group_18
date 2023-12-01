@@ -461,6 +461,7 @@ Password: testpassword
 Address: Test Address
 Payment Method: 1234567890123456
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 Name: Test User
 Email: tipi@gmail.com
@@ -523,27 +524,11 @@ Password: testpassword
 Address: Test Address
 Payment Method: 1234567890123456
 >>>>>>> Stashed changes
+=======
 Name: jesus
-Email: jesus@gmail
-Phone Number: 7356285625
-Password: password
-Address: 123 house
-Payment Method: 3213213213213213
-Name: The Queen
-Email: liz.zy@gmail.com
-Phone Number: 8723650913
-Password: password
-Address: 123 house
-Payment Method: 3213213213213213
-Name: Mahatma Gandhi
-Email: mahatma@gmail.com
-Phone Number: 8374629583
-Password: password
-Address: 123 house
-Payment Method: 3213213213213213
-Name: Nelson Mandela
-Email: nelson@gmail.com
-Phone Number: 927642875
-Password: password
-Address: 123 house
-Payment Method: 3213213213213213
+Email: jesusgmail
+Phone Number: 3478916537
+Password: tryme123!!
+Address: 675 Trayborn Drive
+Payment Method: 2536879109638765
+>>>>>>> Stashed changes

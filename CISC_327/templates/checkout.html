@@ -64,13 +64,14 @@
             {% for cart in cart_items %}
                 <h3> {{ cart.name }} </h3>
                 <p> ${{ cart.price }} </p>
+                <p> Quantity: {{ cart.quantity }} </p>
             {% endfor %}
         </div>
 
         <!-- Displays the prices -->
         <p>Subtotal: ${{ subtotal }}</p>
         <p>Tax: ${{tax}}</p>
-        <p>Tip: ${{tip}}</p>
+        <p>Tip: {{tip}}%</p>
         <p>Total Amount: ${{total}}</p>
 
         <!-- Creates text box to input a tip -->
@@ -78,7 +79,7 @@
             <h3>Tips</h3>
             <form method="post" action="{{url_for('tips.tips', restaurant_id=restaurant.id)}}">
                 <input id="tip" name="tip" type="text" class="comment-input" placeholder="Add a tip in percentage (e.g. 10%)...">
-                <button type="submit" class="comment-button">Add Tip</button>
+                <button type="submit" class="comment-button">Confirm Tip</button>
             </form>
         </div>
 
