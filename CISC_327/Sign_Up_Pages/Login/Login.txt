@@ -314,6 +314,7 @@ Email: tipi@gmail.com
 Password: testpassword
 Email: tipi@gmail.com
 Password: testpassword
+<<<<<<< HEAD
 Email: tipi@gmail.com
 Password: testpassword
 Email: tipi@gmail.com
@@ -390,6 +391,25 @@ Email: tipi@gmail.com
 Password: testpassword
 Email: tipi@gmail.com
 Password: testpassword
+Email: tipi@gmail.com
+Password: testpassword
+Email: tipi@gmail.com
+Password: testpassword
+=======
+Email: tipi@gmail.com
+Password: testpassword
+Email: tipi@gmail.com
+Password: testpassword
+Email: tipi@gmail.com
+Password: testpassword
+<<<<<<< Updated upstream
+Email: tipi@gmail.com
+Password: testpassword
+Email: tipi@gmail.com
+Password: testpassword
+=======
+>>>>>>> Stashed changes
+>>>>>>> b07e7444d644a0306a7a49f1a9f9ad5e3de44fc0
 Email: tipi@gmail.com
 Password: testpassword
 Email: tipi@gmail.com

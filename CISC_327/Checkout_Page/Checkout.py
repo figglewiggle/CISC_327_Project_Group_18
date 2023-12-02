@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, request, flash, session
 from ..models import Item, Restaurant
-from flask_login import current_user
+from flask_login import current_user, login_required
 from ..Cart_Page.Subtotal import Subtotal
 checkout_blueprint = Blueprint('checkout',__name__)
+@login_required
 @checkout_blueprint.route("/checkout/<restaurant_id>", methods=['GET','POST'])
 
 def checkout(restaurant_id):

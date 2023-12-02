@@ -568,6 +568,7 @@ Phone Number: 1234567890
 Password: testpassword
 Address: Test Address
 Payment Method: 1234567890123456
+<<<<<<< HEAD
 Name: Test User
 Email: tipi@gmail.com
 Phone Number: 1234567890
@@ -796,6 +797,53 @@ Phone Number: 1234567890
 Password: testpassword
 Address: Test Address
 Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+=======
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+<<<<<<< Updated upstream
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+=======
+>>>>>>> Stashed changes
+>>>>>>> b07e7444d644a0306a7a49f1a9f9ad5e3de44fc0
 Name: Test User
 Email: tipi@gmail.com
 Phone Number: 1234567890
