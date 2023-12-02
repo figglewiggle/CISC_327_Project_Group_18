@@ -269,17 +269,38 @@ Password: testpassword
 >>>>>>> Stashed changes
 Email: tipi@gmail.com
 Password: testpassword
+<<<<<<< Updated upstream
 Email: poop@gmail.com
 Password: abc
-Email: poop@gmail.com
-Password: abc
-Email: poop@gmail.com
-Password: abc
-Email: poop@gmail.com
-Password: abc
-Email: poop@gmail.com
-Password: abc
-Email: poop@gmail.com
-Password: abc
-Email: poop@gmail.com
-Password: abc
+=======
+=======
+Email: ethfig@gmail.com
+Password: minime65
+Email: jesus@gmail.com
+Password: jesusisking
+Email: jesus@gmail.com
+Password: jesusisking
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+>>>>>>> Stashed changes
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minim65
+Email: ethfig@gmail.com
+Password: minime65
+Email: ethfig@gmail.com
+Password: minime65
+Email: kanye@gmail.com
+Password: trymeagain
+>>>>>>> Stashed changes
