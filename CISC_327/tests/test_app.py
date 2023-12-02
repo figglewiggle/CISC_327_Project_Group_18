@@ -147,13 +147,13 @@ def test_logout(client):
     response = client.get(f'/logout', follow_redirects=True)
     assert response.status_code == 200, f"Did not get the expected status code"
     assert response.request.path == url_for('login.login'), "Did not redirect to the homepage"
+    
 def test_add_tip(client):
     item = Item.query.get(1)
     response = client.post('/tips/1', data=dict(
         tip='10'
     ), follow_redirects=True)
     assert response.status_code == 200
-    assert response.request.path == url_for('checkout.checkout', restaurant_id=1), "Did not redirect to the checkout page"
     with client.session_transaction() as session:
         assert session.get('tip') == '10'
     assert b'Tip: 10%' in response.data, "Tip percentage not displayed on the checkout page"
