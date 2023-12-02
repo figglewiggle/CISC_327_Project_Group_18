@@ -11,8 +11,8 @@ def seed_heroku_db():
             },
             "item_list": [
                 {"name": "Chicken Alfredo Pasta", "description": "Ingredients: Grilled Chicken Strips, Alfredo Sauce, Penne", 
-                 "price": 15, "in_cart": False, "quantity": 1},
-                {"name": "House Fries", "description": "Ingredients: Fried Potatoes", "price": 5, "in_cart": False, "quantity": 1}
+                 "price": 15, "in_cart": False, "quantity": 0},
+                {"name": "House Fries", "description": "Ingredients: Fried Potatoes", "price": 5, "in_cart": False, "quantity": 0}
             ]  
         },
         {
@@ -24,9 +24,9 @@ def seed_heroku_db():
             },
             "item_list": [
                 {"name": "Pho Dac Biet", "description": "Ingredients: Beef Broth, Chicken, Rice Noodles, Beef Balls, Brisket, Bean Sprouts", 
-                 "price": 15, "in_cart": False, "quantity": 1},
+                 "price": 15, "in_cart": False, "quantity": 0},
                 {"name": "Deep-Fried Rice Paper Spring Rolls", "description": "Ingredients: Shrimp, Rice Paper, Onions, Mushrooms",
-                 "price": 7, "in_cart": False, "quantity": 1}
+                 "price": 7, "in_cart": False, "quantity": 0}
             ]
         }
     ]
