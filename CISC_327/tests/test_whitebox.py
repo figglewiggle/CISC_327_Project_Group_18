@@ -34,8 +34,6 @@ def test_filter_search_3(client):
     assert b'Pho Kingston' in response.data
     print('Test 3 HTML: ', response.data.decode('utf-8'))
 
-
-
 def test_edit_phone_number(client):
     response = client.post('/edit_phone', data = {"new_phone": "0987654321"}, follow_redirects = True)
     assert response.status_code == 200
