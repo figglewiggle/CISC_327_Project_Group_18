@@ -304,3 +304,7 @@ Password: minime65
 Email: kanye@gmail.com
 Password: trymeagain
 >>>>>>> Stashed changes
+Email: tipi@gmail.com
+Password: testpassword
+Email: tipi@gmail.com
+Password: testpassword
