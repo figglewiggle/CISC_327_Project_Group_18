@@ -131,22 +131,7 @@ def test_search_invalid(client):
     print('Search Bar Test - Status Code:', response.status_code)
     print('Search Bar Test - Response: ', response.data.decode())
 
-def test_logout(client):
-    response = client.post('/registration', data=dict(
-        name='Test User',
-        email='tipi@gmail.com',
-        phone_number='1234567890',
-        password='testpassword',
-        address='Test Address',
-        payment_method='1234567890123456'
-    ), follow_redirects=True)
-    response = client.post('/login', data=dict(
-        email='tipi@gmail.com',
-        password='testpassword'
-    ), follow_redirects=True)
-    response = client.get(f'/logout', follow_redirects=True)
-    assert response.status_code == 200, f"Did not get the expected status code"
-    assert response.request.path == url_for('login.login'), "Did not redirect to the homepage"
+
     
 def test_add_tip(client):
     item = Item.query.get(1)
@@ -175,7 +160,35 @@ def test_edit_password(client):
     assert response.status_code == 200, f"Did not get the expected status code"  
     assert user.password == hashed 
 
+def test_add_payment(client):
+    response = client.post('/add_payment', data={'card_num':'1234567890123455'}, follow_redirects=True)
+    assert response.status_code == 200, f"Did not get the expected status code" 
+    assert b'1234567890123455'in response.data, f"The expected search result was not displayed"
+    print('Add Payment Test - Status Code:', response.status_code)
+    print('Add Payment Test - Response: ', response.data.decode())
 
+def test_delete_payment(client):
+    response = client.post('/add_payment', data={'card_num':'1234567890123455'}, follow_redirects=True)
+    response = client.post('/delete_payment', data={'payment_id':'1'}, follow_redirects=True)
+    assert response.status_code == 200, f"Did not get the expected status code" 
+    assert b'1234567890123455' not in response.data, f"The expected search result was not displayed"
+    print('Delete Payment Test - Status Code:', response.status_code)
+    print('Delete Payment Test - Response: ', response.data.decode('utf-8'))
 
-    
+def test_logout(client):
+    response = client.post('/registration', data=dict(
+        name='Test User',
+        email='tipi@gmail.com',
+        phone_number='1234567890',
+        password='testpassword',
+        address='Test Address',
+        payment_method='1234567890123456'
+    ), follow_redirects=True)
+    response = client.post('/login', data=dict(
+        email='tipi@gmail.com',
+        password='testpassword'
+    ), follow_redirects=True)
+    response = client.get(f'/logout', follow_redirects=True)
+    assert response.status_code == 200, f"Did not get the expected status code"
+    assert response.request.path == url_for('login.login'), "Did not redirect to the homepage"
     
