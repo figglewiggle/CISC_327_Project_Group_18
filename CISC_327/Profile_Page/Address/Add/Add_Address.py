@@ -1,8 +1,9 @@
 from flask import Blueprint, request, redirect, url_for, flash
-from flask_login import current_user
+from flask_login import current_user, login_required
 from ....models import db, Address
 import re
 add_address_blueprint = Blueprint('add_address',__name__)
+@login_required
 @add_address_blueprint.route('/add_address',methods=['GET', 'POST'])
 def add_address():
     if request.method=='POST':

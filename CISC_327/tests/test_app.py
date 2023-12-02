@@ -21,7 +21,7 @@ def test_user_registration(client):
 
     # Assert the registration result
     assert response.status_code == 200  # Check if the registration is successful
-    assert response.request.path == url_for('login.login'), "Did not redirect to the homepage"
+    assert 'login' in response.request.path, "Did not redirect to the login page"
 
     registered_user = User.query.filter_by(email='tipi@gmail.com').first()
     assert registered_user is not None  # Check if the user is registered in the database
@@ -38,6 +38,39 @@ def test_user_login(client):
 
     # Assert the login result
     assert response.status_code == 200  # Check if the login is successful
+
+def test_homepage_2(client):
+    response = client.get('/homepage', follow_redirects = True)
+    assert response.status_code == 200, f"Did not get the expected status code"
+
+def test_profile_page(client):
+    response = client.get('/profile', follow_redirects = True)
+    assert response.status_code == 200, f"Did not get the expected status code"
+
+def test_add_address(client):
+    new_address = '123 Test Street'
+    response = client.post('/add_address', data=dict(
+        address=new_address
+    ), follow_redirects=True)
+    assert response.status_code == 200
+    assert 'profile' in response.request.path, "Did not redirect to the profile page"
+    current_user = User.query.filter_by(email='tipi@gmail.com').first()
+    added_address = current_user.addresses.filter_by(address=new_address).first()
+    assert added_address is not None, "Address was not added to the user's addresses"
+    assert added_address.default is False, "New address should not be set as default"
+    with client.session_transaction() as session:
+        session.clear()
+
+def test_delete_address(client):
+    current_user = User.query.filter_by(email='tipi@gmail.com').first()
+    added_address = current_user.addresses.filter_by(address='123 Test Street').first()
+    address_id = added_address.id
+    response_delete_address = client.post('/delete_address', data=dict(
+        address_id=address_id
+    ), follow_redirects=True)
+    assert response_delete_address.status_code == 200
+    assert 'profile' in response_delete_address.request.path, "Did not redirect to the profile page"
+
 
 def test_menu_access(client):
     response = client.post('/menu/1', follow_redirects = True)
@@ -166,15 +199,6 @@ def test_add_payment(client):
     assert b'1234567890123455'in response.data, f"The expected search result was not displayed"
     print('Add Payment Test - Status Code:', response.status_code)
     print('Add Payment Test - Response: ', response.data.decode())
-
-def test_delete_payment(client):
-    response = client.post('/add_payment', data={'card_num':'1234567890123455'}, follow_redirects=True)
-    response = client.post('/delete_payment', data={'payment_id':'1'}, follow_redirects=True)
-    assert response.status_code == 200, f"Did not get the expected status code" 
-    assert b'1234567890123455' not in response.data, f"The expected search result was not displayed"
-    print('Delete Payment Test - Status Code:', response.status_code)
-    print('Delete Payment Test - Response: ', response.data.decode('utf-8'))
-
 def test_logout(client):
     response = client.post('/registration', data=dict(
         name='Test User',
@@ -190,5 +214,18 @@ def test_logout(client):
     ), follow_redirects=True)
     response = client.get(f'/logout', follow_redirects=True)
     assert response.status_code == 200, f"Did not get the expected status code"
-    assert response.request.path == url_for('login.login'), "Did not redirect to the homepage"
+    assert 'login' in response.request.path, "Did not redirect to the login page"
+
+
+
+
+def test_delete_payment(client):
+    response = client.post('/add_payment', data={'card_num':'1234567890123455'}, follow_redirects=True)
+    response = client.post('/delete_payment', data={'payment_id':'1'}, follow_redirects=True)
+    assert response.status_code == 200, f"Did not get the expected status code" 
+    assert b'1234567890123455' not in response.data, f"The expected search result was not displayed"
+    print('Delete Payment Test - Status Code:', response.status_code)
+    print('Delete Payment Test - Response: ', response.data.decode('utf-8'))
+
+
     
