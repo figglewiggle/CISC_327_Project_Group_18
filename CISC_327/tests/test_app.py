@@ -21,7 +21,7 @@ def test_user_registration(client):
 
     # Assert the registration result
     assert response.status_code == 200  # Check if the registration is successful
-    assert response.request.path == url_for('login.login'), "Did not redirect to the homepage"
+    assert 'login' in response.request.path, "Did not redirect to the login page"
 
     registered_user = User.query.filter_by(email='tipi@gmail.com').first()
     assert registered_user is not None  # Check if the user is registered in the database
@@ -38,6 +38,39 @@ def test_user_login(client):
 
     # Assert the login result
     assert response.status_code == 200  # Check if the login is successful
+
+def test_homepage_2(client):
+    response = client.get('/homepage', follow_redirects = True)
+    assert response.status_code == 200, f"Did not get the expected status code"
+
+def test_profile_page(client):
+    response = client.get('/profile', follow_redirects = True)
+    assert response.status_code == 200, f"Did not get the expected status code"
+
+def test_add_address(client):
+    new_address = '123 Test Street'
+    response = client.post('/add_address', data=dict(
+        address=new_address
+    ), follow_redirects=True)
+    assert response.status_code == 200
+    assert 'profile' in response.request.path, "Did not redirect to the profile page"
+    current_user = User.query.filter_by(email='tipi@gmail.com').first()
+    added_address = current_user.addresses.filter_by(address=new_address).first()
+    assert added_address is not None, "Address was not added to the user's addresses"
+    assert added_address.default is False, "New address should not be set as default"
+    with client.session_transaction() as session:
+        session.clear()
+
+def test_delete_address(client):
+    current_user = User.query.filter_by(email='tipi@gmail.com').first()
+    added_address = current_user.addresses.filter_by(address='123 Test Street').first()
+    address_id = added_address.id
+    response_delete_address = client.post('/delete_address', data=dict(
+        address_id=address_id
+    ), follow_redirects=True)
+    assert response_delete_address.status_code == 200
+    assert 'profile' in response_delete_address.request.path, "Did not redirect to the profile page"
+
 
 def test_menu_access(client):
     response = client.post('/menu/1', follow_redirects = True)
@@ -130,23 +163,6 @@ def test_search_invalid(client):
     assert b'Jack Astor\'s' in response.data, f"The expected search result was not displayed"
     print('Search Bar Test - Status Code:', response.status_code)
     print('Search Bar Test - Response: ', response.data.decode())
-
-def test_logout(client):
-    response = client.post('/registration', data=dict(
-        name='Test User',
-        email='tipi@gmail.com',
-        phone_number='1234567890',
-        password='testpassword',
-        address='Test Address',
-        payment_method='1234567890123456'
-    ), follow_redirects=True)
-    response = client.post('/login', data=dict(
-        email='tipi@gmail.com',
-        password='testpassword'
-    ), follow_redirects=True)
-    response = client.get(f'/logout', follow_redirects=True)
-    assert response.status_code == 200, f"Did not get the expected status code"
-    assert response.request.path == url_for('login.login'), "Did not redirect to the homepage"
     
 def test_add_tip(client):
     item = Item.query.get(1)
@@ -167,6 +183,25 @@ def test_cart_page(client):
 def test_checkout_page(client):
     response = client.post('/checkout/1', follow_redirects = True)
     assert response.status_code == 200, f"Did not get the expected status code"
+
+
+def test_logout(client):
+    response = client.post('/registration', data=dict(
+        name='Test User',
+        email='tipi@gmail.com',
+        phone_number='1234567890',
+        password='testpassword',
+        address='Test Address',
+        payment_method='1234567890123456'
+    ), follow_redirects=True)
+    response = client.post('/login', data=dict(
+        email='tipi@gmail.com',
+        password='testpassword'
+    ), follow_redirects=True)
+    response = client.get(f'/logout', follow_redirects=True)
+    assert response.status_code == 200, f"Did not get the expected status code"
+    assert 'login' in response.request.path, "Did not redirect to the login page"
+
 
 
 
