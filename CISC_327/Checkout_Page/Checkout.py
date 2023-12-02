@@ -8,6 +8,7 @@ checkout_blueprint = Blueprint('checkout',__name__)
 def checkout(restaurant_id):
     subtotal = Subtotal.subtotal()
     restaurant = Restaurant.query.get(restaurant_id)
+    c = 0
     if not restaurant:
         flash(f'Restaurant not found','danger')
     cart_items = Item.query.filter(Item.in_cart==True).all() #Gets all the items that were in cart
@@ -25,7 +26,7 @@ def checkout(restaurant_id):
                     pm_data = session.get('change_pm', None) 
                     if pm_data != None: # Checks to see if user has changed their payment method before so that it displays that one isntead of the default
                         checkout_pm = current_user.payment_methods.filter_by(card_num=pm_data).first()                
-                else: #The change payment method button was clicked
+                elif key == "change_pm": #The change payment method button was clicked
                     session['change_pm'] = request.form['change_pm']
                     new_pm = request.form['change_pm']
                     checkout_pm = current_user.payment_methods.filter_by(card_num=new_pm).first()

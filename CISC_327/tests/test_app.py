@@ -126,6 +126,24 @@ def test_search_invalid(client):
     print('Search Bar Test - Status Code:', response.status_code)
     print('Search Bar Test - Response: ', response.data.decode())
 
+def test_logout(client):
+    response = client.post('/registration', data=dict(
+        name='Test User',
+        email='tipi@gmail.com',
+        phone_number='1234567890',
+        password='testpassword',
+        address='Test Address',
+        payment_method='1234567890123456'
+    ), follow_redirects=True)
+    response = client.post('/login', data=dict(
+        email='tipi@gmail.com',
+        password='testpassword'
+    ), follow_redirects=True)
+    response = client.get(f'/logout', follow_redirects=True)
+    assert response.status_code == 200, f"Did not get the expected status code"
+    assert response.request.path == url_for('login.login'), "Did not redirect to the homepage"
+
+
 
     
     
