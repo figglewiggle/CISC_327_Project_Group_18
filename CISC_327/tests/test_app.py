@@ -39,8 +39,6 @@ def test_user_login(client):
     # Assert the login result
     assert response.status_code == 200  # Check if the login is successful
 
-    # You can add additional assertions based on your application's behavior after successful login
-
 def test_menu_access(client):
     response = client.post('/menu/1', follow_redirects = True)
     assert response.status_code == 200, f"Did not get the expected status code"  
@@ -125,6 +123,29 @@ def test_search_invalid(client):
     assert b'Jack Astor\'s' in response.data, f"The expected search result was not displayed"
     print('Search Bar Test - Status Code:', response.status_code)
     print('Search Bar Test - Response: ', response.data.decode())
+
+def test_add_tip(client):
+    item = Item.query.get(1)
+    response = client.post('/tips/1', data=dict(
+        tip='10'
+    ), follow_redirects=True)
+    assert response.status_code == 302
+    assert response.request.path == url_for('checkout.checkout', restaurant_id=1), "Did not redirect to the checkout page"
+    with client.session_transaction() as session:
+        assert session.get('tip') == '10'
+    assert b'Tip: 10%' in response.data, "Tip percentage not displayed on the checkout page"
+    with client.session_transaction() as session:
+        session.clear()
+
+def test_cart_page(client):
+    response = client.post('/cartpage/1', follow_redirects = True)
+    assert response.status_code == 200, f"Did not get the expected status code"  
+
+def test_checkout_page(client):
+    response = client.post('/checkout/1', follow_redirects = True)
+    assert response.status_code == 200, f"Did not get the expected status code"
+
+
 
 
     

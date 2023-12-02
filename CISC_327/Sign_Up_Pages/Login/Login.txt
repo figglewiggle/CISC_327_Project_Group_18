@@ -304,3 +304,11 @@ Password: minime65
 Email: kanye@gmail.com
 Password: trymeagain
 >>>>>>> Stashed changes
+Email: mahatma@gmail.com
+Password: password
+Email: mahatma@gmail.com
+Password: password123
+Email: nelson@gmail.com
+Password: password
+Email: bryanadams@gmail.com
+Password: password
