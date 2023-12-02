@@ -1,5 +1,5 @@
 from flask import url_for
-from ..models import Item, User
+from ..models import Item, User, bcrypt
 
 def test_homepage(client):
     response = client.get('/')
@@ -184,6 +184,12 @@ def test_checkout_page(client):
     response = client.post('/checkout/1', follow_redirects = True)
     assert response.status_code == 200, f"Did not get the expected status code"
 
+def test_edit_password(client):
+    response = client.post('/edit_password', data={'new_password': 'newpassword'}, follow_redirects=True)
+    hashed = bcrypt.generate_password_hash('newpassword').decode('utf-8')
+    user = User.query.filter_by(email='tipi@gmail.com').first()
+    assert response.status_code == 200, f"Did not get the expected status code"  
+    assert user.password == hashed 
 
 def test_logout(client):
     response = client.post('/registration', data=dict(
