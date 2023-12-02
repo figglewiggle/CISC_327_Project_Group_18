@@ -17,8 +17,8 @@ def app():
 
 def populate_test_data():
     item1 = Item(name="Chicken Alfredo Pasta", description="Ingredients: Grilled Chicken Strips, Alfredo Sauce, Penne", 
-                 price=15, in_cart=False)
-    item2 = Item(name="House Fries", description="Ingredients: Fried Potatoes", price=5, in_cart=False)
+                 price=15, in_cart=False, quantity=0)
+    item2 = Item(name="House Fries", description="Ingredients: Fried Potatoes", price=5, in_cart=False, quantity=0)
     db.session.add(item1)
     db.session.add(item2)
     restaurant1 = Restaurant(name="Jack Astor's", phone_number="4165738923", 
@@ -26,10 +26,10 @@ def populate_test_data():
     db.session.add(restaurant1)
     item3 = Item(name="Pho Dac Biet", 
                  description="Ingredients: Beef Broth, Chicken, Rice Noodles, Beef Balls, Brisket, Bean Sprouts",
-                 price=15, in_cart=False)
+                 price=15, in_cart=False, quantity = 0)
     item4 = Item(name="Deep-Fried Rice Paper Spring Rolls",
                  description="Ingredients: Shrimp, Rice Paper, Onions, Mushrooms",
-                 price=7, in_cart=False)
+                 price=7, in_cart=False, quantity = 0)
     db.session.add(item3)
     db.session.add(item4)
     restaurant2 = Restaurant(name="Pho Kingston", phone_number="6478923478", address="1289 Bath Road", cuisine="Vietnamese",

@@ -42,6 +42,7 @@ def checkout(restaurant_id):
 
     # Calculates total price
     tax = subtotal*0.13
+    tax_round = round(tax,3)
     total = tax + subtotal
     tip = session.get('tip') # If tip was added, this will return the amount that was stored in session
     t = 0.0
@@ -55,4 +56,4 @@ def checkout(restaurant_id):
     t = round(t,3)
   
     return render_template("checkout.html", restaurant=restaurant,cart_items=cart_items,subtotal=subtotal,
-                           total=total,tax=tax,name=name,email=email,phone_number=phone_number,address=checkout_address,all_addresses=all_addresses,all_pm=all_pm,payment_method=checkout_pm, tip=tip)
+                           total=total,tax=tax_round,name=name,email=email,phone_number=phone_number,address=checkout_address,all_addresses=all_addresses,all_pm=all_pm,payment_method=checkout_pm, tip=tip)

@@ -538,9 +538,33 @@ Phone Number: 3458919076
 Password: trymeagain
 Address: 123 Beverly Hills Boulevard
 Payment Method: 4589675432568901
-Name: Bryan Adams
-Email: bryanadams@gmail.com
-Phone Number: 0193716254
-Password: password
-Address: 123 house
-Payment Method: 3213213213213213
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456
+Name: Test User
+Email: tipi@gmail.com
+Phone Number: 1234567890
+Password: testpassword
+Address: Test Address
+Payment Method: 1234567890123456

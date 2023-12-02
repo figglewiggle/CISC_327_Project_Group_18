@@ -51,6 +51,7 @@ def test_add_to_cart_valid(client):
     response = client.post('/add_to_cart/1/1', follow_redirects=True) 
     item = Item.query.get(1)
     assert item.in_cart is True, f"Item was not added to cart" # Check to make sure that item is in the cart
+    assert item.quantity==2, f"Item quantity not updated"
     assert response.status_code == 200, f"Did not get the expected status code"
     assert b'Chicken Alfredo Pasta added to cart!' in response.data, f"Item was not added to cart so the flash message was not displayed" # Checks for the flash message in the html 
     print('Add To Cart Test - Status Code: ', response.status_code)
@@ -60,6 +61,7 @@ def test_add_to_cart_invalid(client):
     response = client.post('/add_to_cart/0/0', follow_redirects=True) 
     item = Item.query.get(1)
     assert item.in_cart is True, f"Item was not added to cart" # Check to make sure that item is in the cart
+    assert item.quantity==1, f"Item quantity not updated"
     assert response.status_code == 200, f"Did not get the expected status code"
     assert b'Chicken Alfredo Pasta added to cart!' in response.data, f"Item was not added to cart so the flash message was not displayed" # Checks for the flash message in the html 
     print('Add To Cart Test - Status Code: ', response.status_code)
@@ -68,31 +70,35 @@ def test_add_to_cart_invalid(client):
 def test_delete_from_cart_valid(client):
     item = Item.query.get(1)
     item.in_cart = True # Put the item in the cart first
+    item.quantity = 1
     response = client.post('/delete_from_cart/1/1', follow_redirects=True)
     print('Delete From Cart Test - Status Code: ', response.status_code)
     print('Delete From Cart Test - Response: ', response.data.decode('utf-8'))
     assert response.status_code == 200, f"Did not get the expected status code"
     assert item.in_cart is False, f"The item was not removed from the cart" # Check that is has been removed from cart
+    assert item.quantity==0, f"Item was not reset"
 
 def test_subtotal(client):
     response = client.get('/cartpage/1', follow_redirects=True)
-    item = Item.query.get(1)
     assert response.status_code == 200
     
 
 def test_delete_from_cart_invalid(client):
     item = Item.query.get(1)
     item.in_cart = True # Put the item in the cart first
+    item.quantity = 1
     response = client.post('/delete_from_cart/0/1', follow_redirects=True)
     print('Delete From Cart Test - Status Code: ', response.status_code)
     print('Delete From Cart Test - Response: ', response.data.decode('utf-8'))
     assert response.status_code == 200, f"Did not get the expected status code"
     assert item.in_cart is False, f"The item was not removed from the cart" # Check that is has been removed from cart
+    assert item.quantity==0, f"Item was not reset" 
 
 
 def test_subtotal_valid(client):
     item = Item.query.get(1)
     item.in_cart = True # Put an item in the cart so that the cart page can be opened
+    item.quantity = 1
     response = client.get('/cartpage/1', follow_redirects=True)
     assert response.status_code == 200, f"Did not get the expected status code"
     assert b'$15' in response.data, f"Did not get the expected subtotal " # Check that the price of the item is listed
@@ -102,6 +108,7 @@ def test_subtotal_valid(client):
 def test_subtotal_invalid(client):
     item = Item.query.get(1)
     item.in_cart = True # Put an item in the cart so that the cart page can be opened
+    item.quantity = 1
     response = client.get('/cartpage/0', follow_redirects=True)
     assert response.status_code == 200, f"Did not get the expected status code"
     assert b'$15' in response.data, f"Did not get the expected subtotal " # Check that the price of the item is listed
@@ -112,7 +119,7 @@ def test_search_valid(client):
     # Makes request to search function with the specified query
     response = client.get(f'/search/?q=Jack Astor\'s', follow_redirects=True)
     assert response.status_code == 200, f"Did not get the expected status code"
-    assert b'Jack Astor\'s' in response.data, f"The expected search result was not displayed"
+    assert b'Jack Astor' in response.data, f"The expected search result was not displayed"
     print('Search Bar Test - Status Code:', response.status_code)
     print('Search Bar Test - Response: ', response.data.decode())
 

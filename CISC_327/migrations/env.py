@@ -1,6 +1,6 @@
 import logging
 from logging.config import fileConfig
-import os
+
 from flask import current_app
 
 from alembic import context
@@ -25,16 +25,11 @@ def get_engine():
 
 
 def get_engine_url():
-    # Check if running in a test environment
-    if os.environ.get('FLASK_ENV') == 'testing':
-        return 'sqlite:///:memory:'
-    else:
-        # Use the regular database URL
-        try:
-            return get_engine().url.render_as_string(hide_password=False).replace('%', '%%')
-        except AttributeError:
-            return str(get_engine().url).replace('%', '%%')
-
+    try:
+        return get_engine().url.render_as_string(hide_password=False).replace(
+            '%', '%%')
+    except AttributeError:
+        return str(get_engine().url).replace('%', '%%')
 
 
 # add your model's MetaData object here
