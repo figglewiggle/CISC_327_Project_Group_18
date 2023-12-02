@@ -152,7 +152,7 @@ def test_add_tip(client):
     response = client.post('/tips/1', data=dict(
         tip='10'
     ), follow_redirects=True)
-    assert response.status_code == 302
+    assert response.status_code == 200
     assert response.request.path == url_for('checkout.checkout', restaurant_id=1), "Did not redirect to the checkout page"
     with client.session_transaction() as session:
         assert session.get('tip') == '10'
