@@ -40,22 +40,22 @@ def test_user_login(client):
     assert response.status_code == 200  # Check if the login is successful
 
 def test_homepage_2(client):
-    response = client.get('/homepage', follow_redirects = True)
+    response = client.get('/homepage', follow_redirects = True) # whether homepage can be rendered
     assert response.status_code == 200, f"Did not get the expected status code"
 
 def test_profile_page(client):
-    response = client.get('/profile', follow_redirects = True)
+    response = client.get('/profile', follow_redirects = True) # whether profile page can be rendered
     assert response.status_code == 200, f"Did not get the expected status code"
 
 def test_add_address(client):
     new_address = '123 Test Street'
     response = client.post('/add_address', data=dict(
         address=new_address
-    ), follow_redirects=True)
+    ), follow_redirects=True) # adds address
     assert response.status_code == 200
     assert 'profile' in response.request.path, "Did not redirect to the profile page"
     current_user = User.query.filter_by(email='tipi@gmail.com').first()
-    added_address = current_user.addresses.filter_by(address=new_address).first()
+    added_address = current_user.addresses.filter_by(address=new_address).first() # verifies whether address was added
     assert added_address is not None, "Address was not added to the user's addresses"
     assert added_address.default is False, "New address should not be set as default"
     with client.session_transaction() as session:
@@ -68,17 +68,17 @@ def test_delete_address(client):
     response_delete_address = client.post('/delete_address', data=dict(
         address_id=address_id
     ), follow_redirects=True)
-    assert response_delete_address.status_code == 200
+    assert response_delete_address.status_code == 200 # address deletion successful
     assert 'profile' in response_delete_address.request.path, "Did not redirect to the profile page"
 
 
 def test_menu_access(client):
     response = client.post('/menu/1', follow_redirects = True)
-    assert response.status_code == 200, f"Did not get the expected status code"  
+    assert response.status_code == 200, f"Did not get the expected status code"  # whether menu is accessed
 
 def test_add_to_cart(client):
     response = client.post('/add_to_cart/1/1', follow_redirects=True)
-    assert response.status_code == 200
+    assert response.status_code == 200 # Check if item 1 of restaurant 1 is added to cart 
     assert b'Chicken Alfredo Pasta added to cart!' in response.data
 def test_add_to_cart_valid(client):
     response = client.post('/add_to_cart/1/1', follow_redirects=True) 
@@ -170,34 +170,34 @@ def test_add_tip(client):
     item = Item.query.get(1)
     response = client.post('/tips/1', data=dict(
         tip='10'
-    ), follow_redirects=True)
-    assert response.status_code == 200
+    ), follow_redirects=True) # initalizes test inputs
+    assert response.status_code == 200 # checks whether process was executed
     with client.session_transaction() as session:
-        assert session.get('tip') == '10'
+        assert session.get('tip') == '10' # checks whether the tip was properly inputted
     assert b'Tip: 10%' in response.data, "Tip percentage not displayed on the checkout page"
     with client.session_transaction() as session:
         session.clear()
 
 def test_cart_page(client):
-    response = client.post('/cartpage/1', follow_redirects = True)
+    response = client.post('/cartpage/1', follow_redirects = True) # test whether cartpage for restaurant 1 is displayed
     assert response.status_code == 200, f"Did not get the expected status code"  
 
 def test_checkout_page(client):
-    response = client.post('/checkout/1', follow_redirects = True)
+    response = client.post('/checkout/1', follow_redirects = True) # test whether checkout page for restaurant 1 is displayed
     assert response.status_code == 200, f"Did not get the expected status code"
 
 def test_edit_password(client):
     response = client.post('/edit_password', data={'new_password': 'newpassword'}, follow_redirects=True)
     user = User.query.filter_by(email='tipi@gmail.com').first()
     same = bcrypt.check_password_hash(user.password, 'newpassword')
-    assert response.status_code == 200, f"Did not get the expected status code"  
-    assert same is not None, f"Password was not edited"
+    assert response.status_code == 200, f"Did not get the expected status code"  # check whether edit password was successful
+    assert same is not None, f"Password was not edited" # check whether password inputted matches the one present
 
 def test_add_payment(client):
     response = client.get
-    response = client.post('/add_payment', data={'card_num':'1234567890123455'}, follow_redirects=True)
+    response = client.post('/add_payment', data={'card_num':'1234567890123455'}, follow_redirects=True) # perform function
     assert response.status_code == 200, f"Did not get the expected status code" 
-    assert b'1234567890123455'in response.data, f"The expected search result was not displayed"
+    assert b'1234567890123455'in response.data, f"The expected search result was not displayed" # check if input was displayed
     print('Add Payment Test - Status Code:', response.status_code)
     print('Add Payment Test - Response: ', response.data.decode())
 
@@ -206,8 +206,8 @@ def test_delete_payment(client):
     added_payment = current_user.payment_methods.filter_by(card_num='1234567890123455').first()
     added_payment_id = added_payment.id
     response = client.post('/delete_payment', data={'payment_id':added_payment_id}, follow_redirects=True)
-    assert response.status_code == 200, f"Did not get the expected status code" 
-    assert b'1234567890123455' not in response.data, f"The expected search result was not displayed"
+    assert response.status_code == 200, f"Did not get the expected status code" # check whether payment method was deleted
+    assert b'1234567890123455' not in response.data, f"The expected search result was not displayed" # check if method was removed
     print('Delete Payment Test - Status Code:', response.status_code)
     print('Delete Payment Test - Response: ', response.data.decode('utf-8'))
 
@@ -219,14 +219,14 @@ def test_logout(client):
         password='testpassword',
         address='Test Address',
         payment_method='1234567890123456'
-    ), follow_redirects=True)
+    ), follow_redirects=True) # register user
     response = client.post('/login', data=dict(
         email='tipi@gmail.com',
         password='testpassword'
-    ), follow_redirects=True)
-    response = client.get(f'/logout', follow_redirects=True)
-    assert response.status_code == 200, f"Did not get the expected status code"
-    assert 'login' in response.request.path, "Did not redirect to the login page"
+    ), follow_redirects=True) # login user
+    response = client.get(f'/logout', follow_redirects=True) # logout
+    assert response.status_code == 200, f"Did not get the expected status code" # check whether logout worked
+    assert 'login' in response.request.path, "Did not redirect to the login page" # check whether it goes back to login page
 
 
 
