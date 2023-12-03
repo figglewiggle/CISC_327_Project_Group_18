@@ -199,6 +199,17 @@ def test_add_payment(client):
     assert b'1234567890123455'in response.data, f"The expected search result was not displayed"
     print('Add Payment Test - Status Code:', response.status_code)
     print('Add Payment Test - Response: ', response.data.decode())
+
+def test_delete_payment(client):
+    current_user = User.query.filter_by(email='tipi@gmail.com').first()
+    added_payment = current_user.payment_methods.filter_by(card_num='1234567890123455').first()
+    added_payment_id = added_payment.id
+    response = client.post('/delete_payment', data={'payment_id':added_payment_id}, follow_redirects=True)
+    assert response.status_code == 200, f"Did not get the expected status code" 
+    assert b'1234567890123455' not in response.data, f"The expected search result was not displayed"
+    print('Delete Payment Test - Status Code:', response.status_code)
+    print('Delete Payment Test - Response: ', response.data.decode('utf-8'))
+
 def test_logout(client):
     response = client.post('/registration', data=dict(
         name='Test User',
@@ -219,13 +230,7 @@ def test_logout(client):
 
 
 
-def test_delete_payment(client):
-    response = client.post('/add_payment', data={'card_num':'1234567890123455'}, follow_redirects=True)
-    response = client.post('/delete_payment', data={'payment_id':'1'}, follow_redirects=True)
-    assert response.status_code == 200, f"Did not get the expected status code" 
-    assert b'1234567890123455' not in response.data, f"The expected search result was not displayed"
-    print('Delete Payment Test - Status Code:', response.status_code)
-    print('Delete Payment Test - Response: ', response.data.decode('utf-8'))
+
 
 
     
