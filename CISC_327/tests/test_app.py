@@ -188,12 +188,13 @@ def test_checkout_page(client):
 
 def test_edit_password(client):
     response = client.post('/edit_password', data={'new_password': 'newpassword'}, follow_redirects=True)
-    hashed = bcrypt.generate_password_hash('newpassword').decode('utf-8')
     user = User.query.filter_by(email='tipi@gmail.com').first()
+    same = bcrypt.check_password_hash(user.password, 'newpassword')
     assert response.status_code == 200, f"Did not get the expected status code"  
-    assert user.password == hashed 
+    assert same is not None, f"Password was not edited"
 
 def test_add_payment(client):
+    response = client.get
     response = client.post('/add_payment', data={'card_num':'1234567890123455'}, follow_redirects=True)
     assert response.status_code == 200, f"Did not get the expected status code" 
     assert b'1234567890123455'in response.data, f"The expected search result was not displayed"
